@@ -94,14 +94,20 @@ async def run_arbiter(
     hypothesis_results: List[HypothesisResult],
     pattern_signal: Optional[PatternSignal],
     client: anthropic.AsyncAnthropic,
+    pattern_interpretation: Optional[str] = None,
 ) -> RoutingDecision:
     system_prompt = _load_prompt()
 
+    interpretation_section = (
+        f"\nPATTERN INTERPRETATION:\n{pattern_interpretation}"
+        if pattern_interpretation else ""
+    )
     user_message = (
         f"COMPLAINT: {complaint_title}\n"
         f"DOMAIN: {domain}\n\n"
         f"{_format_hypotheses(hypothesis_results)}\n\n"
         f"{_format_pattern(pattern_signal)}"
+        f"{interpretation_section}"
     )
 
     t_start = time.monotonic()

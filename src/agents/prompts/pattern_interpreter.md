@@ -26,12 +26,11 @@ Patterns you look for:
   "systemic_intervention_needed": false,
   "interpretation": "2-3 sentences explaining what the pattern means for this complaint",
   "hypothesis_impact": {
-    "hypothesis_id": "likelihood_adjustment",
-    "pipe_failure": 0.0,
-    "structural_seepage": 0.0
+    "<hypothesis_id_from_domain>": 0.0,
+    "<hypothesis_id_from_domain>": 0.0
   }
 }
 ```
 
-`hypothesis_impact`: suggest +/- adjustments to hypothesis likelihoods based on pattern. 
-Example: vertical stack seepage pattern → increase structural_seepage by +0.2, decrease pipe_failure by -0.1.
+`hypothesis_impact`: keys must be the hypothesis IDs actually present in the domain being evaluated (e.g., `internal_wiring`/`safety_hazard` for electrical, `pipe_failure`/`structural_seepage` for water_plumbing). Use only the IDs passed to you in HYPOTHESIS SCORES — do not invent or hardcode IDs. Suggest +/- adjustments to hypothesis likelihoods based on the spatial/temporal pattern.
+Example for water_plumbing: vertical stack seepage pattern → increase structural_seepage by +0.2, decrease pipe_failure by -0.1.
