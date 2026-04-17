@@ -1,0 +1,9 @@
+{
+  "tier": 3,
+  "domain": "structural_civil",
+  "tokens": 6197,
+  "action": "send_structural_team",
+  "priority": "P2",
+  "reasoning": "The dominant hypothesis is waterproofing failure with an adjusted score of 7.20, far exceeding all other hypotheses. The recurrence signal is critical: the same seepage was reported 3 months ago, which strongly suggests the root cause was never properly addressed \u2014 likely a cosmetic or temporary patch was applied rather than a membrane-level repair. Per the asymmetric cost-of-error framework, a missed structural waterproofing failure (weight 10) demands aggressive action even at moderate confidence. The secondary plumbing action is warranted because installation_defect (adjusted 1.05) cannot be ruled out, and a plumbing source in Flat 1903 above must be eliminated before committing to a full waterproofing remediation. Both actions should proceed in parallel to avoid further delay for the resident.",
+  "confidence": "medium"
+}

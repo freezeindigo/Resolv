@@ -1,0 +1,21 @@
+{
+  "run_timestamp": "20260417_110914",
+  "total_complaints": 10,
+  "errors": 0,
+  "tier_distribution": {
+    "2": 10
+  },
+  "tier_percentages": {
+    "2": "100.0%"
+  },
+  "domain_distribution": {
+    "other": 2,
+    "water_plumbing": 6,
+    "carpentry": 1,
+    "pest_hygiene": 1
+  },
+  "total_tokens": 14127,
+  "estimated_cost_usd": 0.0424,
+  "avg_latency_ms": 4850,
+  "csv_path": "eval/results/eval_20260417_110914.csv"
+}
