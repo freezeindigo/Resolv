@@ -1,7 +1,96 @@
 # ARIA — Agentic Routing & Intelligence for Amenities
 
 **Living document. Updated after every strategic session.**
-**Last updated: April 2026**
+**Last updated: April 2026 — Phase 1 scaffold complete**
+
+---
+
+## Agent Map — What Every Agent Does and Why It Exists
+
+This section explains every LLM-powered agent in the system. Each agent has exactly one job. If something can be done with a SQL query or a keyword match, it is NOT an agent.
+
+### Why so many agents?
+
+A single LLM prompt evaluating multiple hypotheses has a known failure mode: **anchoring**. Whichever hypothesis it considers first influences all subsequent scores. Isolated agents with isolated evidence produce genuinely independent assessments. This is the core architectural reason — not complexity for its own sake.
+
+---
+
+### Pipeline Nodes (deterministic, no LLM)
+
+| Node | What it does | Why no LLM |
+|---|---|---|
+| **Intake Normalizer** | Maps source schema → unified complaint object | Pure data transformation |
+| **Domain Classifier** | Keywords → domain (water_plumbing, electrical, etc.) | Rules cover 77% of cases correctly; LLM only for low-confidence fallback |
+| **Complexity Assessor** | Assigns Tier 1/2/3 | Safety/recurrence/ambiguity rules are deterministic |
+| **Context Assembler** | 3 parallel SQL queries → flat history, adjacent history, building pattern | Pure DB retrieval, ~65ms |
+| **Pattern State Query** | DBSCAN over Redis sliding window → active complaint clusters | Deterministic clustering algorithm |
+| **Execution Layer** | Dispatch vendor, notify resident, create ticket | Pure API calls (stubbed in Phase 1) |
+| **Audit Logger** | Persist full reasoning trace | Pure DB write |
+
+---
+
+### Reasoning Agents (LLM-powered)
+
+#### Tier 2: Single Reasoning Agent
+**Model:** Claude Haiku (cost-efficient)
+**When:** Complaints that need context but aren't high-stakes ambiguous
+**What it does:** Takes complaint + full context package → produces routing decision in one call
+**Why an agent:** The complaint text + flat history + building pattern together suggest a routing that no keyword rule can produce. Example: "water in kitchen" + flat has 3 prior plumbing calls + building has no structural issues → send plumber confidently.
+
+---
+
+#### Tier 3: Hypothesis Agents (run in parallel)
+
+Each agent receives ONLY the evidence relevant to its hypothesis. This prevents the anchoring problem.
+
+**Water / Plumbing domain — up to 4 agents:**
+
+| Agent | Job | Cost-of-error weight | Why isolated |
+|---|---|---|---|
+| `pipe_failure` | Is this a fixture/pipe issue in THIS unit? | 1.0× (baseline) | Must not see structural evidence — would anchor toward structural if it did |
+| `structural_seepage` | Is this waterproofing/building envelope failure? | **10.0×** | Receives adjacent/stack context. Missing this costs ₹5,000-50,000 |
+| `environmental` | Is this rain/roof/external ingress? | 2.0× | Receives seasonal/roof data only |
+| `hvac_condensate` | Is this AC condensate drain? | 1.5× | Only spawned for ceiling complaints |
+
+**Electrical domain — up to 4 agents:**
+
+| Agent | Job | Cost-of-error weight |
+|---|---|---|
+| `internal_wiring` | Fault inside this flat's circuit | 1.0× |
+| `external_supply` | Building/MSEB supply failure | 2.0× |
+| `equipment_specific` | Inverter/geyser/fan/VDP failure | 0.8× |
+| `safety_hazard` | Sparking/shock/fire risk — **escalate if likelihood > 0.3** | **20.0×** |
+
+**Other domains** (structural_civil, carpentry, HVAC, lift, safety_security) follow the same pattern — see `src/config/hypothesis_library.yaml` for full config.
+
+---
+
+#### Pattern Interpretation Agent
+**Model:** Claude Sonnet
+**When:** Pattern State Query returns active clusters for this building
+**What it does:** Receives cluster data + hypothesis scores → interprets whether the spatial pattern corroborates or contradicts each hypothesis. Example: vertical stack seepage pattern → increase structural_seepage likelihood by +0.2, decrease pipe_failure by -0.1
+**Why an agent:** The *meaning* of a cluster depends on its relationship to the current hypotheses. "6 seepage complaints in a vertical stack" could be coincidence, plumbing cascade, or systemic waterproofing failure. No deterministic rule captures this — it requires reasoning about the specific combination.
+
+---
+
+#### Arbiter Agent
+**Model:** Claude Opus (highest reasoning quality — this is the decision-maker)
+**When:** Always in Tier 3, after hypothesis agents + pattern interpreter have run
+**What it does:** Receives all hypothesis scores (with cost-of-error weights), pattern interpretation, complaint history → applies asymmetric cost-of-error logic → produces final routing decision, which may be multi-action
+**Why an agent (and why Opus):** This is the integration step. The arbiter must reason about tradeoffs: "structural_seepage has only 35% likelihood but 10× cost weight = adjusted score of 3.5. pipe_failure has 60% likelihood but 1× cost weight = score of 0.6. Route structural despite lower raw probability." This is asymmetric expected-value reasoning that requires the strongest model.
+
+---
+
+### Agent Cost Per Complaint
+
+| Tier | Agents called | Approx tokens | Approx cost (INR) |
+|---|---|---|---|
+| Tier 1 | 0 | 0 | ₹0 |
+| Tier 2 | 1 (Haiku) | ~2,000 | ₹0.50-1 |
+| Tier 3 | 4-6 (Sonnet) + 1 (Opus) | ~8,000-12,000 | ₹8-15 |
+| Blended (20/64/16 split) | — | ~2,500 avg | ₹1.5-3 avg |
+
+**Full eval cost estimate:** 17,029 complaints × ₹2 avg = ~₹34,000 (~$400). Run 100-complaint sample first.
 
 ---
 
