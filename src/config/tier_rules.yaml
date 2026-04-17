@@ -1,0 +1,194 @@
+# Tier classification rules
+# Tier 1: unambiguous, rule-route, no LLM
+# Tier 2: default — single reasoning agent
+# Tier 3: ambiguous, high-cost, or recurrence signal — multi-agent deliberation
+
+# --- TIER 1 ---
+# Exact or near-exact patterns from top complaint titles in Godrej data.
+# Must be unambiguous: single domain, clear action, low cost-of-error.
+# Matched case-insensitively against complaint_title.
+
+tier1_patterns:
+  water_plumbing:
+    - "flush not working"
+    - "flush issue"
+    - "flush not proper"
+    - "kitchen sink leakage"
+    - "kitchen sink leakeage"
+    - "jet spray leakage"
+    - "jet spray leakeage"
+    - "jet spray changing"
+    - "nani trap chockup"
+    - "nani trap chokup"
+    - "drain choked"
+    - "drain choke"
+    - "drain blockage"
+    - "drain clog"
+    - "chokup issue"
+    - "chockup issue"
+    - "kitchen drainage chockup"
+    - "kitchen basin chock"
+    - "tap leakage"
+    - "tap not working"
+    - "no water in kitchen"
+    - "no water in washroom"
+    - "no water in tap"
+    - "no water in flat"
+    - "water pressure low"
+    - "low water pressure"
+    - "water pressure issue"
+    - "plumber required"
+    - "plumber work"
+    - "washing machine drain"
+    - "hot water not coming"
+    - "solar water not coming"
+    - "solar water wasn't coming"
+    - "geyser not working"
+    - "shower not working"
+    - "angle valve"
+    - "jet spray pipe"
+    - "water leakage"
+    - "water leak"
+    - "leakage issue"
+    - "leakeage issue"
+    - "wc issue"
+    - "wc not working"
+    - "water not coming"
+    - "water wasn't coming"
+
+  electrical:
+    - "mcb tripped"
+    - "mcb trip"
+    - "switch not working"
+    - "light not working"
+    - "fan not working"
+    - "fan wasn't working"
+    - "inverter not working"
+    - "inverter issue"
+    - "ivertor not working"
+    - "inerter not working"
+    - "invertor not working"
+    - "invertr not working"
+    - "iverter not working"
+    - "no electricity in flat"
+    - "noelectricity in flat"
+    - "no electricity"
+    - "no power"
+    - "no power supply"
+    - "power not coming"
+    - "electrical issue"
+    - "electrician required"
+    - "vdp not working"
+    - "ac switch not working"
+    - "exhaust fan not working"
+    - "tube light not working"
+    - "passage lights not working"
+    - "parking tube light"
+    - "socket not working"
+    - "master washroom switch"
+    - "fused lamp"
+    - "bulb fused"
+    - "light fused"
+    - "tripping electricity"
+    - "triping electricity"
+    - "mseb failure"
+    - "mseb electricity"
+
+  carpentry:
+    - "door lock issue"
+    - "door lock not working"
+    - "door not closing"
+    - "door not opening"
+    - "sliding window not opening"
+    - "sliding window not closing"
+    - "window not opening"
+    - "window not closing"
+    - "hinge broken"
+    - "door hinge"
+    - "handle broken"
+    - "lock not working"
+    - "door handle"
+
+  lift_elevator:
+    - "lift not working"
+    - "lift issue"
+    - "elevator not working"
+    - "lift stuck"
+
+  hvac:
+    - "ac not working"
+    - "ac not cooling"
+    - "ac service"
+    - "ac repair"
+
+  pest_hygiene:
+    - "pest control"
+    - "cockroach issue"
+    - "garbage not collected"
+    - "housekeeping"
+    - "cleaning not done"
+
+
+# --- TIER 3 ---
+# Any of these signals escalates to Tier 3 regardless of domain.
+
+# Keywords that indicate recurrence / prior failure — strongest Tier 3 signal
+recurrence_phrases:
+  - "again"
+  - "still not"
+  - "still facing"
+  - "still pending"
+  - "not resolved"
+  - "unresolved"
+  - "repeated"
+  - "repeatedly"
+  - "third time"
+  - "4th time"
+  - "multiple times"
+  - "same issue"
+  - "same problem"
+  - "same complaint"
+  - "previously complained"
+  - "already complained"
+  - "already raised"
+  - "despite"
+  - "no action"
+  - "no response"
+  - "ignored"
+  - "escalat"
+
+# Keywords that indicate multi-domain ambiguity — requires hypothesis agents
+ambiguity_keywords:
+  - "seepage"
+  - "seep"
+  - "damp"
+  - "wet wall"
+  - "wet ceiling"
+  - "ceiling leak"
+  - "ceiling water"
+  - "wall crack"
+  - "crack and leak"
+  - "algae"
+  - "moss"
+
+# Domains that are always Tier 3 — cost-of-error too high for single agent
+tier3_domains:
+  - "structural_civil"
+  - "safety_security"
+  - "lift_elevator"
+
+# Safety keywords — always Tier 3 regardless of domain classification
+safety_keywords:
+  - "spark"
+  - "sparking"
+  - "shock"
+  - "electric shock"
+  - "smoke"
+  - "fire alarm"
+  - "burning smell"
+  - "gas leak"
+  - "gas smell"
+  - "cooking gas"
+  - "png not"
+  - "hazard"
+  - "danger"
