@@ -44,7 +44,12 @@ def run(dbname: str, sample_size: int, show_examples: int):
 
     for ticket_id, title, raw_category, priority in rows:
         d_result = classify_domain(title)
-        t_result = assess_complexity(title, d_result["domain"])
+        t_result = assess_complexity(
+            title,
+            d_result["domain"],
+            domain_confidence=d_result["confidence"],
+            domain_method=d_result["method"],
+        )
 
         domain_counts[d_result["domain"]] += 1
         tier_counts[t_result["tier"]] += 1

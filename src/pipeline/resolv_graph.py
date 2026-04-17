@@ -83,7 +83,12 @@ def node_classify_domain(state: ResolvState) -> ResolvState:
 
 
 def node_assess_complexity(state: ResolvState) -> ResolvState:
-    result = assess_complexity(state["complaint_title"], state["domain"])
+    result = assess_complexity(
+        state["complaint_title"],
+        state["domain"],
+        domain_confidence=state["domain_confidence"],
+        domain_method=state["domain_method"],
+    )
     state["tier"] = result["tier"]
     state["tier_reason"] = result["reason"]
     state["audit_log"]["tier"] = result

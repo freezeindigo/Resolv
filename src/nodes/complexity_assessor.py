@@ -32,14 +32,32 @@ def _normalise(text: str) -> str:
 
 
 def _matches_any(text_norm: str, patterns: list):
-    """Return first matching pattern or None."""
+    """Return first matching pattern or None.
+
+    Supports:
+    - plain keyword/phrase patterns via case-insensitive contains
+    - regex patterns prefixed with ``re:``
+    """
     for pattern in patterns:
+        if not pattern:
+            continue
+        if pattern.startswith("re:"):
+            regex = pattern[3:].strip()
+            if regex and re.search(regex, text_norm):
+                return pattern
+            continue
+
         if _normalise(pattern) in text_norm:
             return pattern
     return None
 
 
-def assess_complexity(complaint_title: str, domain: str) -> dict:
+def assess_complexity(
+    complaint_title: str,
+    domain: str,
+    domain_confidence: float = 1.0,
+    domain_method: str = "rules",
+) -> dict:
     """
     Assign processing tier to a complaint.
 
@@ -84,19 +102,23 @@ def assess_complexity(complaint_title: str, domain: str) -> dict:
     # Only reached if no Tier 3 signals found
     tier1_by_domain = rules.get("tier1_patterns", {})
 
+    # Tier 1 requires a clear, deterministic domain mapping.
+    # If domain was not confidently mapped, defer to Tier 2 reasoning.
+    min_conf = float(rules.get("tier1_min_domain_confidence", 0.6))
+    if domain == "other" or domain_method != "rules" or domain_confidence < min_conf:
+        return {
+            "tier": 2,
+            "reason": (
+                "domain not unambiguous for Tier 1 "
+                f"(domain={domain}, method={domain_method}, confidence={domain_confidence:.3f})"
+            ),
+        }
+
     # Check patterns for the classified domain first
     domain_patterns = tier1_by_domain.get(domain, [])
     match = _matches_any(title_norm, domain_patterns)
     if match:
         return {"tier": 1, "reason": f"exact pattern match: '{match}'"}
-
-    # Also check all domains (complaint may match a different domain's clear pattern)
-    for d, patterns in tier1_by_domain.items():
-        if d == domain:
-            continue
-        match = _matches_any(title_norm, patterns)
-        if match:
-            return {"tier": 1, "reason": f"exact pattern match ({d}): '{match}'"}
 
     # --- TIER 2 DEFAULT ---
     return {"tier": 2, "reason": "no strong signal — default single-agent reasoning"}
