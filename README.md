@@ -64,14 +64,18 @@ For more detail, see `ARIA.md` (product and agent map) and `ARCHITECTURE.md` (im
 
 ## Quick start
 
-**Prerequisites:** Python 3.11+, PostgreSQL (database name `resolv` matches defaults in `src/api/main.py`), Redis (for pattern state; default `redis://localhost:6379`), and an **Anthropic API key** for LLM calls.
+**Prerequisites:** Python 3.11+, PostgreSQL (database name `resolv` matches defaults in `src/api/main.py`), Redis (for pattern state; default `redis://localhost:6379`), a **Groq API key** (Tier 2, hypothesis agents, pattern interpreter, judge — cheap/free tier), and an **Anthropic API key** (arbiter only on Tier 3).
 
 From the repository root:
 
 ```bash
 python3 -m venv .venv && source .venv/bin/activate
-pip install anthropic asyncpg fastapi langgraph numpy psycopg2-binary pydantic pyyaml redis scikit-learn uvicorn
-export ANTHROPIC_API_KEY=your_key_here
+pip install -r requirements.txt
+export GROQ_API_KEY=your_groq_key_here
+export ANTHROPIC_API_KEY=your_anthropic_key_here
+```
+
+Copy `.env.example` to `.env` and fill in both keys locally.
 # Create DB and schema — see scripts/create_schema.sql and PHASE1_BUILD.md
 uvicorn src.api.main:app --reload --host 127.0.0.1 --port 8000
 ```

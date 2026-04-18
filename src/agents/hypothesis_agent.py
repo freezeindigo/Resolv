@@ -14,18 +14,14 @@ from functools import lru_cache
 from pathlib import Path
 from typing import Any, Dict, List, Optional, Tuple
 
-import anthropic
 import yaml
 
+from src.agents.llm_client import llm_call
 from src.memory.pattern_state import PatternSignal
 from src.nodes.context_assembler import ContextPackage
 
 LIBRARY_PATH = Path(__file__).parent.parent / "config" / "hypothesis_library.yaml"
 PROMPTS_DIR = Path(__file__).parent / "prompts"
-
-HYPOTHESIS_MODEL = "claude-sonnet-4-6"
-MAX_TOKENS = 1024
-TEMPERATURE = 0.0
 
 MAX_HYPOTHESES = 4
 MIN_HYPOTHESES = 2
@@ -382,7 +378,6 @@ async def run_hypothesis_agent(
     domain: str,
     complaint_title: str,
     context: ContextPackage,
-    client: anthropic.AsyncAnthropic,
 ) -> HypothesisResult:
     import time
 
@@ -403,16 +398,10 @@ async def run_hypothesis_agent(
 
     t_start = time.monotonic()
     try:
-        response = await client.messages.create(
-            model=HYPOTHESIS_MODEL,
-            max_tokens=MAX_TOKENS,
-            temperature=TEMPERATURE,
-            system=system_prompt,
-            messages=[{"role": "user", "content": user_message}],
-        )
-        latency_ms = int((time.monotonic() - t_start) * 1000)
-        tokens = response.usage.input_tokens + response.usage.output_tokens
-        parsed = _parse_llm_response(response.content[0].text, hyp_id)
+        out = await llm_call("hypothesis_agents", system_prompt, user_message)
+        latency_ms = out["latency_ms"]
+        tokens = out["tokens"]
+        parsed = _parse_llm_response(out["text"], hyp_id)
 
         likelihood = float(parsed.get("likelihood", 0.5))
         likelihood = max(0.0, min(1.0, likelihood))
@@ -457,7 +446,6 @@ async def spawn_hypothesis_agents(
     domain: str,
     complaint_title: str,
     context: ContextPackage,
-    client: anthropic.AsyncAnthropic,
     pattern_signal: Optional[PatternSignal] = None,
 ) -> Tuple[List[HypothesisResult], Dict[str, Any]]:
     library = _load_library()
@@ -479,7 +467,7 @@ async def spawn_hypothesis_agents(
         return [], {**audit, "note": "no hypotheses selected"}
 
     tasks = [
-        run_hypothesis_agent(h, domain, complaint_title, context, client)
+        run_hypothesis_agent(h, domain, complaint_title, context)
         for h in selected
     ]
     results = await asyncio.gather(*tasks)

@@ -6,16 +6,13 @@ from __future__ import annotations
 
 import json
 import re
-import time
 from dataclasses import replace
 from typing import Any, Dict, Optional
 
-import anthropic
-
 from src.agents.arbiter import RoutingDecision
+from src.agents.llm_client import llm_call
 from src.config.routing_actions import normalize_primary_action
 
-JUDGE_MODEL = "claude-haiku-4-5-20251001"
 PROMPT_PATH = "src/agents/prompts/judge.md"
 
 
@@ -55,7 +52,6 @@ async def run_judge(
     domain: str,
     tier: int,
     decision: RoutingDecision,
-    client: anthropic.AsyncAnthropic,
 ) -> tuple[Dict[str, Any], Optional[RoutingDecision]]:
     """
     Returns (audit_dict, new_decision_or_none).
@@ -72,17 +68,10 @@ async def run_judge(
         indent=2,
     )
 
-    t0 = time.monotonic()
-    response = await client.messages.create(
-        model=JUDGE_MODEL,
-        max_tokens=600,
-        temperature=0.0,
-        system=system,
-        messages=[{"role": "user", "content": user}],
-    )
-    latency_ms = int((time.monotonic() - t0) * 1000)
-    tokens = response.usage.input_tokens + response.usage.output_tokens
-    raw_text = response.content[0].text
+    out = await llm_call("judge", system, user)
+    latency_ms = out["latency_ms"]
+    tokens = out["tokens"]
+    raw_text = out["text"]
     parsed = _parse_json(raw_text)
     verdict = (parsed.get("verdict") or "approve").lower().strip()
     if verdict not in ("approve", "flag", "override"):
@@ -94,7 +83,7 @@ async def run_judge(
         "verdict": verdict,
         "reason": reason,
         "original_decision": original,
-        "model": JUDGE_MODEL,
+        "model": f"{out['provider']}:{out['model']}",
         "tokens_used": tokens,
         "latency_ms": latency_ms,
         "human_review": None,

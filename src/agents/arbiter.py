@@ -5,20 +5,14 @@ LLM-powered. Uses Claude Opus for highest reasoning quality.
 
 import json
 import re
-import time
 from dataclasses import dataclass
 from typing import List, Optional
 
-import anthropic
-
 from src.agents.hypothesis_agent import HypothesisResult
+from src.agents.llm_client import llm_call
 from src.config.routing_actions import normalize_primary_action
 from src.memory.pattern_state import PatternSignal
 from src.nodes.ownership import infer_ownership
-
-ARBITER_MODEL = "claude-opus-4-6"
-MAX_TOKENS = 1500
-TEMPERATURE = 0.0
 
 PROMPT_PATH = "src/agents/prompts/arbiter.md"
 
@@ -96,7 +90,6 @@ async def run_arbiter(
     domain: str,
     hypothesis_results: List[HypothesisResult],
     pattern_signal: Optional[PatternSignal],
-    client: anthropic.AsyncAnthropic,
     pattern_interpretation: Optional[str] = None,
 ) -> RoutingDecision:
     system_prompt = _load_prompt()
@@ -113,18 +106,11 @@ async def run_arbiter(
         f"{interpretation_section}"
     )
 
-    t_start = time.monotonic()
-    response = await client.messages.create(
-        model=ARBITER_MODEL,
-        max_tokens=MAX_TOKENS,
-        temperature=TEMPERATURE,
-        system=system_prompt,
-        messages=[{"role": "user", "content": user_message}],
-    )
-    latency_ms = int((time.monotonic() - t_start) * 1000)
-    tokens = response.usage.input_tokens + response.usage.output_tokens
+    out = await llm_call("arbiter", system_prompt, user_message)
+    latency_ms = out["latency_ms"]
+    tokens = out["tokens"]
 
-    parsed = _parse_response(response.content[0].text)
+    parsed = _parse_response(out["text"])
     primary = parsed.get("primary_action", {})
     if not isinstance(primary, dict):
         primary = {}

@@ -7,12 +7,11 @@ Tier 3: + spawn_hypotheses → interpret_patterns → arbitrate → execute → 
 """
 
 import asyncio
-import time
 from typing import Any, Dict, List, Optional, TypedDict
 
-import anthropic
 from langgraph.graph import StateGraph, END
 
+from src.agents.llm_client import llm_call
 from src.config.routing_actions import (
     allowed_actions_json_hint,
     get_tier1_rule_tuple,
@@ -26,8 +25,6 @@ from src.agents.hypothesis_agent import spawn_hypothesis_agents, HypothesisResul
 from src.agents.arbiter import run_arbiter, RoutingDecision
 from src.agents.judge import run_judge
 from src.nodes.ownership import infer_ownership
-
-ANTHROPIC_CLIENT = None  # initialised on first use
 
 TIER2_SYSTEM_PROMPT = (
     "You are a facility management routing assistant for high-rise residential towers.\n"
@@ -43,13 +40,6 @@ TIER2_SYSTEM_PROMPT = (
     "Choose the single best dispatch action matching the DOMAIN and building context.\n"
     "Do not invent action names — only the list above. If unclear, use assign_fm_manager.\n"
 )
-
-
-def _get_client() -> anthropic.AsyncAnthropic:
-    global ANTHROPIC_CLIENT
-    if ANTHROPIC_CLIENT is None:
-        ANTHROPIC_CLIENT = anthropic.AsyncAnthropic()
-    return ANTHROPIC_CLIENT
 
 
 # ── State ──────────────────────────────────────────────────────────────────
@@ -181,31 +171,22 @@ def node_rule_route(state: ResolvState) -> ResolvState:
 
 async def node_tier2_reasoning(state: ResolvState) -> ResolvState:
     """Tier 2: single LLM reasoning call with context."""
-    client = _get_client()
     ctx = state["context"]
     context_str = ctx.to_prompt_context() if ctx else "No context available."
 
-    t_start = time.monotonic()
-    try:
-        response = await client.messages.create(
-            model="claude-haiku-4-5-20251001",
-            max_tokens=800,
-            temperature=0.0,
-            system=TIER2_SYSTEM_PROMPT,
-            messages=[{
-                "role": "user",
-                "content": (
-                    f"COMPLAINT: {state['complaint_title']}\n"
-                    f"DOMAIN: {state['domain']}\n\n"
-                    f"{context_str}"
-                ),
-            }],
-        )
-        latency_ms = int((time.monotonic() - t_start) * 1000)
-        tokens = response.usage.input_tokens + response.usage.output_tokens
+    user_content = (
+        f"COMPLAINT: {state['complaint_title']}\n"
+        f"DOMAIN: {state['domain']}\n\n"
+        f"{context_str}"
+    )
 
+    try:
         import json, re
-        text = response.content[0].text
+
+        out = await llm_call("tier2_reasoning", TIER2_SYSTEM_PROMPT, user_content)
+        latency_ms = out["latency_ms"]
+        tokens = out["tokens"]
+        text = out["text"]
         m = re.search(r"```(?:json)?\s*([\s\S]*?)```", text)
         if m:
             text = m.group(1)
@@ -259,13 +240,11 @@ async def node_tier2_reasoning(state: ResolvState) -> ResolvState:
 
 async def node_spawn_hypotheses(state: ResolvState) -> ResolvState:
     """Tier 3: spawn all hypothesis agents in parallel."""
-    client = _get_client()
     try:
         results, trigger_audit = await spawn_hypothesis_agents(
             domain=state["domain"],
             complaint_title=state["complaint_title"],
             context=state["context"],
-            client=client,
             pattern_signal=state.get("pattern_signal"),
         )
         state["hypothesis_results"] = results
@@ -289,7 +268,6 @@ async def node_interpret_patterns(state: ResolvState) -> ResolvState:
     if not state["hypothesis_results"]:
         return state
 
-    client = _get_client()
     with open("src/agents/prompts/pattern_interpreter.md") as f:
         system_prompt = f.read()
 
@@ -323,18 +301,11 @@ async def node_interpret_patterns(state: ResolvState) -> ResolvState:
         f"{hypothesis_summary}"
     )
 
-    t_start = time.monotonic()
     try:
-        response = await client.messages.create(
-            model="claude-sonnet-4-6",
-            max_tokens=600,
-            temperature=0.0,
-            system=system_prompt,
-            messages=[{"role": "user", "content": user_message}],
-        )
-        latency_ms = int((time.monotonic() - t_start) * 1000)
-        tokens = response.usage.input_tokens + response.usage.output_tokens
-        state["pattern_interpretation"] = response.content[0].text
+        out = await llm_call("pattern_interpreter", system_prompt, user_message)
+        latency_ms = out["latency_ms"]
+        tokens = out["tokens"]
+        state["pattern_interpretation"] = out["text"]
         state["total_tokens"] += tokens
         state["total_latency_ms"] += latency_ms
         state["audit_log"]["pattern_interpreter_tokens"] = tokens
@@ -348,14 +319,12 @@ async def node_interpret_patterns(state: ResolvState) -> ResolvState:
 
 async def node_arbitrate(state: ResolvState) -> ResolvState:
     """Tier 3: arbiter integrates all signals into final decision."""
-    client = _get_client()
     decision = await run_arbiter(
         complaint_title=state["complaint_title"],
         domain=state["domain"],
         hypothesis_results=state["hypothesis_results"],
         pattern_signal=state["pattern_signal"],
         pattern_interpretation=state.get("pattern_interpretation"),
-        client=client,
     )
     state["routing_decision"] = decision
     state["total_tokens"] += decision.tokens_used
@@ -370,14 +339,12 @@ async def node_judge(state: ResolvState) -> ResolvState:
     if tier not in (2, 3) or not decision:
         return state
 
-    client = _get_client()
     try:
         audit, new_decision = await run_judge(
             complaint_title=state["complaint_title"],
             domain=state["domain"],
             tier=tier,
             decision=decision,
-            client=client,
         )
         state["audit_log"]["judge_verdict"] = audit
         state["total_tokens"] += audit.get("tokens_used", 0)
