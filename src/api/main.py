@@ -2,18 +2,20 @@
 Resolv FastAPI — complaint intake and reasoning trace endpoints.
 """
 
-import asyncio
 from datetime import datetime
-from typing import Optional
+from typing import Any, Dict, Optional
 
 import psycopg2
 from fastapi import FastAPI, HTTPException
+from fastapi.responses import RedirectResponse
+from fastapi.staticfiles import StaticFiles
 from pydantic import BaseModel
 
 from src.pipeline.resolv_graph import process_complaint
 from src.memory.pattern_state import get_active_clusters, ingest_complaint
 
 app = FastAPI(title="Resolv.AI", version="0.1.0")
+app.mount("/static", StaticFiles(directory="src/api/static"), name="static")
 
 
 # ── Request / Response models ──────────────────────────────────────────────
@@ -30,6 +32,7 @@ class ComplaintRequest(BaseModel):
 class RoutingResponse(BaseModel):
     ticket_id: str
     tier: int
+    tier_reason: Optional[str] = None
     domain: str
     domain_confidence: float
     primary_action: str
@@ -42,9 +45,15 @@ class RoutingResponse(BaseModel):
     escalation_trigger: str
     total_tokens: int
     total_latency_ms: int
+    hypothesis_triggers: Optional[Dict[str, Any]] = None
 
 
 # ── Endpoints ──────────────────────────────────────────────────────────────
+
+
+@app.get("/")
+async def root():
+    return RedirectResponse(url="/static/index.html")
 
 @app.post("/complaints", response_model=RoutingResponse)
 async def submit_complaint(req: ComplaintRequest):
@@ -65,8 +74,6 @@ async def submit_complaint(req: ComplaintRequest):
         raise HTTPException(status_code=500, detail="Routing decision not produced")
 
     # Ingest into pattern state for future cluster detection
-    from src.nodes.domain_classifier import classify_domain
-    from src.nodes.complexity_assessor import assess_complexity
     from src.memory.pattern_state import _floor_from_flat
     floor = _floor_from_flat(req.flat) or 0
     ingest_complaint(
@@ -81,6 +88,7 @@ async def submit_complaint(req: ComplaintRequest):
     return RoutingResponse(
         ticket_id=ticket_id,
         tier=result["tier"],
+        tier_reason=result.get("tier_reason"),
         domain=result["domain"],
         domain_confidence=result["domain_confidence"],
         primary_action=decision.primary_action,
@@ -93,6 +101,7 @@ async def submit_complaint(req: ComplaintRequest):
         escalation_trigger=decision.escalation_trigger,
         total_tokens=result["total_tokens"],
         total_latency_ms=result["total_latency_ms"],
+        hypothesis_triggers=result.get("audit_log", {}).get("hypothesis_triggers"),
     )
 
 

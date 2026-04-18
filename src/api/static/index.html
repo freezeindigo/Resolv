@@ -1,0 +1,308 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ARIA</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-white text-slate-900 min-h-screen">
+  <header class="bg-[#0a1628] text-white shadow-md">
+    <div class="max-w-5xl mx-auto px-6 py-5">
+      <h1 class="text-2xl font-semibold tracking-tight">ARIA</h1>
+      <p class="text-slate-400 text-sm mt-1">Agentic complaint routing for facility management</p>
+    </div>
+  </header>
+
+  <main class="max-w-5xl mx-auto px-6 py-8 space-y-6">
+    <section class="bg-white rounded-xl border border-slate-200 shadow-sm p-6">
+      <h2 class="text-lg font-semibold text-slate-800 mb-4">Submit complaint</h2>
+      <form id="complaint-form" class="space-y-4">
+        <div>
+          <label for="complaint_title" class="block text-sm font-medium text-slate-700 mb-1">Complaint text</label>
+          <textarea id="complaint_title" name="complaint_title" rows="4" required
+            class="w-full rounded-lg border border-slate-300 px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-600"
+          >Seepage from ceiling in master bedroom, same issue was reported 3 months ago</textarea>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+          <div>
+            <label for="site_name" class="block text-sm font-medium text-slate-700 mb-1">Site name</label>
+            <select id="site_name" name="site_name" required
+              class="w-full rounded-lg border border-slate-300 px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-600">
+              <option value="Godrej Woods" selected>Godrej Woods</option>
+              <option value="Godrej Meridien">Godrej Meridien</option>
+              <option value="Godrej Nurture-Pune">Godrej Nurture-Pune</option>
+              <option value="Godrej Se7en">Godrej Se7en</option>
+              <option value="Godrej Retreat">Godrej Retreat</option>
+              <option value="Godrej Golf Link Crest">Godrej Golf Link Crest</option>
+              <option value="Godrej Urban Park">Godrej Urban Park</option>
+              <option value="Godrej RKS">Godrej RKS</option>
+            </select>
+          </div>
+
+          <div>
+            <label for="tower" class="block text-sm font-medium text-slate-700 mb-1">Tower</label>
+            <input id="tower" name="tower" value="T6" required
+              class="w-full rounded-lg border border-slate-300 px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-600">
+          </div>
+
+          <div>
+            <label for="flat" class="block text-sm font-medium text-slate-700 mb-1">Flat</label>
+            <input id="flat" name="flat" value="1803" required
+              class="w-full rounded-lg border border-slate-300 px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-600">
+          </div>
+        </div>
+
+        <div class="pt-2 flex items-center gap-3">
+          <button id="submit-btn" type="submit"
+            class="inline-flex items-center justify-center rounded-lg bg-blue-600 text-white px-5 py-2.5 text-sm font-medium hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-600">
+            Submit
+          </button>
+          <div id="loading" class="hidden items-center gap-2 text-sm text-slate-600">
+            <svg class="animate-spin h-4 w-4 text-blue-600" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+              <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+              <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8v4a4 4 0 00-4 4H4z"></path>
+            </svg>
+            <span>Routing complaint…</span>
+          </div>
+        </div>
+      </form>
+    </section>
+
+    <section id="error-box" class="hidden bg-red-50 border border-red-200 text-red-800 rounded-xl p-4 text-sm"></section>
+
+    <section id="result-card" class="hidden bg-white rounded-xl border border-slate-200 shadow-sm p-6 space-y-5">
+      <div class="flex flex-wrap items-start gap-2">
+        <span id="tier-badge" class="px-3 py-1 rounded-full text-xs font-semibold"></span>
+        <span id="domain-tag" class="px-3 py-1 rounded-full text-xs font-semibold bg-slate-100 text-slate-700"></span>
+        <span id="priority-badge" class="px-3 py-1 rounded-full text-xs font-semibold"></span>
+        <span id="confidence-tag" class="px-3 py-1 rounded-full text-xs font-medium bg-slate-50 text-slate-600 border border-slate-200"></span>
+      </div>
+      <p id="tier-reason" class="text-sm text-slate-600 hidden"></p>
+
+      <div>
+        <p class="text-xs uppercase tracking-wide text-slate-500">Primary action</p>
+        <p id="primary-action" class="mt-1 text-2xl font-bold text-slate-900"></p>
+      </div>
+
+      <div id="secondary-wrap" class="hidden">
+        <p class="text-xs uppercase tracking-wide text-slate-500">Secondary action</p>
+        <p id="secondary-action" class="mt-1 text-slate-800"></p>
+      </div>
+
+      <div>
+        <p class="text-xs uppercase tracking-wide text-slate-500">Reasoning</p>
+        <p id="reasoning" class="mt-1 text-slate-800 leading-relaxed whitespace-pre-line"></p>
+      </div>
+
+      <div id="escalation-wrap" class="hidden">
+        <p class="text-xs uppercase tracking-wide text-slate-500">Escalation trigger</p>
+        <p id="escalation-trigger" class="mt-1 text-slate-800"></p>
+      </div>
+
+      <div id="hypothesis-section" class="border-t border-slate-200 pt-5">
+        <p class="text-xs uppercase tracking-wide text-slate-500 mb-2">Hypothesis triggers (Tier 3)</p>
+        <div id="hypothesis-body" class="text-sm text-slate-700 space-y-3"></div>
+      </div>
+
+      <div id="meta" class="text-xs text-slate-500 pt-2 border-t border-slate-100"></div>
+    </section>
+  </main>
+
+  <script>
+    const form = document.getElementById("complaint-form");
+    const submitBtn = document.getElementById("submit-btn");
+    const loading = document.getElementById("loading");
+    const errorBox = document.getElementById("error-box");
+    const resultCard = document.getElementById("result-card");
+
+    function setLoading(isLoading) {
+      submitBtn.disabled = isLoading;
+      submitBtn.classList.toggle("opacity-60", isLoading);
+      submitBtn.classList.toggle("cursor-not-allowed", isLoading);
+      loading.classList.toggle("hidden", !isLoading);
+      loading.classList.toggle("flex", isLoading);
+    }
+
+    function tierBadgeClasses(tier) {
+      if (tier === 1) return "bg-emerald-100 text-emerald-800";
+      if (tier === 2) return "bg-amber-100 text-amber-800";
+      return "bg-rose-100 text-rose-800";
+    }
+
+    function priorityBadgeClasses(priority) {
+      if (priority === "P1") return "bg-red-100 text-red-800";
+      if (priority === "P2") return "bg-orange-100 text-orange-800";
+      if (priority === "P3") return "bg-yellow-100 text-yellow-800";
+      return "bg-emerald-100 text-emerald-800";
+    }
+
+    function showError(message) {
+      errorBox.textContent = message;
+      errorBox.classList.remove("hidden");
+    }
+
+    function clearError() {
+      errorBox.textContent = "";
+      errorBox.classList.add("hidden");
+    }
+
+    function renderHypothesisTriggers(tier, ht) {
+      const body = document.getElementById("hypothesis-body");
+      body.innerHTML = "";
+
+      if (tier !== 3 || !ht) {
+        body.innerHTML =
+          '<p class="text-slate-500">' +
+          (tier !== 3
+            ? "Hypothesis agents run only for Tier 3 routing."
+            : "No trigger audit returned.") +
+          "</p>";
+        return;
+      }
+
+      const spawned = ht.spawned || [];
+      const filtered = ht.filtered || [];
+      const backfilled = ht.backfilled || [];
+      const selected = ht.selected_ids || [];
+
+      const ulSpawn = document.createElement("div");
+      ulSpawn.innerHTML =
+        '<p class="font-medium text-slate-800 mb-1">Activated</p><ul class="list-disc pl-5 space-y-1"></ul>';
+      const sList = ulSpawn.querySelector("ul");
+      if (selected.length) {
+        selected.forEach((id) => {
+          const li = document.createElement("li");
+          const meta = spawned.find((x) => x.id === id);
+          li.textContent = meta
+            ? `${id} — ${meta.reason} (weight ${meta.selection_weight ?? "—"})`
+            : id;
+          sList.appendChild(li);
+        });
+      } else {
+        sList.innerHTML = "<li>None</li>";
+      }
+      body.appendChild(ulSpawn);
+
+      if (backfilled.length) {
+        const bf = document.createElement("div");
+        bf.className = "mt-2";
+        bf.innerHTML = '<p class="font-medium text-slate-800 mb-1">Backfilled</p><ul class="list-disc pl-5 space-y-1"></ul>';
+        const bList = bf.querySelector("ul");
+        backfilled.forEach((b) => {
+          const li = document.createElement("li");
+          li.textContent = `${b.id}: ${b.reason}`;
+          bList.appendChild(li);
+        });
+        body.appendChild(bf);
+      }
+
+      if (filtered.length) {
+        const fd = document.createElement("div");
+        fd.className = "mt-2";
+        fd.innerHTML = '<p class="font-medium text-slate-800 mb-1">Filtered out</p><ul class="list-disc pl-5 space-y-1"></ul>';
+        const fList = fd.querySelector("ul");
+        filtered.forEach((f) => {
+          const li = document.createElement("li");
+          li.textContent = `${f.id}: ${f.reason}`;
+          fList.appendChild(li);
+        });
+        body.appendChild(fd);
+      }
+    }
+
+    function renderResult(data) {
+      const tierBadge = document.getElementById("tier-badge");
+      const domainTag = document.getElementById("domain-tag");
+      const priorityBadge = document.getElementById("priority-badge");
+      const confidenceTag = document.getElementById("confidence-tag");
+      const tierReasonEl = document.getElementById("tier-reason");
+      const primaryAction = document.getElementById("primary-action");
+      const reasoning = document.getElementById("reasoning");
+      const secondaryWrap = document.getElementById("secondary-wrap");
+      const secondaryAction = document.getElementById("secondary-action");
+      const escalationWrap = document.getElementById("escalation-wrap");
+      const escalationTrigger = document.getElementById("escalation-trigger");
+      const meta = document.getElementById("meta");
+
+      tierBadge.className =
+        "px-3 py-1 rounded-full text-xs font-semibold " + tierBadgeClasses(data.tier);
+      tierBadge.textContent = `Tier ${data.tier}`;
+
+      domainTag.textContent = (data.domain || "unknown").replaceAll("_", " ");
+
+      priorityBadge.className =
+        "px-3 py-1 rounded-full text-xs font-semibold " + priorityBadgeClasses(data.priority);
+      priorityBadge.textContent = data.priority || "P?";
+
+      confidenceTag.textContent = `Confidence: ${data.confidence || "—"}`;
+
+      if (data.tier_reason) {
+        tierReasonEl.textContent = data.tier_reason;
+        tierReasonEl.classList.remove("hidden");
+      } else {
+        tierReasonEl.classList.add("hidden");
+      }
+
+      primaryAction.textContent = data.primary_action || "—";
+      reasoning.textContent = data.reasoning || "No reasoning returned.";
+
+      if (data.secondary_action) {
+        secondaryAction.textContent = data.secondary_action;
+        secondaryWrap.classList.remove("hidden");
+      } else {
+        secondaryWrap.classList.add("hidden");
+      }
+
+      if (data.escalation_trigger) {
+        escalationTrigger.textContent = data.escalation_trigger;
+        escalationWrap.classList.remove("hidden");
+      } else {
+        escalationWrap.classList.add("hidden");
+      }
+
+      renderHypothesisTriggers(data.tier, data.hypothesis_triggers);
+
+      meta.textContent =
+        `Ticket ${data.ticket_id} • Tokens ${data.total_tokens ?? 0} • Latency ${data.total_latency_ms ?? 0} ms`;
+
+      resultCard.classList.remove("hidden");
+    }
+
+    form.addEventListener("submit", async (event) => {
+      event.preventDefault();
+      clearError();
+      resultCard.classList.add("hidden");
+      setLoading(true);
+
+      const payload = {
+        complaint_title: document.getElementById("complaint_title").value.trim(),
+        site_name: document.getElementById("site_name").value.trim(),
+        tower: document.getElementById("tower").value.trim(),
+        flat: document.getElementById("flat").value.trim(),
+      };
+
+      try {
+        const response = await fetch("/complaints", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(payload),
+        });
+
+        const body = await response.json();
+        if (!response.ok) {
+          const detail = body && body.detail ? body.detail : "Unexpected API failure.";
+          throw new Error(typeof detail === "string" ? detail : JSON.stringify(detail));
+        }
+
+        renderResult(body);
+      } catch (error) {
+        showError(`Request failed: ${error.message}`);
+      } finally {
+        setLoading(false);
+      }
+    });
+  </script>
+</body>
+</html>

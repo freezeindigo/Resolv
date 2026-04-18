@@ -36,6 +36,7 @@ _SITE_BUILDING_AGE_ESTIMATE: dict[str, float] = {
     "godrej se7en": 8.0,
     "godrej retreat": 11.0,
     "godrej golf link (crest)": 10.0,
+    "godrej golf link crest": 10.0,
     "godrej urban park": 9.0,
     "godrej rks": 6.0,
 }
