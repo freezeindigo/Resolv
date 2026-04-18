@@ -13,6 +13,7 @@ from typing import Any, Dict, Optional
 import anthropic
 
 from src.agents.arbiter import RoutingDecision
+from src.config.routing_actions import normalize_primary_action
 JUDGE_MODEL = "claude-haiku-4-5-20251001"
 PROMPT_PATH = "src/agents/prompts/judge.md"
 
@@ -105,7 +106,7 @@ async def run_judge(
         if isinstance(ov, dict) and ov.get("primary_action"):
             new_decision = replace(
                 decision,
-                primary_action=str(ov.get("primary_action", decision.primary_action)),
+                primary_action=normalize_primary_action(str(ov.get("primary_action", decision.primary_action))),
                 vendor_skill_level=str(ov.get("vendor_skill_level", decision.vendor_skill_level)),
                 priority=str(ov.get("priority", decision.priority)),
                 sla_hours=int(ov.get("sla_hours", decision.sla_hours)),

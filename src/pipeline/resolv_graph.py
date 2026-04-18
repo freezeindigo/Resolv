@@ -13,6 +13,11 @@ from typing import Any, Dict, List, Optional, TypedDict
 import anthropic
 from langgraph.graph import StateGraph, END
 
+from src.config.routing_actions import (
+    allowed_actions_json_hint,
+    get_tier1_rule_tuple,
+    normalize_primary_action,
+)
 from src.nodes.domain_classifier import classify_domain
 from src.nodes.complexity_assessor import assess_complexity
 from src.nodes.context_assembler import assemble_context, ContextPackage
@@ -23,6 +28,21 @@ from src.agents.judge import run_judge
 from src.nodes.ownership import infer_ownership
 
 ANTHROPIC_CLIENT = None  # initialised on first use
+
+TIER2_SYSTEM_PROMPT = (
+    "You are a facility management routing assistant for high-rise residential towers.\n"
+    "Output a single JSON object only (no markdown code fences).\n"
+    "Required keys: action, vendor_skill_level, priority, sla_hours, materials_hint, reasoning, confidence, ownership.\n"
+    "- action MUST be exactly one of: "
+    + allowed_actions_json_hint()
+    + "\n"
+    "- ownership must be \"FM\" or \"Project\" (FM = facility operations; Project = developer / DLP / handover-era defects).\n"
+    "- vendor_skill_level: junior | senior | specialist\n"
+    "- priority: P1 | P2 | P3 | P4\n"
+    "- confidence: high | medium | low\n"
+    "Choose the single best dispatch action matching the DOMAIN and building context.\n"
+    "Do not invent action names — only the list above. If unclear, use assign_fm_manager.\n"
+)
 
 
 def _get_client() -> anthropic.AsyncAnthropic:
@@ -133,21 +153,10 @@ def node_query_patterns(state: ResolvState) -> ResolvState:
 
 def node_rule_route(state: ResolvState) -> ResolvState:
     """Tier 1: deterministic routing, no LLM."""
-    domain_actions = {
-        "water_plumbing": ("send_plumber", "junior", "P2", 24),
-        "electrical": ("send_electrician", "junior", "P2", 24),
-        "carpentry": ("send_carpenter", "junior", "P3", 48),
-        "hvac": ("send_hvac_tech", "junior", "P2", 24),
-        "lift_elevator": ("send_lift_engineer", "specialist", "P1", 4),
-        "structural_civil": ("send_civil_team", "senior", "P2", 48),
-        "safety_security": ("send_security", "senior", "P1", 4),
-        "pest_hygiene": ("send_housekeeping", "junior", "P3", 48),
-        "common_area": ("send_maintenance", "junior", "P3", 48),
-        "other": ("assign_fm_manager", "senior", "P3", 48),
-    }
-    action, skill, priority, sla = domain_actions.get(
-        state["domain"], ("assign_fm_manager", "senior", "P3", 48)
+    action, skill, priority, sla = get_tier1_rule_tuple(
+        state["domain"], state["complaint_title"]
     )
+    action = normalize_primary_action(action)
     state["routing_decision"] = RoutingDecision(
         primary_action=action,
         vendor_skill_level=skill,
@@ -159,7 +168,12 @@ def node_rule_route(state: ResolvState) -> ResolvState:
         confidence="high",
         reasoning=f"Unambiguous {state['domain']} complaint — rule routed without LLM.",
         escalation_trigger="If vendor cannot resolve, escalate to senior.",
-        ownership=infer_ownership(state["complaint_title"]),
+        ownership=infer_ownership(
+            state["complaint_title"],
+            domain=state["domain"],
+            tier=state["tier"],
+            hypothesis_results=None,
+        ),
     )
     state["audit_log"]["routing"] = {"method": "rule", "action": action}
     return state
@@ -177,12 +191,7 @@ async def node_tier2_reasoning(state: ResolvState) -> ResolvState:
             model="claude-haiku-4-5-20251001",
             max_tokens=800,
             temperature=0.0,
-            system=(
-                "You are a facility management complaint routing assistant. "
-                "Given a complaint and its building context, decide the best routing action. "
-                "Reply in JSON: {action, vendor_skill_level, priority, sla_hours, "
-                "materials_hint, reasoning, confidence}"
-            ),
+            system=TIER2_SYSTEM_PROMPT,
             messages=[{
                 "role": "user",
                 "content": (
@@ -203,12 +212,26 @@ async def node_tier2_reasoning(state: ResolvState) -> ResolvState:
         try:
             parsed = json.loads(text.strip())
         except Exception:
-            parsed = {"action": "send_maintenance", "vendor_skill_level": "senior",
+            parsed = {"action": "assign_fm_manager", "vendor_skill_level": "senior",
                       "priority": "P2", "sla_hours": 24, "materials_hint": "",
                       "reasoning": text[:200], "confidence": "low"}
 
+        primary = normalize_primary_action(parsed.get("action"))
+        own = infer_ownership(
+            state["complaint_title"],
+            domain=state["domain"],
+            tier=2,
+            hypothesis_results=None,
+        )
+        ol = parsed.get("ownership")
+        if isinstance(ol, str) and ol.strip():
+            oln = ol.strip().lower()
+            if oln == "project":
+                own = "Project"
+            elif oln in ("fm", "facility", "facilities"):
+                own = "FM"
         state["routing_decision"] = RoutingDecision(
-            primary_action=parsed.get("action", "send_maintenance"),
+            primary_action=primary,
             vendor_skill_level=parsed.get("vendor_skill_level", "senior"),
             priority=parsed.get("priority", "P2"),
             sla_hours=parsed.get("sla_hours", 24),
@@ -218,7 +241,7 @@ async def node_tier2_reasoning(state: ResolvState) -> ResolvState:
             confidence=parsed.get("confidence", "medium"),
             reasoning=parsed.get("reasoning", ""),
             escalation_trigger="If unresolved in SLA window, escalate to senior.",
-            ownership=infer_ownership(state["complaint_title"]),
+            ownership=own,
             tokens_used=tokens,
             latency_ms=latency_ms,
         )

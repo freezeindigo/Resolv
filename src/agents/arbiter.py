@@ -12,6 +12,7 @@ from typing import List, Optional
 import anthropic
 
 from src.agents.hypothesis_agent import HypothesisResult
+from src.config.routing_actions import normalize_primary_action
 from src.memory.pattern_state import PatternSignal
 from src.nodes.ownership import infer_ownership
 
@@ -125,6 +126,8 @@ async def run_arbiter(
 
     parsed = _parse_response(response.content[0].text)
     primary = parsed.get("primary_action", {})
+    if not isinstance(primary, dict):
+        primary = {}
     secondary = parsed.get("secondary_action")
 
     secondary_str = None
@@ -134,8 +137,12 @@ async def run_arbiter(
             f"SLA {secondary.get('sla_hours','?')}h | {secondary.get('materials_hint','')}"
         )
 
+    raw_action = primary.get("action", "assign_fm_manager")
+    if isinstance(raw_action, dict):
+        raw_action = raw_action.get("action", "assign_fm_manager")
+
     return RoutingDecision(
-        primary_action=primary.get("action", "investigate_further"),
+        primary_action=normalize_primary_action(raw_action),
         vendor_skill_level=primary.get("vendor_skill_level", "senior"),
         priority=primary.get("priority", "P2"),
         sla_hours=primary.get("sla_hours", 24),
@@ -145,7 +152,12 @@ async def run_arbiter(
         confidence=parsed.get("confidence", "low"),
         reasoning=parsed.get("reasoning", ""),
         escalation_trigger=parsed.get("escalation_trigger", ""),
-        ownership=infer_ownership(complaint_title),
+        ownership=infer_ownership(
+            complaint_title,
+            domain=domain,
+            tier=3,
+            hypothesis_results=hypothesis_results,
+        ),
         tokens_used=tokens,
         latency_ms=latency_ms,
     )

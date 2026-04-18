@@ -23,7 +23,7 @@ Route toward the hypothesis with the highest adjusted_score, not necessarily the
 ```json
 {
   "primary_action": {
-    "action": "send_plumber|send_electrician|send_structural_team|send_hvac_tech|send_carpenter|escalate_management|immediate_emergency",
+    "action": "EXACTLY one of: send_plumber, send_electrician, send_carpenter, send_structural_team, send_hvac_tech, send_pest_control, assign_security_team, assign_housekeeping, assign_lift_operator, assign_fm_manager, escalate_project_team, immediate_emergency",
     "vendor_skill_level": "junior|senior|specialist",
     "priority": "P1|P2|P3|P4",
     "sla_hours": 24,
