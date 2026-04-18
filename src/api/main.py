@@ -2,17 +2,22 @@
 Resolv FastAPI — complaint intake and reasoning trace endpoints.
 """
 
+import csv
+import io
 from datetime import datetime
-from typing import Any, Dict, Optional
+from typing import Any, Dict, List, Optional, Union
 
 import psycopg2
-from fastapi import FastAPI, HTTPException
+from fastapi import FastAPI, File, HTTPException, UploadFile
 from fastapi.responses import RedirectResponse
 from fastapi.staticfiles import StaticFiles
 from pydantic import BaseModel
 
 from src.pipeline.resolv_graph import process_complaint
 from src.memory.pattern_state import get_active_clusters, ingest_complaint
+from src.nodes.domain_classifier import classify_domain
+from src.nodes.complexity_assessor import assess_complexity
+from src import insights_queries
 
 app = FastAPI(title="Resolv.AI", version="0.1.0")
 app.mount("/static", StaticFiles(directory="src/api/static"), name="static")
@@ -41,7 +46,7 @@ class RoutingResponse(BaseModel):
     sla_hours: int
     secondary_action: Optional[str]
     reasoning: str
-    confidence: str
+    confidence: Union[str, float, None] = None
     escalation_trigger: str
     total_tokens: int
     total_latency_ms: int
@@ -85,6 +90,15 @@ async def submit_complaint(req: ComplaintRequest):
         ticket_id=ticket_id,
     )
 
+    conf = result["routing_decision"].confidence
+    if isinstance(conf, (int, float)):
+        if conf > 0.8:
+            conf = "high"
+        elif conf > 0.5:
+            conf = "medium"
+        else:
+            conf = "low"
+
     return RoutingResponse(
         ticket_id=ticket_id,
         tier=result["tier"],
@@ -97,7 +111,7 @@ async def submit_complaint(req: ComplaintRequest):
         sla_hours=decision.sla_hours,
         secondary_action=decision.secondary_action,
         reasoning=decision.reasoning,
-        confidence=decision.confidence,
+        confidence=conf,
         escalation_trigger=decision.escalation_trigger,
         total_tokens=result["total_tokens"],
         total_latency_ms=result["total_latency_ms"],
@@ -161,3 +175,120 @@ async def get_active_clusters_endpoint(
 @app.get("/health")
 async def health():
     return {"status": "ok", "service": "resolv"}
+
+
+# ── Bulk analysis (rule-based, no LLM) ────────────────────────────────────
+
+
+def _estimate_llm_cost_usd_tier(tier: int, n: int) -> float:
+    """Rough marginal $/complaint by tier (same order of magnitude as eval notes)."""
+    per = {1: 0.0, 2: 0.02, 3: 0.10}
+    return round(n * per.get(tier, 0.02), 2)
+
+
+@app.post("/bulk-analyze")
+async def bulk_analyze(file: UploadFile = File(...)):
+    """
+    CSV columns: complaint_text (or complaint_title), site_name, tower, flat.
+    Runs domain_classifier + complexity_assessor only (no LLM).
+    """
+    raw = await file.read()
+    try:
+        text = raw.decode("utf-8")
+    except UnicodeDecodeError:
+        text = raw.decode("latin-1", errors="replace")
+
+    reader = csv.DictReader(io.StringIO(text))
+    if not reader.fieldnames:
+        raise HTTPException(status_code=400, detail="Empty CSV")
+
+    rows_out: List[Dict[str, Any]] = []
+    tier_counts = {1: 0, 2: 0, 3: 0}
+    domain_counts: Dict[str, int] = {}
+
+    for row in reader:
+        title = (row.get("complaint_text") or row.get("complaint_title") or "").strip()
+        site = (row.get("site_name") or "").strip()
+        tower = (row.get("tower") or "").strip()
+        flat = (row.get("flat") or "").strip()
+        if not title:
+            continue
+
+        d = classify_domain(title)
+        t = assess_complexity(
+            title,
+            d["domain"],
+            domain_confidence=d["confidence"],
+            domain_method=d["method"],
+        )
+        tier = t["tier"]
+        tier_counts[tier] = tier_counts.get(tier, 0) + 1
+        dom = d["domain"]
+        domain_counts[dom] = domain_counts.get(dom, 0) + 1
+
+        rows_out.append(
+            {
+                "complaint_text": title[:500],
+                "site_name": site,
+                "tower": tower,
+                "flat": flat,
+                "domain": dom,
+                "domain_confidence": d["confidence"],
+                "tier": tier,
+                "tier_reason": t["reason"],
+            }
+        )
+
+    n = len(rows_out)
+    est = _estimate_llm_cost_usd_tier(1, tier_counts[1]) + _estimate_llm_cost_usd_tier(
+        2, tier_counts[2]
+    ) + _estimate_llm_cost_usd_tier(3, tier_counts[3])
+
+    return {
+        "row_count": n,
+        "tier_distribution": {f"T{k}": tier_counts.get(k, 0) for k in (1, 2, 3)},
+        "domain_distribution": domain_counts,
+        "estimated_full_llm_cost_usd": round(est, 2),
+        "rows": rows_out,
+    }
+
+
+# ── Insights (PostgreSQL) ─────────────────────────────────────────────────
+
+
+@app.get("/insights/summary")
+async def insights_summary():
+    data = insights_queries.get_summary()
+    try:
+        data["tier_distribution_projection"] = insights_queries.tier_projection_sample(500)
+    except Exception as e:
+        data["tier_distribution_projection"] = {}
+        data["tier_projection_error"] = str(e)
+    open_n = data.get("open_complaints") or 0
+    data["projected_monthly_savings_inr"] = round(open_n * 0.28 * 900, 0)
+    return data
+
+
+@app.get("/insights/hotspots")
+async def insights_hotspots():
+    return {"hotspots": insights_queries.get_hotspots(20)}
+
+
+@app.get("/insights/domains")
+async def insights_domains():
+    return insights_queries.get_domains_heatmap()
+
+
+@app.get("/insights/recurrence")
+async def insights_recurrence():
+    return insights_queries.get_recurrence()
+
+
+@app.get("/insights/aging")
+async def insights_aging():
+    return {"buckets": insights_queries.get_aging_buckets()}
+
+
+@app.get("/insights/taxonomy")
+async def insights_taxonomy():
+    return insights_queries.get_taxonomy_chaos()
