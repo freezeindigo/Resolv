@@ -1,35 +1,44 @@
 """
 Hypothesis Agent — LLM-powered reasoning unit.
 
-Each agent:
-  - Has one isolated system prompt (loaded from .md file)
-  - Receives only evidence relevant to its hypothesis (via evidence_filter)
-  - Returns a structured HypothesisResult
-
-This module also provides spawn_hypothesis_agents() which reads the
-hypothesis_library.yaml and spawns all relevant agents in parallel.
+spawn_hypothesis_agents() reads hypothesis_library.yaml, applies trigger_conditions,
+then runs selected agents in parallel (max 4; minimum 2 for Tier 3 when possible).
 """
 
 import asyncio
 import json
 import re
 from dataclasses import dataclass, field
+from datetime import datetime
 from functools import lru_cache
 from pathlib import Path
-from typing import Any, Dict, List, Optional
+from typing import Any, Dict, List, Optional, Tuple
 
 import anthropic
 import yaml
 
+from src.memory.pattern_state import PatternSignal
 from src.nodes.context_assembler import ContextPackage
 
 LIBRARY_PATH = Path(__file__).parent.parent / "config" / "hypothesis_library.yaml"
 PROMPTS_DIR = Path(__file__).parent / "prompts"
 
-# Model config — Sonnet for Tier 3 hypothesis agents
 HYPOTHESIS_MODEL = "claude-sonnet-4-6"
 MAX_TOKENS = 1024
-TEMPERATURE = 0.0  # deterministic scoring
+TEMPERATURE = 0.0
+
+MAX_HYPOTHESES = 4
+MIN_HYPOTHESES = 2
+
+
+@dataclass
+class TriggerContext:
+    building_age_years: Optional[float]
+    has_recurrence: bool
+    has_vertical_stack: bool
+    flat_has_ac: bool
+    complaint_mentions_ac: bool
+    is_monsoon_window: bool
 
 
 @dataclass
@@ -37,14 +46,14 @@ class HypothesisResult:
     hypothesis_id: str
     hypothesis_name: str
     domain: str
-    likelihood: float           # 0.0 – 1.0
-    confidence: str             # "high" | "medium" | "low"
+    likelihood: float
+    confidence: str
     evidence_for: List[str]
     evidence_against: List[str]
     reasoning: str
     recommended_action: str
     cost_of_error_weight: float
-    adjusted_score: float       # likelihood × cost_of_error_weight
+    adjusted_score: float
     raw_response: Dict[str, Any] = field(default_factory=dict)
     tokens_used: int = 0
     latency_ms: int = 0
@@ -57,20 +66,262 @@ def _load_library() -> dict:
         return yaml.safe_load(f)
 
 
+def _norm(text: str) -> str:
+    return re.sub(r"\s+", " ", text.lower().strip())
+
+
+def _keyword_hit(title_norm: str, kw: str) -> bool:
+    k = _norm(kw)
+    if not k:
+        return False
+    if " " in k:
+        return k in title_norm
+    if k == "wc":
+        return bool(re.search(r"\bwc\b", title_norm))
+    if len(k) <= 3:
+        return bool(re.search(rf"\b{re.escape(k)}\b", title_norm))
+    return k in title_norm
+
+
+def _suppress_hit(title_norm: str, phrase: str) -> bool:
+    p = _norm(phrase)
+    if not p:
+        return False
+    if " " in p:
+        return p in title_norm
+    return _keyword_hit(title_norm, p)
+
+
+def _build_trigger_context(
+    context: ContextPackage,
+    complaint_title: str,
+    pattern_signal: Optional[PatternSignal],
+) -> TriggerContext:
+    title_norm = _norm(complaint_title)
+    now = datetime.now()
+
+    recur_re = re.compile(
+        r"\b(again|same issue|same problem|months?\s+ago|recurring|repeated|reported)\b",
+        re.I,
+    )
+    has_recurrence_kw = bool(recur_re.search(title_norm))
+
+    hist = context.flat_history or []
+    recent_count = 0
+    for c in hist:
+        if c.created_date:
+            if (now - c.created_date).days <= 365:
+                recent_count += 1
+    has_recurrence_hist = recent_count >= 2
+    has_recurrence = has_recurrence_kw or has_recurrence_hist
+
+    has_vertical_stack = bool(pattern_signal and pattern_signal.has_stack_pattern)
+
+    complaint_mentions_ac = bool(
+        re.search(r"\b(ac|a/c|air conditioning|hvac|split)\b", title_norm, re.I)
+    )
+    flat_has_ac = complaint_mentions_ac
+    for c in hist:
+        t = (c.complaint_title or "").lower()
+        cat = (c.category or "").lower()
+        if re.search(r"\bac\b|air condition|hvac|split", t):
+            flat_has_ac = True
+            break
+        if "ac" in cat or "ac repair" in cat:
+            flat_has_ac = True
+            break
+
+    monsoon_kw = "monsoon" in title_norm
+    is_monsoon_window = now.month in (6, 7, 8, 9) or monsoon_kw
+
+    age = context.building_age_years
+
+    return TriggerContext(
+        building_age_years=age,
+        has_recurrence=has_recurrence,
+        has_vertical_stack=has_vertical_stack,
+        flat_has_ac=flat_has_ac,
+        complaint_mentions_ac=complaint_mentions_ac,
+        is_monsoon_window=is_monsoon_window,
+    )
+
+
+def _eval_require_context(rc: Optional[dict], tr: TriggerContext) -> bool:
+    if not rc:
+        return True
+    for key, val in rc.items():
+        if key == "building_age_gt":
+            if tr.building_age_years is None or not (tr.building_age_years > float(val)):
+                return False
+        elif key == "has_recurrence":
+            if bool(val) != tr.has_recurrence:
+                return False
+        elif key == "has_vertical_stack":
+            if bool(val) != tr.has_vertical_stack:
+                return False
+        elif key == "flat_has_ac":
+            if bool(val) != tr.flat_has_ac:
+                return False
+        elif key == "complaint_mentions_ac":
+            if bool(val) != tr.complaint_mentions_ac:
+                return False
+    return True
+
+
+def _eval_require_context_or(rco: Optional[dict], tr: TriggerContext) -> bool:
+    if not rco:
+        return True
+    for key, val in rco.items():
+        if not val:
+            continue
+        if key == "flat_has_ac" and tr.flat_has_ac:
+            return True
+        if key == "complaint_mentions_ac" and tr.complaint_mentions_ac:
+            return True
+    return False
+
+
+def _selection_weight(hyp: dict, tr: TriggerContext) -> float:
+    tc = hyp.get("trigger_conditions") or {}
+    w = float(hyp.get("cost_of_error_weight", 1.0))
+    w += float(tc.get("boost_score") or 0)
+    hid = hyp["id"]
+    eb = tc.get("extra_boost") or {}
+    if hid == "structural_seepage" and eb.get("recurrence_or_vertical_stack"):
+        if tr.has_recurrence or tr.has_vertical_stack:
+            w += float(eb["recurrence_or_vertical_stack"])
+    if hid == "waterproofing_failure" and eb.get("monsoon_or_age_gt_7"):
+        if tr.is_monsoon_window or (tr.building_age_years and tr.building_age_years > 7):
+            w += float(eb["monsoon_or_age_gt_7"])
+    if hid == "structural_movement" and eb.get("building_age_gt_5"):
+        if tr.building_age_years and tr.building_age_years > 5:
+            w += float(eb["building_age_gt_5"])
+    return w
+
+
+def _evaluate_hypothesis_triggers(
+    hyp: dict,
+    domain: str,
+    title_norm: str,
+    tr: TriggerContext,
+    domain_config: dict,
+) -> Tuple[bool, str]:
+    """Return (should_spawn, reason)."""
+    if domain_config.get("always_all_hypotheses"):
+        return True, "safety_security: always_all_hypotheses"
+
+    tc = hyp.get("trigger_conditions") or {}
+    hid = hyp["id"]
+
+    if hid == "safety_hazard" and domain == "electrical":
+        req = tc.get("require_any") or []
+        if any(_keyword_hit(title_norm, k) for k in req):
+            return True, "safety_hazard: keyword match (never suppress)"
+        return False, "safety_hazard: no safety keywords matched"
+
+    if tc.get("always_spawn_in_domain"):
+        return True, f"{hid}: always_spawn_in_domain ({domain})"
+
+    for s in tc.get("suppress") or []:
+        if _suppress_hit(title_norm, s):
+            return False, f"suppress matched: {s}"
+
+    req_any = tc.get("require_any") or []
+    if req_any:
+        if not any(_keyword_hit(title_norm, k) for k in req_any):
+            return False, "require_any not satisfied"
+
+    if not _eval_require_context(tc.get("require_context"), tr):
+        return False, "require_context not satisfied"
+
+    if tc.get("require_context_or"):
+        if not _eval_require_context_or(tc.get("require_context_or"), tr):
+            return False, "require_context_or not satisfied"
+
+    return True, "triggers satisfied"
+
+
+def _select_hypotheses_to_run(
+    hypotheses: List[dict],
+    domain: str,
+    domain_config: dict,
+    title_norm: str,
+    tr: TriggerContext,
+) -> Tuple[List[dict], Dict[str, Any]]:
+    """Returns (selected_hypothesis_configs, audit)."""
+    audit_filtered: List[Dict[str, Any]] = []
+    audit_spawn: List[Dict[str, Any]] = []
+    passed: List[Tuple[dict, float, str]] = []
+
+    for hyp in hypotheses:
+        ok, reason = _evaluate_hypothesis_triggers(hyp, domain, title_norm, tr, domain_config)
+        entry = {"id": hyp["id"], "name": hyp.get("name"), "reason": reason}
+        if ok:
+            w = _selection_weight(hyp, tr)
+            passed.append((hyp, w, reason))
+            audit_spawn.append({**entry, "selection_weight": w})
+        else:
+            audit_filtered.append(entry)
+
+    passed.sort(key=lambda x: x[1], reverse=True)
+    selected = [p[0] for p in passed]
+    selected = selected[:MAX_HYPOTHESES]
+
+    backfill_audit: List[Dict[str, Any]] = []
+    if len(selected) < MIN_HYPOTHESES and not domain_config.get("always_all_hypotheses"):
+        by_cost = sorted(hypotheses, key=lambda h: float(h.get("cost_of_error_weight", 0)), reverse=True)
+        sel_ids = {h["id"] for h in selected}
+        for h in by_cost:
+            if h["id"] in sel_ids:
+                continue
+            selected.append(h)
+            sel_ids.add(h["id"])
+            backfill_audit.append(
+                {"id": h["id"], "reason": "minimum Tier-3 breadth: backfill by cost_of_error_weight"}
+            )
+            if len(selected) >= MIN_HYPOTHESES:
+                break
+
+    if len(selected) > MAX_HYPOTHESES:
+        selected = sorted(
+            selected,
+            key=lambda h: float(h.get("cost_of_error_weight", 0)),
+            reverse=True,
+        )[:MAX_HYPOTHESES]
+
+    if not selected and hypotheses:
+        selected = sorted(
+            hypotheses,
+            key=lambda h: float(h.get("cost_of_error_weight", 0)),
+            reverse=True,
+        )[: max(MIN_HYPOTHESES, 1)]
+        audit_filtered.append(
+            {
+                "id": "_emergency",
+                "name": "",
+                "reason": "no triggers matched — fallback to highest cost_of_error_weight",
+            }
+        )
+
+    return selected, {
+        "spawned": audit_spawn,
+        "filtered": audit_filtered,
+        "backfilled": backfill_audit,
+        "selected_ids": [h["id"] for h in selected],
+        "max_cap": MAX_HYPOTHESES,
+        "min_target": MIN_HYPOTHESES,
+    }
+
+
 def _load_prompt(prompt_path: str) -> str:
     path = Path(prompt_path)
     if not path.exists():
-        # Fall back to prompts dir
         path = PROMPTS_DIR / path.name
     with open(path) as f:
         return f.read()
 
 
 def _filter_evidence(context: ContextPackage, evidence_filter: List[str]) -> str:
-    """
-    Return only the context sections relevant to this hypothesis.
-    Prevents cognitive contamination between hypothesis agents.
-    """
     parts = []
 
     if "flat_history" in evidence_filter and context.flat_history:
@@ -108,8 +359,6 @@ def _filter_evidence(context: ContextPackage, evidence_filter: List[str]) -> str
 
 
 def _parse_llm_response(response_text: str, hypothesis_id: str) -> dict:
-    """Extract JSON from LLM response, handling markdown code blocks."""
-    # Strip markdown code block if present
     match = re.search(r"```(?:json)?\s*([\s\S]*?)```", response_text)
     if match:
         response_text = match.group(1)
@@ -135,7 +384,6 @@ async def run_hypothesis_agent(
     context: ContextPackage,
     client: anthropic.AsyncAnthropic,
 ) -> HypothesisResult:
-    """Run a single hypothesis agent and return its result."""
     import time
 
     hyp_id = hypothesis_config["id"]
@@ -205,49 +453,36 @@ async def run_hypothesis_agent(
         )
 
 
-def _should_spawn(hyp_config: dict, complaint_title: str) -> bool:
-    """Check trigger conditions for conditional hypotheses."""
-    trigger = hyp_config.get("trigger_condition")
-    if not trigger:
-        return True
-
-    title_lower = complaint_title.lower()
-    if trigger == "ceiling_complaint":
-        return any(w in title_lower for w in ["ceiling", "ceil", "overhead", "top", "roof"])
-
-    return True
-
-
 async def spawn_hypothesis_agents(
     domain: str,
     complaint_title: str,
     context: ContextPackage,
     client: anthropic.AsyncAnthropic,
-) -> List[HypothesisResult]:
-    """
-    Load hypothesis library, select agents for this domain,
-    and run them all in parallel.
-    """
+    pattern_signal: Optional[PatternSignal] = None,
+) -> Tuple[List[HypothesisResult], Dict[str, Any]]:
     library = _load_library()
     domain_config = library.get(domain)
 
     if not domain_config:
-        return []
+        return [], {"error": f"no hypothesis library for domain={domain}"}
 
     hypotheses = domain_config.get("hypothesis_types", [])
+    if not hypotheses:
+        return [], {"error": "empty hypothesis_types"}
 
-    # Filter by trigger conditions
-    active = [h for h in hypotheses if _should_spawn(h, complaint_title)]
+    title_norm = _norm(complaint_title)
+    tr = _build_trigger_context(context, complaint_title, pattern_signal)
 
-    if not active:
-        return []
+    selected, audit = _select_hypotheses_to_run(hypotheses, domain, domain_config, title_norm, tr)
 
-    # Run all in parallel
+    if not selected:
+        return [], {**audit, "note": "no hypotheses selected"}
+
     tasks = [
         run_hypothesis_agent(h, domain, complaint_title, context, client)
-        for h in active
+        for h in selected
     ]
     results = await asyncio.gather(*tasks)
+    results = sorted(results, key=lambda r: r.adjusted_score, reverse=True)
+    return results, audit
 
-    # Sort by adjusted_score descending
-    return sorted(results, key=lambda r: r.adjusted_score, reverse=True)

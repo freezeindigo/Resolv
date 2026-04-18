@@ -1,6 +1,5 @@
 # Hypothesis Library — domain to hypothesis agent mappings
-# Each hypothesis agent runs in isolation with filtered evidence
-# cost_of_error_weight: relative cost vs other hypotheses (1.0 = baseline)
+# trigger_conditions gate which agents run before Tier 3 LLM calls.
 
 water_plumbing:
   description: "Plumbing leaks, drainage, water supply, seepage"
@@ -13,6 +12,21 @@ water_plumbing:
         - flat_history
         - recent_plumbing_work
       cost_of_error_weight: 1.0
+      trigger_conditions:
+        always_spawn_in_domain: true
+        require_any:
+          - tap
+          - flush
+          - pipe
+          - drain
+          - choke
+          - basin
+          - sink
+          - geyser
+          - valve
+          - wc
+          - jet
+        boost_score: 0
 
     - id: structural_seepage
       name: "Structural Seepage"
@@ -24,6 +38,22 @@ water_plumbing:
         - building_pattern
         - flat_history
       cost_of_error_weight: 10.0
+      trigger_conditions:
+        require_any:
+          - ceiling
+          - wall
+          - seepage
+          - damp
+          - moisture
+        suppress:
+          - tap
+          - sink
+          - faucet
+          - flush
+          - basin
+        boost_score: 0
+        extra_boost:
+          recurrence_or_vertical_stack: 2
 
     - id: environmental
       name: "Environmental / External"
@@ -33,6 +63,20 @@ water_plumbing:
         - flat_history
         - building_pattern
       cost_of_error_weight: 2.0
+      trigger_conditions:
+        require_any:
+          - rain
+          - monsoon
+          - terrace
+          - roof
+          - external
+          - storm
+          - ceiling
+        suppress:
+          - tap
+          - pipe
+          - fixture
+        boost_score: 0
 
     - id: hvac_condensate
       name: "HVAC Condensate"
@@ -42,7 +86,18 @@ water_plumbing:
         - flat_history
         - adjacent_history
       cost_of_error_weight: 1.5
-      trigger_condition: "ceiling_complaint"  # only spawned for ceiling-related complaints
+      trigger_conditions:
+        require_any:
+          - ceiling
+          - drip
+        require_context_or:
+          flat_has_ac: true
+          complaint_mentions_ac: true
+        suppress:
+          - wall
+          - floor
+          - tap
+        boost_score: 0
 
 electrical:
   description: "Electrical faults, power supply, switches, wiring"
@@ -54,6 +109,16 @@ electrical:
       evidence_filter:
         - flat_history
       cost_of_error_weight: 1.0
+      trigger_conditions:
+        always_spawn_in_domain: true
+        require_any:
+          - switch
+          - socket
+          - wire
+          - mcb
+          - trip
+          - short
+        boost_score: 0
 
     - id: external_supply
       name: "External Supply Issue"
@@ -63,6 +128,17 @@ electrical:
         - building_pattern
         - flat_history
       cost_of_error_weight: 2.0
+      trigger_conditions:
+        require_any:
+          - power
+          - no supply
+          - voltage
+          - load shedding
+          - transformer
+        suppress:
+          - switch
+          - socket
+        boost_score: 0
 
     - id: equipment_specific
       name: "Equipment Failure"
@@ -71,6 +147,20 @@ electrical:
       evidence_filter:
         - flat_history
       cost_of_error_weight: 0.8
+      trigger_conditions:
+        require_any:
+          - fan
+          - geyser
+          - inverter
+          - intercom
+          - vdp
+          - bell
+          - exhaust
+          - motor
+        suppress:
+          - power cut
+          - no supply
+        boost_score: 0
 
     - id: safety_hazard
       name: "Electrical Safety Hazard"
@@ -79,6 +169,17 @@ electrical:
       evidence_filter:
         - flat_history
       cost_of_error_weight: 20.0
+      trigger_conditions:
+        never_suppress: true
+        require_any:
+          - spark
+          - shock
+          - burning
+          - smell
+          - smoke
+          - fire
+          - short circuit
+        boost_score: 0
 
 structural_civil:
   description: "Cracks, seepage, tiles, plaster, waterproofing"
@@ -91,6 +192,16 @@ structural_civil:
         - building_pattern
         - flat_history
       cost_of_error_weight: 5.0
+      trigger_conditions:
+        require_any:
+          - crack
+          - gap
+          - shift
+          - tilt
+        suppress:
+          - paint
+          - tile loose
+        boost_score: 0
 
     - id: waterproofing_failure
       name: "Waterproofing Failure"
@@ -101,6 +212,16 @@ structural_civil:
         - adjacent_history
         - flat_history
       cost_of_error_weight: 10.0
+      trigger_conditions:
+        require_any:
+          - seepage
+          - damp
+          - moisture
+          - water mark
+          - efflorescence
+        boost_score: 0
+        extra_boost:
+          monsoon_or_age_gt_7: 2
 
     - id: installation_defect
       name: "Installation / DLP Defect"
@@ -110,6 +231,17 @@ structural_civil:
         - flat_history
         - building_pattern
       cost_of_error_weight: 3.0
+      trigger_conditions:
+        require_any:
+          - tile
+          - grout
+          - plaster
+          - paint peeling
+          - loose
+        suppress:
+          - crack spreading
+          - structural
+        boost_score: 0
 
     - id: environmental_damage
       name: "Environmental Damage"
@@ -119,6 +251,14 @@ structural_civil:
         - building_pattern
         - flat_history
       cost_of_error_weight: 2.0
+      trigger_conditions:
+        require_any:
+          - storm
+          - flood
+          - rain
+          - external
+          - tree
+        boost_score: 0
 
 carpentry:
   description: "Doors, windows, locks, hinges, cabinets"
@@ -130,6 +270,15 @@ carpentry:
       evidence_filter:
         - flat_history
       cost_of_error_weight: 1.0
+      trigger_conditions:
+        always_spawn_in_domain: true
+        require_any:
+          - lock
+          - handle
+          - hinge
+          - knob
+          - latch
+        boost_score: 0
 
     - id: structural_movement
       name: "Structural Movement"
@@ -139,6 +288,19 @@ carpentry:
         - building_pattern
         - flat_history
       cost_of_error_weight: 4.0
+      trigger_conditions:
+        require_any:
+          - door not closing
+          - window stuck
+          - frame gap
+          - alignment
+        suppress:
+          - lock
+          - handle
+          - hinge
+        boost_score: 0
+        extra_boost:
+          building_age_gt_5: 1
 
     - id: installation_defect
       name: "Installation Defect"
@@ -147,6 +309,17 @@ carpentry:
       evidence_filter:
         - flat_history
       cost_of_error_weight: 2.0
+      trigger_conditions:
+        require_any:
+          - new
+          - since possession
+          - dlp
+          - defect
+        suppress:
+          - old
+          - worn
+          - broken handle
+        boost_score: 0
 
 hvac:
   description: "Air conditioning, cooling systems"
@@ -158,6 +331,18 @@ hvac:
       evidence_filter:
         - flat_history
       cost_of_error_weight: 2.0
+      trigger_conditions:
+        require_any:
+          - cooling
+          - gas
+          - compressor
+          - refrigerant
+          - not cooling
+        suppress:
+          - mcb
+          - switch
+          - socket
+        boost_score: 0
 
     - id: electrical_fault
       name: "Electrical Fault (AC)"
@@ -167,6 +352,17 @@ hvac:
         - flat_history
         - building_pattern
       cost_of_error_weight: 1.5
+      trigger_conditions:
+        require_any:
+          - trip
+          - voltage
+          - pcb
+          - electric
+          - power
+        suppress:
+          - gas
+          - refrigerant
+        boost_score: 0
 
     - id: post_service_issue
       name: "Post-Service Issue"
@@ -175,6 +371,14 @@ hvac:
       evidence_filter:
         - flat_history
       cost_of_error_weight: 3.0
+      trigger_conditions:
+        require_any:
+          - after service
+          - serviced
+          - amc
+          - gas charging
+          - recent service
+        boost_score: 0
 
 lift_elevator:
   description: "Lift and elevator faults"
@@ -187,6 +391,14 @@ lift_elevator:
         - building_pattern
         - flat_history
       cost_of_error_weight: 5.0
+      trigger_conditions:
+        require_any:
+          - electric
+          - power
+          - stuck between
+          - tripping
+          - short
+        boost_score: 0
 
     - id: mechanical_wear
       name: "Mechanical Wear (Lift)"
@@ -195,6 +407,14 @@ lift_elevator:
       evidence_filter:
         - building_pattern
       cost_of_error_weight: 3.0
+      trigger_conditions:
+        require_any:
+          - noise
+          - door
+          - cable
+          - jerk
+          - vibration
+        boost_score: 0
 
     - id: maintenance_overdue
       name: "Maintenance Overdue"
@@ -203,10 +423,62 @@ lift_elevator:
       evidence_filter:
         - building_pattern
       cost_of_error_weight: 2.0
+      trigger_conditions:
+        require_any:
+          - amc
+          - overdue
+          - maintenance
+          - inspection
+        suppress:
+          - stuck
+        boost_score: 0
+
+pest_hygiene:
+  description: "Pests, cleanliness, garbage, odours"
+  hypothesis_types:
+    - id: pest_infestation
+      name: "Pest Infestation"
+      description: "Insects, rodents, or recurring pest issues"
+      prompt_template: "src/agents/prompts/pest_infestation.md"
+      evidence_filter:
+        - flat_history
+      cost_of_error_weight: 2.0
+      trigger_conditions:
+        require_any:
+          - pest
+          - cockroach
+          - rat
+          - rodent
+          - mosquito
+          - insect
+        suppress:
+          - garbage
+          - cleaning
+        boost_score: 0
+
+    - id: hygiene_service
+      name: "Hygiene / Housekeeping"
+      description: "Cleaning, garbage, odour, common-area hygiene failures"
+      prompt_template: "src/agents/prompts/hygiene_service.md"
+      evidence_filter:
+        - flat_history
+        - building_pattern
+      cost_of_error_weight: 1.5
+      trigger_conditions:
+        require_any:
+          - garbage
+          - cleaning
+          - smell
+          - stink
+          - housekeeping
+          - waste
+        suppress:
+          - pest control scheduled
+        boost_score: 0
 
 safety_security:
   description: "Fire, gas, electrical hazards, security equipment"
-  always_all_hypotheses: true  # all spawned regardless of tier
+  always_all_hypotheses: true
   hypothesis_types:
     - id: fire_system
       name: "Fire System"

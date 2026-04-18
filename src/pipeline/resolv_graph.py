@@ -225,13 +225,15 @@ async def node_spawn_hypotheses(state: ResolvState) -> ResolvState:
     """Tier 3: spawn all hypothesis agents in parallel."""
     client = _get_client()
     try:
-        results = await spawn_hypothesis_agents(
+        results, trigger_audit = await spawn_hypothesis_agents(
             domain=state["domain"],
             complaint_title=state["complaint_title"],
             context=state["context"],
             client=client,
+            pattern_signal=state.get("pattern_signal"),
         )
         state["hypothesis_results"] = results
+        state["audit_log"]["hypothesis_triggers"] = trigger_audit
         total_tokens = sum(r.tokens_used for r in results)
         state["total_tokens"] += total_tokens
         state["audit_log"]["hypothesis_tokens"] = total_tokens

@@ -28,6 +28,23 @@ BUILDING_PATTERN_DAYS = 90
 FLAT_HISTORY_LIMIT = 20
 ADJACENT_HISTORY_LIMIT = 15
 
+# Indicative building ages for hypothesis trigger context (years, rough estimates)
+_SITE_BUILDING_AGE_ESTIMATE: dict[str, float] = {
+    "godrej woods": 12.0,
+    "godrej meridien": 10.0,
+    "godrej nurture-pune": 7.0,
+    "godrej se7en": 8.0,
+    "godrej retreat": 11.0,
+    "godrej golf link (crest)": 10.0,
+    "godrej urban park": 9.0,
+    "godrej rks": 6.0,
+}
+
+
+def _estimate_building_age_years(site_name: str) -> Optional[float]:
+    key = site_name.strip().lower()
+    return _SITE_BUILDING_AGE_ESTIMATE.get(key)
+
 
 @dataclass
 class ComplaintSummary:
@@ -60,6 +77,8 @@ class ContextPackage:
     building_pattern: List[FloorPattern] = field(default_factory=list)
     adjacency_info: dict = field(default_factory=dict)  # above/below/lateral flats
     retrieval_ms: int = 0
+    # Rough estimate for trigger logic (years); None if unknown
+    building_age_years: Optional[float] = None
 
     def to_prompt_context(self) -> str:
         """Serialise context into a compact string suitable for LLM prompt inclusion."""
@@ -233,4 +252,5 @@ async def assemble_context(site_name: str, tower: str, flat: str) -> ContextPack
         building_pattern=bldg_pattern,
         adjacency_info=adj_info,
         retrieval_ms=elapsed_ms,
+        building_age_years=_estimate_building_age_years(site_name),
     )
