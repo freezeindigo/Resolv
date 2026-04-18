@@ -26,8 +26,7 @@ After reading, tell me:
 Do not write any code yet. I want to verify your understanding is correct before we start.
 Once you confirm, we'll begin with Day 1-2 of PHASE1_BUILD.md — the data foundation.
 
-The facility complaint export (Excel) should live under `data/` as `*.xlsx` (gitignored). Don't commit raw exports. 
-yet — we'll load it in Day 1-2.
+The facility complaint export (Excel) should live under `data/` as `*.xlsx` (gitignored). Don't commit raw exports — we'll load it in Day 1-2.
 ```
 
 ---

@@ -108,7 +108,7 @@ Resolv is the product. ARIA is the brain.
 
 ### What is actually broken in FM complaint management today
 
-Residents in large residential complexes (a major Indian developer and peers) submit complaints through MyGate, NoBrokerHood, or direct CRM. What happens next:
+Residents in large residential complexes from **a major Indian developer (23 sites, 40,000+ residents)** submit complaints through MyGate, NoBrokerHood, or direct CRM. What happens next:
 
 1. Complaint sits in a queue (Excel dump or dashboard)
 2. FM team manually reads it, decides vendor category

@@ -111,6 +111,18 @@
   </main>
 
   <script>
+    /** Demo dropdown shows generic estate names; API requests use the DB `site_name` values. */
+    const UI_TO_DB_SITE_NAME = {
+      "Riverside Heights": "Godrej Woods",
+      "Parkview Towers": "Godrej Meridien",
+      "Greenfield Estate": "Godrej Nurture-Pune",
+      "Metro Square": "Godrej Se7en",
+      "Lakeside Residences": "Godrej Retreat",
+      "Hillcrest Gardens": "Godrej Golf Link (Crest)",
+      "Sunrise Apartments": "Godrej Urban Park",
+      "Heritage Enclave": "Godrej RKS"
+    };
+
     const form = document.getElementById("complaint-form");
     const submitBtn = document.getElementById("submit-btn");
     const loading = document.getElementById("loading");
@@ -276,9 +288,10 @@
       resultCard.classList.add("hidden");
       setLoading(true);
 
+      const selectedUiSite = document.getElementById("site_name").value.trim();
       const payload = {
         complaint_title: document.getElementById("complaint_title").value.trim(),
-        site_name: document.getElementById("site_name").value.trim(),
+        site_name: UI_TO_DB_SITE_NAME[selectedUiSite] ?? selectedUiSite,
         tower: document.getElementById("tower").value.trim(),
         flat: document.getElementById("flat").value.trim(),
       };

@@ -28,16 +28,25 @@ BUILDING_PATTERN_DAYS = 90
 FLAT_HISTORY_LIMIT = 20
 ADJACENT_HISTORY_LIMIT = 15
 
-# Indicative building ages for hypothesis trigger context (years, rough estimates)
+# Indicative building ages for hypothesis trigger context (years, rough estimates).
+# Keys include both demo UI labels and canonical DB site_name values (same site, two labels).
 _SITE_BUILDING_AGE_ESTIMATE: dict[str, float] = {
     "riverside heights": 12.0,
+    "godrej woods": 12.0,
     "parkview towers": 10.0,
+    "godrej meridien": 10.0,
     "greenfield estate": 7.0,
+    "godrej nurture-pune": 7.0,
     "metro square": 8.0,
+    "godrej se7en": 8.0,
     "lakeside residences": 11.0,
+    "godrej retreat": 11.0,
     "hillcrest gardens": 10.0,
+    "godrej golf link (crest)": 10.0,
     "sunrise apartments": 9.0,
+    "godrej urban park": 9.0,
     "heritage enclave": 6.0,
+    "godrej rks": 6.0,
 }
 
 

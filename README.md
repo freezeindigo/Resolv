@@ -1,6 +1,6 @@
 # ARIA — Agentic Routing & Intelligence for Amenities
 
-**ARIA** is an agentic complaint routing system for facility management. It sits inside **Resolv** as the intelligence layer: it is not a generic ticketing product or CRM. It takes ambiguous resident complaints, reasons over spatial and historical context, and returns a routing decision with a full reasoning trace—so the right vendor is dispatched with the right priority, especially when mistakes are asymmetric (structural vs. plumbing, safety vs. convenience).
+**ARIA** is an agentic complaint routing system for facility management. It sits inside **Resolv** as the intelligence layer: it is not a generic ticketing product or CRM. It takes ambiguous resident complaints, reasons over spatial and historical context, and returns a routing decision with a full reasoning trace—so the right vendor is dispatched with the right priority, especially when mistakes are asymmetric (structural vs. plumbing, safety vs. convenience). The reference dataset comes from **a major Indian developer (23 sites, 40,000+ residents)**; site names in documentation and the demo UI are generic labels, while PostgreSQL stores the operational site names used for routing and history lookups.
 
 ---
 

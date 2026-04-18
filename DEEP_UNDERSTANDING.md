@@ -135,7 +135,7 @@ For every component, ask: "What breaks if I remove this?"
 
 ## 5. THE PLATFORM QUESTION
 
-**"This is impressive for a major Indian developer. But is it a startup or an internal tool?"**
+**"This is impressive for a major Indian developer (23 sites, 40,000+ residents). But is it a startup or an internal tool?"**
 
 Trace the logic:
 
