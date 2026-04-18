@@ -68,14 +68,26 @@
 
       <div id="live-result" class="hidden bg-white rounded-xl border border-slate-200 shadow-sm overflow-hidden">
         <div class="flex flex-wrap items-center gap-2 p-4 border-b border-slate-100 bg-slate-50">
+          <span id="lr-ownership" class="px-3 py-1 rounded-full text-xs font-bold"></span>
+          <span id="lr-rag-badge" class="hidden px-3 py-1 rounded-full text-xs font-semibold bg-indigo-100 text-indigo-900">Enhanced with operational intelligence</span>
           <span id="lr-tier" class="px-3 py-1 rounded-full text-xs font-bold"></span>
           <span id="lr-domain" class="px-3 py-1 rounded-full text-xs font-semibold bg-slate-200 text-slate-800"></span>
           <span id="lr-priority" class="px-3 py-1 rounded-full text-xs font-bold"></span>
         </div>
         <div class="p-6 space-y-4">
+          <div id="lr-judge" class="hidden rounded-lg border p-3 text-sm"></div>
           <div>
             <p class="text-xs uppercase text-slate-500">Primary action</p>
             <p id="lr-action" class="text-2xl font-bold text-slate-900 mt-1"></p>
+          </div>
+          <div id="lr-override-wrap" class="hidden text-sm border border-rose-100 bg-rose-50 rounded-lg p-3">
+            <p class="text-xs font-semibold text-rose-900">Original routing (before judge)</p>
+            <p class="text-rose-800 mt-1"><span id="lr-orig-action"></span></p>
+            <p id="lr-orig-reason" class="text-rose-700 text-xs mt-1 whitespace-pre-line"></p>
+          </div>
+          <div id="lr-rag-wrap" class="hidden">
+            <p class="text-xs uppercase text-slate-500 mb-2">RAG sources used</p>
+            <ul id="lr-rag-list" class="text-sm text-slate-700 list-disc pl-5 space-y-1"></ul>
           </div>
           <details class="group border border-slate-200 rounded-lg">
             <summary class="cursor-pointer px-4 py-2 text-sm font-medium text-slate-700 bg-slate-50 rounded-lg">Reasoning</summary>
@@ -196,6 +208,11 @@
         </div>
       </div>
 
+      <div class="bg-white rounded-xl border p-4 shadow-sm hidden" id="in-own-wrap">
+        <p class="text-sm font-medium text-slate-800 mb-2">Ownership split (FM vs Project)</p>
+        <canvas id="in-chart-ownership" height="100"></canvas>
+      </div>
+
       <div class="bg-white rounded-xl border shadow-sm overflow-hidden hidden" id="in-hot-wrap">
         <div class="px-4 py-3 border-b border-slate-100 font-semibold text-slate-800">Complaint hotspots</div>
         <div class="overflow-x-auto">
@@ -227,12 +244,16 @@
         </div>
       </div>
 
-      <div class="bg-white rounded-xl border shadow-sm p-4 hidden" id="in-tax-wrap">
-        <p class="text-sm font-medium text-slate-800 mb-2">Taxonomy chaos — keywords spanning 5+ categories</p>
-        <div class="overflow-x-auto max-h-64">
-          <table class="min-w-full text-xs">
-            <thead><tr class="text-left text-slate-500"><th class="py-1">Keyword</th><th class="py-1"># Categories</th><th class="py-1">Sample categories</th></tr></thead>
-            <tbody id="in-tax-body"></tbody>
+      <div class="bg-white rounded-xl border shadow-sm overflow-hidden hidden" id="in-multitrade-wrap">
+        <div class="px-4 py-3 border-b border-slate-100 font-semibold text-slate-800">Multi-trade complaints (3+ categories per flat)</div>
+        <p class="px-4 pt-2 text-xs text-slate-600">Patterns that resemble Tier 3-style complexity — multiple trades/categories for the same unit.</p>
+        <div class="overflow-x-auto max-h-72">
+          <table class="min-w-full text-sm">
+            <thead class="bg-slate-50"><tr>
+              <th class="px-3 py-2 text-left">Site</th><th class="px-3 py-2">Tower</th><th class="px-3 py-2">Flat</th>
+              <th class="px-3 py-2">Categories</th><th class="px-3 py-2">Complaints</th>
+            </tr></thead>
+            <tbody id="in-multitrade-body"></tbody>
           </table>
         </div>
       </div>
@@ -303,6 +324,53 @@
         const data = await res.json();
         if (!res.ok) throw new Error(data.detail || res.statusText);
         const tier = data.tier;
+        const own = data.ownership || "FM";
+        const ownEl = document.getElementById("lr-ownership");
+        ownEl.textContent = own === "Project" ? "Project" : "FM";
+        ownEl.className = own === "Project"
+          ? "px-3 py-1 rounded-full text-xs font-bold bg-purple-100 text-purple-900"
+          : "px-3 py-1 rounded-full text-xs font-bold bg-blue-100 text-blue-900";
+        const ragBadge = document.getElementById("lr-rag-badge");
+        if (data.rag_enhanced) ragBadge.classList.remove("hidden");
+        else ragBadge.classList.add("hidden");
+        const jEl = document.getElementById("lr-judge");
+        const jv = data.judge_verdict;
+        if (tier === 1) {
+          jEl.classList.add("hidden");
+        } else if (jv === "approve") {
+          jEl.classList.remove("hidden");
+          jEl.className = "rounded-lg border border-emerald-200 bg-emerald-50 p-3 text-sm text-emerald-900";
+          jEl.textContent = "✓ Quality check passed";
+        } else if (jv === "flag") {
+          jEl.classList.remove("hidden");
+          jEl.className = "rounded-lg border border-amber-200 bg-amber-50 p-3 text-sm text-amber-900";
+          jEl.textContent = "⚠ Flagged for human review: " + (data.judge_reason || "");
+        } else if (jv === "override") {
+          jEl.classList.remove("hidden");
+          jEl.className = "rounded-lg border border-rose-300 bg-rose-50 p-3 text-sm text-rose-900";
+          jEl.textContent = "Decision overridden: " + (data.judge_reason || "");
+        } else {
+          jEl.classList.remove("hidden");
+          jEl.className = "rounded-lg border border-slate-200 bg-slate-50 p-3 text-sm text-slate-600";
+          jEl.textContent = "Quality check: " + (data.judge_reason || "not recorded");
+        }
+        const owWrap = document.getElementById("lr-override-wrap");
+        if (jv === "override" && data.original_primary_action) {
+          owWrap.classList.remove("hidden");
+          document.getElementById("lr-orig-action").textContent = data.original_primary_action;
+          document.getElementById("lr-orig-reason").textContent = (data.original_reasoning || "").slice(0, 800);
+        } else owWrap.classList.add("hidden");
+        const rw = document.getElementById("lr-rag-wrap");
+        const rlist = document.getElementById("lr-rag-list");
+        rlist.innerHTML = "";
+        if (data.rag_sources_used && data.rag_sources_used.length) {
+          rw.classList.remove("hidden");
+          data.rag_sources_used.forEach((s) => {
+            const li = document.createElement("li");
+            li.textContent = "[" + (s.collection || "") + "] " + (s.title || "") + " — " + (s.snippet || "").slice(0, 160);
+            rlist.appendChild(li);
+          });
+        } else rw.classList.add("hidden");
         document.getElementById("lr-tier").textContent = "Tier " + tier;
         document.getElementById("lr-tier").className = "px-3 py-1 rounded-full text-xs font-bold " + tierBadge(tier);
         document.getElementById("lr-domain").textContent = (data.domain || "").replaceAll("_", " ");
@@ -494,6 +562,7 @@
     // --- Insights ---
     let inDomChart = null;
     let inTierChart = null;
+    let inOwnChart = null;
     let inRecChart = null;
     let inAgeChart = null;
     let insightsLoaded = false;
@@ -502,13 +571,14 @@
       if (insightsLoaded) return;
       document.getElementById("insights-load").classList.remove("hidden");
       try {
-        const [sum, hot, dom, rec, age, tax] = await Promise.all([
+        const [sum, hot, dom, rec, age, ownp, mtrade] = await Promise.all([
           fetch("/insights/summary").then((r) => r.json()),
           fetch("/insights/hotspots").then((r) => r.json()),
           fetch("/insights/domains").then((r) => r.json()),
           fetch("/insights/recurrence").then((r) => r.json()),
           fetch("/insights/aging").then((r) => r.json()),
-          fetch("/insights/taxonomy").then((r) => r.json()),
+          fetch("/insights/ownership").then((r) => r.json()),
+          fetch("/insights/multitrade").then((r) => r.json()),
         ]);
 
         document.getElementById("in-total").textContent = sum.total_complaints ?? "—";
@@ -568,6 +638,26 @@
           options: { plugins: { legend: { position: "bottom" } } },
         });
 
+        const fm = ownp.fm || 0;
+        const pr = ownp.project || 0;
+        const un = ownp.unknown || 0;
+        const ot = ownp.other || 0;
+        const ctxO = document.getElementById("in-chart-ownership").getContext("2d");
+        if (inOwnChart) inOwnChart.destroy();
+        inOwnChart = new Chart(ctxO, {
+          type: "bar",
+          data: {
+            labels: ["FM", "Project", "Unknown", "Other"],
+            datasets: [{
+              label: "Complaints",
+              data: [fm, pr, un, ot],
+              backgroundColor: ["#3b82f6", "#9333ea", "#94a3b8", "#cbd5e1"],
+            }],
+          },
+          options: { indexAxis: "y", plugins: { legend: { display: false } }, scales: { x: { beginAtZero: true } } },
+        });
+        document.getElementById("in-own-wrap").classList.remove("hidden");
+
         const hb = document.getElementById("in-hot-body");
         hb.innerHTML = "";
         (hot.hotspots || []).forEach((h) => {
@@ -613,19 +703,21 @@
           options: { scales: { y: { beginAtZero: true } } },
         });
 
-        const tbody = document.getElementById("in-tax-body");
-        tbody.innerHTML = "";
-        (tax.keywords || []).forEach((k) => {
+        const mtb = document.getElementById("in-multitrade-body");
+        mtb.innerHTML = "";
+        (mtrade.patterns || []).forEach((p) => {
           const tr = document.createElement("tr");
-          tr.innerHTML = `<td class="py-1 font-medium">${k.keyword}</td><td class="py-1">${k.distinct_categories}</td><td class="py-1 text-slate-600">${(k.categories || []).join(", ")}</td>`;
-          tbody.appendChild(tr);
+          tr.className = "border-t border-slate-100";
+          tr.innerHTML = `<td class="px-3 py-2">${p.site_name}</td><td class="px-3 py-2">${p.tower}</td><td class="px-3 py-2">${p.flat}</td>
+            <td class="px-3 py-2 font-medium">${p.distinct_categories}</td><td class="px-3 py-2">${p.complaint_count}</td>`;
+          mtb.appendChild(tr);
         });
+        document.getElementById("in-multitrade-wrap").classList.remove("hidden");
 
         document.getElementById("insights-row1").classList.remove("hidden");
         document.getElementById("insights-row2").classList.remove("hidden");
         document.getElementById("in-hot-wrap").classList.remove("hidden");
         document.getElementById("in-rec-wrap").classList.remove("hidden");
-        document.getElementById("in-tax-wrap").classList.remove("hidden");
         insightsLoaded = true;
       } catch (e) {
         console.error(e);
