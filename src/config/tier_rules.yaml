@@ -1,5 +1,5 @@
 # Tier classification rules
-# Tier 1: deterministic, high-confidence patterns grounded in top Godrej titles
+# Tier 1: deterministic, high-confidence patterns grounded in top sample complaint titles
 # Tier 2: default — single reasoning agent
 # Tier 3: ambiguity / recurrence / safety / high-cost domains
 

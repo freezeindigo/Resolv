@@ -1,5 +1,5 @@
 """
-Validate domain classifier and complexity assessor against real Godrej data.
+Validate domain classifier and complexity assessor against PostgreSQL complaint samples.
 
 Usage:
     python3 scripts/validate_classifier.py

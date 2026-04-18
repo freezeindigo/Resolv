@@ -127,7 +127,7 @@ See the docstring in `eval/run_evaluation.py` for **cost estimates** and `--full
 | API | FastAPI, Uvicorn, Pydantic |
 | Orchestration | LangGraph |
 | LLMs | Anthropic (Haiku / Sonnet / Opus — roles per `ARIA.md` and pipeline code) |
-| Data | PostgreSQL (`psycopg2`, `asyncpg` in context assembly), optional Excel ETL via `scripts/load_godrej_data.py` |
+| Data | PostgreSQL (`psycopg2`, `asyncpg` in context assembly), optional Excel ETL via `scripts/load_complaints_xlsx.py` |
 | Pattern memory | Redis + NumPy + scikit-learn (DBSCAN) for sliding-window clusters |
 | Config | YAML — domains, tiers, hypothesis definitions |
 

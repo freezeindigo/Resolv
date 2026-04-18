@@ -52,7 +52,7 @@ Resolv is a LangGraph-orchestrated pipeline that processes complaints through a 
 **Tier 1 triggers (deterministic routing, no LLM):**
 - Exact high-confidence keyword match within domain
 - Example: "flush not working" → Plumbing, P2, send plumber
-- Build from top 50 unambiguous patterns in Godrej data
+- Build from top 50 unambiguous patterns in historical complaint data
 
 **Tier 3 triggers (multi-agent deliberation):**
 - Multi-domain keyword overlap (e.g., both "leak" and "wall crack")
@@ -269,7 +269,7 @@ graph.add_edge("audit", END)
 
 ## Evaluation Framework
 
-Run all 15,864 Godrej complaints through the pipeline. Measure:
+Run all loaded sample complaints through the pipeline. Measure:
 
 1. **First-time-right rate:** Resolv's routing matches what would have avoided reassignment
 2. **Tier distribution:** What percentage ended up in each tier (target: ~35/40/25)

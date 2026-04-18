@@ -128,7 +128,7 @@ Can produce: "Send plumber today + schedule structural assessment tomorrow." Use
 
 | Layer | Customer | Role | Revenue | Timeline |
 |-------|----------|------|---------|----------|
-| 1 | Developers (Godrej first) | Proof of concept | Free/pilot | Month 1-6 |
+| 1 | Developers (pilot first) | Proof of concept | Free/pilot | Month 1-6 |
 | 2 | FM Companies (Quess, CBRE, JLL) | Revenue engine (1 contract = 50-200 properties) | ₹1-5L/month | Month 6-18 |
 | 3 | Gate Platforms (MyGate, NoBrokerHood) | Scale lever (1 integration = 25,000+ societies) | ₹5-15/complaint | Month 12-24 |
 | 4 | RWAs | Indirect beneficiaries | Never direct buyer | Ongoing |

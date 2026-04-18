@@ -1,11 +1,11 @@
 # PHASE 1 BUILD PLAN — Resolv.AI Foundation
 
 **Duration:** Week 1-2 (10 working days)
-**Goal:** Working prototype that processes real Godrej complaints through the tiered pipeline and produces measurable accuracy metrics.
+**Goal:** Working prototype that processes real facility complaints through the tiered pipeline and produces measurable accuracy metrics.
 
 ## Deliverables
 
-1. PostgreSQL database with 15,864 Godrej complaints loaded and indexed
+1. PostgreSQL database with ~17k sample complaints loaded and indexed
 2. Working LangGraph pipeline with all tiers functional
 3. At least 2 domains (water_plumbing, electrical) with full hypothesis libraries
 4. Evaluation script that runs all complaints and produces accuracy report
@@ -47,7 +47,7 @@
   CREATE INDEX idx_created ON complaints(created_date);
   CREATE INDEX idx_text ON complaints USING gin(to_tsvector('english', complaint_title));
   ```
-- Write ETL script: `scripts/load_godrej_data.py` — reads Excel, normalizes, inserts
+- Write ETL script: `scripts/load_complaints_xlsx.py` — reads Excel, normalizes, inserts
 
 **Flat Adjacency Table:**
 - Parse tower + flat to extract floor and unit position
@@ -129,7 +129,7 @@
   ```
 - Implement `src/nodes/spawn_hypotheses.py` — reads library config, spawns agents in parallel via asyncio.gather
 
-**Validation:** Take 5 ambiguous water/leak complaints from Godrej data. Run through hypothesis agents. Manually evaluate if scores are reasonable.
+**Validation:** Take 5 ambiguous water/leak complaints from the sample dataset. Run through hypothesis agents. Manually evaluate if scores are reasonable.
 
 ### Day 6: Pattern State + Arbiter
 
@@ -177,7 +177,7 @@
 ### Day 9: Evaluation Framework
 
 **Tasks:**
-- Create `eval/run_godrej_evaluation.py`:
+- Create `eval/run_sample_evaluation.py`:
   - Iterate all 15,864 complaints
   - Run each through pipeline
   - Log: tier, domain, hypothesis scores, final routing, latency, cost
@@ -229,7 +229,7 @@
 
 ## Definition of Done for Phase 1
 
-- [ ] All 15,864 Godrej complaints loaded into PostgreSQL
+- [ ] Full sample complaint set loaded into PostgreSQL
 - [ ] LangGraph pipeline runs end-to-end for all tiers
 - [ ] 2 domains (water_plumbing, electrical) with full hypothesis libraries
 - [ ] Evaluation report generated showing tier distribution, cost, latency, accuracy on ambiguous cases
@@ -243,7 +243,7 @@
 **Mitigation:** Use structured output (Anthropic tool use or OpenAI response_format). Set temperature=0. Run evaluation 3 times on a sample to measure variance.
 
 **Risk:** DBSCAN clustering on small data may not produce meaningful clusters.
-**Mitigation:** Godrej data has 15,864 complaints over 24 months — plenty for clustering. Tune eps and min_samples parameters per site.
+**Mitigation:** The sample has tens of thousands of complaints over multiple years — plenty for clustering. Tune eps and min_samples parameters per site.
 
 **Risk:** Human-assigned category is unreliable ground truth.
 **Mitigation:** Manual labeling of 500 sample complaints by domain expert (you) for Phase 2 calibration. For Phase 1 eval, use human category as rough baseline.
@@ -264,7 +264,7 @@ cat PHASE1_BUILD.md
 
 # Verify data
 ls data/
-# Should see: godrej_complaints.xlsx
+# Should see: data/*.xlsx (local only; gitignored)
 ```
 
 Then start with Day 1-2: data foundation. Don't jump ahead.

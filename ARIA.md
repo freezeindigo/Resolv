@@ -108,7 +108,7 @@ Resolv is the product. ARIA is the brain.
 
 ### What is actually broken in FM complaint management today
 
-Residents in large residential complexes (Godrej, Prestige, DLF, Brigade) submit complaints through MyGate, NoBrokerHood, or direct CRM. What happens next:
+Residents in large residential complexes (a major Indian developer and peers) submit complaints through MyGate, NoBrokerHood, or direct CRM. What happens next:
 
 1. Complaint sits in a queue (Excel dump or dashboard)
 2. FM team manually reads it, decides vendor category
@@ -278,11 +278,11 @@ They route a work order. ARIA decides what the work order should contain and whe
 
 ### The medium-term migration
 
-UC/Snabbit data reveals which vendor types have best first-visit resolution rates, which complaint categories take longest, where materials prediction fails. Use that data to build direct relationships with the top-performing vendors. Over 12–18 months, reduce marketplace dependence. At Godrej scale (23 sites, 17,000+ complaints/year), the volume justifies dedicated vendor relationships.
+UC/Snabbit data reveals which vendor types have best first-visit resolution rates, which complaint categories take longest, where materials prediction fails. Use that data to build direct relationships with the top-performing vendors. Over 12–18 months, reduce marketplace dependence. At enterprise FM scale (many sites and tens of thousands of complaints per year), the volume justifies dedicated vendor relationships.
 
 ### The long-term answer to "why not own the whole thing"
 
-At Godrej scale, you eventually should. A trained, Godrej-certified FM workforce is a competitive moat JLL and Cushman can't replicate. But you build to it through data — know exactly what skills, what geographies, what response times you need before you hire for them. Don't build the workforce before you have the intelligence. Build the intelligence, let it tell you what workforce to build.
+At that scale, you eventually should. A trained, developer-certified FM workforce is a competitive moat third-party FM giants can't replicate. But you build to it through data — know exactly what skills, what geographies, what response times you need before you hire for them. Don't build the workforce before you have the intelligence. Build the intelligence, let it tell you what workforce to build.
 
 ---
 
@@ -329,7 +329,7 @@ The hypothesis library is a YAML configuration. The orchestration layer doesn't 
 
 | Metric | Definition | Target |
 |---|---|---|
-| First-time-right rate | Complaints resolved without reassignment | Baseline from Godrej data → 20% improvement |
+| First-time-right rate | Complaints resolved without reassignment | Baseline from pilot data → 20% improvement |
 | Acknowledgment TAT | Time from complaint submission to first resident notification | < 2 minutes |
 | Scheduling TAT | Time from complaint to confirmed time slot | < 15 minutes |
 | Vendor visit TAT | Time from confirmed slot to visit | Same-day for P1/P2 |
@@ -365,5 +365,5 @@ We own the intelligence. UC/Snabbit own the execution. Vendor management is a di
 **"What's the moat?"**
 The feedback loop. Resolution outcome → recurrence detection → hypothesis recalibration → better routing. This loop only closes if you own routing AND resolution data. Every resolved complaint makes the next decision more accurate. Competitors who only do ticketing never close this loop. After 12 months of data, the accuracy gap between ARIA and a fresh competitor is 12 months of resolution outcomes they don't have.
 
-**"How does this scale beyond Godrej?"**
+**"How does this scale beyond the pilot portfolio?"**
 ARIA's hypothesis library is a YAML config. The orchestration layer doesn't change per vertical. FM is vertical 1. The same pattern — hypothesis agents, asymmetric cost-of-error, spatial context, feedback loop — applies to hospital facilities, commercial real estate, data centre operations, insurance claims intake. New vertical = new config + new prompts + new cost weights.

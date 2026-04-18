@@ -7,7 +7,7 @@
 
 **"Why is this hard? Can't you just use an LLM with a good prompt?"**
 
-Think about it this way. Open Claude right now and paste: "Water leaking from ceiling in Flat 1803, Tower T6, Godrej Woods. What should the FM team do?"
+Think about it this way. Open Claude right now and paste: "Water leaking from ceiling in Flat 1803, Tower T6, Riverside Heights. What should the FM team do?"
 
 Claude will say something like: "This could be plumbing or structural. Send a plumber to investigate."
 
@@ -135,7 +135,7 @@ For every component, ask: "What breaks if I remove this?"
 
 ## 5. THE PLATFORM QUESTION
 
-**"This is impressive for Godrej. But is it a startup or an internal tool?"**
+**"This is impressive for a major Indian developer. But is it a startup or an internal tool?"**
 
 Trace the logic:
 
@@ -167,8 +167,8 @@ Trace the logic:
 
 ## 6. HONEST WEAKNESSES (KNOW THESE BEFORE THEY'RE ASKED)
 
-**"What if the Godrej data isn't representative?"**
-Honest answer: It might not be. Godrej builds mid-to-premium residential. A budget developer's complaint patterns might differ. But the ARCHITECTURE is domain-agnostic — the hypothesis library adapts. What changes is the training data and prompt calibration, not the system design.
+**"What if the pilot data isn't representative?"**
+Honest answer: It might not be. The source portfolio is mid-to-premium residential. A budget developer's complaint patterns might differ. But the ARCHITECTURE is domain-agnostic — the hypothesis library adapts. What changes is the training data and prompt calibration, not the system design.
 
 **"You haven't proven accuracy improvement yet."**
 Honest answer: Correct. We have a working prototype that produces reasonable routing decisions (the seepage test proves this). We need a 100-complaint eval against hand-labeled ground truth to claim specific accuracy numbers. The human baseline (25-30% misrouting) is well-documented from operational data.
@@ -180,13 +180,13 @@ Honest answer: Fine-tuning gives you a better classifier. We explicitly chose NO
 Honest answer: If LLM costs drop 10x, the Tier 1 rule engine becomes unnecessary — you'd just LLM everything. But the hypothesis isolation, cost-of-error weighting, and pattern detection remain valuable regardless of cost. Those are architectural decisions about decision quality, not cost optimization.
 
 **"You're a PM, not an ML engineer. Can you actually build this?"**
-Honest answer: I designed the architecture. My co-founder (Arunabh) and Claude Code built the implementation. I own the problem deeply (I run FM operations at Godrej), I understand the technical architecture well enough to debug it and make design decisions, and I have enough ML background (IIT Bombay M.Tech, CS-229, hands-on with LangGraph/ChromaDB) to be a credible technical co-founder at the pre-seed stage. The gap is in production ML engineering — which is what the ₹2 Cr raise is for.
+Honest answer: I designed the architecture. My co-founder (Arunabh) and Claude Code built the implementation. I own the problem deeply (I run FM operations on large residential portfolios), I understand the technical architecture well enough to debug it and make design decisions, and I have enough ML background (IIT Bombay M.Tech, CS-229, hands-on with LangGraph/ChromaDB) to be a credible technical co-founder at the pre-seed stage. The gap is in production ML engineering — which is what the ₹2 Cr raise is for.
 
 ---
 
 ## 7. THE 3-MINUTE VERSION (FOR WHEN YOU HAVE LIMITED TIME)
 
-"I manage facility operations for 40,000 residents across 23 Godrej sites. Every month, 660 complaints come in. 25-30% get routed to the wrong vendor — wrong plumber for a structural problem, wrong electrician for an equipment issue.
+"I manage facility operations for tens of thousands of residents across many large sites. Every month, hundreds of complaints come in. 25-30% get routed to the wrong vendor — wrong plumber for a structural problem, wrong electrician for an equipment issue.
 
 I analyzed 17,000 real complaints and found that the same physical symptom — 'water leaking from ceiling' — gets classified into 16 different categories depending on who logs it. 674 complaints reference other flats but get treated as isolated incidents. The taxonomy itself is broken.
 

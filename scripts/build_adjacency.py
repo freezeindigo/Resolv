@@ -1,7 +1,7 @@
 """
 Build flat_adjacency table from complaint data.
 
-Flat numbering conventions found in Godrej data:
+Flat numbering conventions found in sample facility data:
   1. Pure numeric:       "1001" → floor=10, unit=01  |  "204" → floor=2, unit=04
   2. Wing-prefixed:      "A204" → wing=A, floor=2, unit=04  |  "C501" → wing=C, floor=5, unit=01
   3. Tower-dash:         "T1-1201" → floor=12, unit=01

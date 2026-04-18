@@ -26,7 +26,7 @@ After reading, tell me:
 Do not write any code yet. I want to verify your understanding is correct before we start.
 Once you confirm, we'll begin with Day 1-2 of PHASE1_BUILD.md — the data foundation.
 
-The Godrej complaint data is at data/godrej_complaints.xlsx (15,864 rows). Don't touch it 
+The facility complaint export (Excel) should live under `data/` as `*.xlsx` (gitignored). Don't commit raw exports. 
 yet — we'll load it in Day 1-2.
 ```
 
@@ -113,7 +113,7 @@ Come back to me (Claude.ai in this conversation) for:
 - [ ] Create a GitHub repo: `resolv`
 - [ ] Clone locally
 - [ ] Copy this resolv_project folder contents into the repo root
-- [ ] Place `godrej_complaints.xlsx` in `data/` folder
+- [ ] Place the complaint workbook in `data/` (e.g. `data/complaints.xlsx`, not tracked in git)
 - [ ] Install Claude Code: `npm install -g @anthropic-ai/claude-code`
 - [ ] Run `claude` in the resolv/ directory
 - [ ] Paste the first message above

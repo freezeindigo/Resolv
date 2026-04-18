@@ -1,9 +1,11 @@
 """
-ETL: Load Godrej complaint data from Excel into PostgreSQL.
+ETL: Load facility complaint export (Excel) into PostgreSQL.
+
+Place the workbook under data/ (see .gitignore for *.xlsx). Default path is data/complaints.xlsx.
 
 Usage:
-    python3 scripts/load_godrej_data.py
-    python3 scripts/load_godrej_data.py --file data/godrej_complaints.xlsx --db resolv
+    python3 scripts/load_complaints_xlsx.py
+    python3 scripts/load_complaints_xlsx.py --file data/complaints.xlsx --db resolv
 """
 
 import argparse
@@ -14,7 +16,6 @@ from datetime import datetime, date, time
 
 import openpyxl
 import psycopg2
-import psycopg2.extras
 
 SHEET_NAME = "Pan India"
 
@@ -135,7 +136,6 @@ def row_to_record(row):
     except (ValueError, TypeError):
         resolution_tat = None
 
-    # Build raw_data from all columns
     raw = {}
     for key, idx in COL.items():
         val = row[idx]
@@ -238,7 +238,7 @@ def load(xlsx_path: str, dbname: str):
 
 def main():
     parser = argparse.ArgumentParser()
-    parser.add_argument("--file", default="data/godrej_complaints.xlsx")
+    parser.add_argument("--file", default="data/complaints.xlsx")
     parser.add_argument("--db",   default="resolv")
     args = parser.parse_args()
     load(args.file, args.db)
