@@ -11,7 +11,7 @@ import psycopg2
 from fastapi import FastAPI, File, HTTPException, UploadFile
 from fastapi.responses import RedirectResponse
 from fastapi.staticfiles import StaticFiles
-from pydantic import BaseModel
+from pydantic import BaseModel, Field
 
 from src.pipeline.resolv_graph import process_complaint
 from src.memory.pattern_state import get_active_clusters, ingest_complaint
@@ -51,6 +51,14 @@ class RoutingResponse(BaseModel):
     total_tokens: int
     total_latency_ms: int
     hypothesis_triggers: Optional[Dict[str, Any]] = None
+    ownership: str = "FM"
+    judge_verdict: Optional[str] = None
+    judge_reason: Optional[str] = None
+    human_review_queued: bool = False
+    original_primary_action: Optional[str] = None
+    original_reasoning: Optional[str] = None
+    rag_sources_used: List[Dict[str, Any]] = Field(default_factory=list)
+    rag_enhanced: bool = False
 
 
 # ── Endpoints ──────────────────────────────────────────────────────────────
@@ -99,6 +107,21 @@ async def submit_complaint(req: ComplaintRequest):
         else:
             conf = "low"
 
+    audit = result.get("audit_log") or {}
+    jv = audit.get("judge_verdict") or {}
+    verdict = jv.get("verdict")
+    if verdict not in ("approve", "flag", "override"):
+        verdict = None
+    orig_snap = jv.get("original_decision") or {}
+    hr = jv.get("human_review") or {}
+
+    ctx = result.get("context")
+    rag_sources: List[Dict[str, Any]] = []
+    rag_enhanced = False
+    if ctx is not None:
+        rag_sources = list(getattr(ctx, "rag_sources_used", None) or [])
+        rag_enhanced = bool(rag_sources)
+
     return RoutingResponse(
         ticket_id=ticket_id,
         tier=result["tier"],
@@ -115,7 +138,15 @@ async def submit_complaint(req: ComplaintRequest):
         escalation_trigger=decision.escalation_trigger,
         total_tokens=result["total_tokens"],
         total_latency_ms=result["total_latency_ms"],
-        hypothesis_triggers=result.get("audit_log", {}).get("hypothesis_triggers"),
+        hypothesis_triggers=audit.get("hypothesis_triggers"),
+        ownership=getattr(decision, "ownership", None) or "FM",
+        judge_verdict=verdict,
+        judge_reason=jv.get("reason"),
+        human_review_queued=bool(hr.get("queued")),
+        original_primary_action=orig_snap.get("primary_action") if verdict == "override" else None,
+        original_reasoning=orig_snap.get("reasoning") if verdict == "override" else None,
+        rag_sources_used=rag_sources,
+        rag_enhanced=rag_enhanced,
     )
 
 
@@ -292,3 +323,13 @@ async def insights_aging():
 @app.get("/insights/taxonomy")
 async def insights_taxonomy():
     return insights_queries.get_taxonomy_chaos()
+
+
+@app.get("/insights/ownership")
+async def insights_ownership():
+    return insights_queries.get_ownership_split()
+
+
+@app.get("/insights/multitrade")
+async def insights_multitrade():
+    return insights_queries.get_multitrade_patterns(25)

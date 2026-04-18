@@ -1,0 +1,139 @@
+{
+  "collections": [
+    "audit",
+    "contracts",
+    "mom",
+    "resident_handbook",
+    "safety",
+    "sops"
+  ],
+  "documents": 6,
+  "chunks": [
+    {
+      "id": "cf9e79d19056aca3",
+      "collection": "audit",
+      "title": "Vendor Quality Audit",
+      "source_file": "data/rag_documents/audit/vendor_quality_audit.md",
+      "text": "Facility vendor quality audit checklist for high-rise residential towers."
+    },
+    {
+      "id": "b4866e7e1f83f7b5",
+      "collection": "audit",
+      "title": "Vendor Quality Audit",
+      "source_file": "data/rag_documents/audit/vendor_quality_audit.md",
+      "text": "Auditors verify plumbing response times, electrical isolation procedures, and lift maintenance logs during quarterly reviews."
+    },
+    {
+      "id": "cf6bb28160fbdef9",
+      "collection": "audit",
+      "title": "Vendor Quality Audit",
+      "source_file": "data/rag_documents/audit/vendor_quality_audit.md",
+      "text": "Repeat failures in the same vertical stack must be escalated to the project engineering head and recorded in the audit management system."
+    },
+    {
+      "id": "4b40e9cf90561287",
+      "collection": "contracts",
+      "title": "Amc Scope",
+      "source_file": "data/rag_documents/contracts/amc_scope.md",
+      "text": "Annual maintenance contract scope summary for residential towers covered under developer AMC."
+    },
+    {
+      "id": "8f74869ea342c2a4",
+      "collection": "contracts",
+      "title": "Amc Scope",
+      "source_file": "data/rag_documents/contracts/amc_scope.md",
+      "text": "Project-side defects during defect liability period remain with the developer project team until formal handover sign-off. Facility management handles routine wear and resident-caused damage after handover."
+    },
+    {
+      "id": "a6573b9434a3783d",
+      "collection": "contracts",
+      "title": "Amc Scope",
+      "source_file": "data/rag_documents/contracts/amc_scope.md",
+      "text": "Lift and firefighting systems may have separate OEM contracts; verify contract owner before dispatching vendors."
+    },
+    {
+      "id": "817e0db3d1c82d4c",
+      "collection": "mom",
+      "title": "Facilities Steering",
+      "source_file": "data/rag_documents/mom/facilities_steering.md",
+      "text": "Minutes of facilities steering committee \u2014 seepage and waterproofing backlog."
+    },
+    {
+      "id": "3b2b85d81d2a689f",
+      "collection": "mom",
+      "title": "Facilities Steering",
+      "source_file": "data/rag_documents/mom/facilities_steering.md",
+      "text": "The committee noted recurring ceiling seepage complaints in monsoon season and agreed to prioritize structural waterproofing inspections where adjacent flats show correlated categories."
+    },
+    {
+      "id": "cfbdd0eb066f1111",
+      "collection": "mom",
+      "title": "Facilities Steering",
+      "source_file": "data/rag_documents/mom/facilities_steering.md",
+      "text": "Vendor coordination between plumbing and civil teams is required before closing tickets marked as structural envelope issues."
+    },
+    {
+      "id": "f45036f8a39c1ee7",
+      "collection": "resident_handbook",
+      "title": "Community Guidelines",
+      "source_file": "data/rag_documents/resident_handbook/community_guidelines.md",
+      "text": "Community guidelines for reporting maintenance issues."
+    },
+    {
+      "id": "fb740ee32c37b6b2",
+      "collection": "resident_handbook",
+      "title": "Community Guidelines",
+      "source_file": "data/rag_documents/resident_handbook/community_guidelines.md",
+      "text": "Residents should report water leaks with clear photos and avoid combining unrelated trades in a single ticket when issues require different specialist skills."
+    },
+    {
+      "id": "2edd1f8bd6b4b35f",
+      "collection": "resident_handbook",
+      "title": "Community Guidelines",
+      "source_file": "data/rag_documents/resident_handbook/community_guidelines.md",
+      "text": "Noise-related complaints after hours route to security first; structural concerns should reference tower and flat clearly for pattern detection across floors."
+    },
+    {
+      "id": "7ee92aead08f0e6c",
+      "collection": "safety",
+      "title": "Electrical Isolation",
+      "source_file": "data/rag_documents/safety/electrical_isolation.md",
+      "text": "Electrical safety bulletin for facility technicians."
+    },
+    {
+      "id": "82d7c551ee6d506d",
+      "collection": "safety",
+      "title": "Electrical Isolation",
+      "source_file": "data/rag_documents/safety/electrical_isolation.md",
+      "text": "Sparking distribution boards and burning smells require immediate isolation at the feeder and notification to security. Do not route routine electrician visits when shock or fire risk keywords are present \u2014 escalate to specialist electrical safety response."
+    },
+    {
+      "id": "cf78d9df8165cd16",
+      "collection": "safety",
+      "title": "Electrical Isolation",
+      "source_file": "data/rag_documents/safety/electrical_isolation.md",
+      "text": "High voltage common area faults must be treated as priority one until cleared by a licensed supervisor."
+    },
+    {
+      "id": "04b67b7cc352ec4c",
+      "collection": "sops",
+      "title": "Seepage Response",
+      "source_file": "data/rag_documents/sops/seepage_response.md",
+      "text": "Standard operating procedure: resident seepage complaints."
+    },
+    {
+      "id": "4a137aae5b5fea1f",
+      "collection": "sops",
+      "title": "Seepage Response",
+      "source_file": "data/rag_documents/sops/seepage_response.md",
+      "text": "When seepage is reported from the ceiling, capture photographs, check flat history for prior plumbing tickets, and coordinate with the floor above before assigning only a plumber."
+    },
+    {
+      "id": "354fa4d150f1573d",
+      "collection": "sops",
+      "title": "Seepage Response",
+      "source_file": "data/rag_documents/sops/seepage_response.md",
+      "text": "If multiple floors in the same column show water ingress within ninety days, invoke the building pattern review and consider structural waterproofing hypothesis."
+    }
+  ]
+}

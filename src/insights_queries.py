@@ -212,6 +212,64 @@ def get_aging_buckets() -> Dict[str, int]:
     return {r[0]: r[1] for r in rows}
 
 
+def get_ownership_split() -> Dict[str, Any]:
+    """FM vs Project vs Unknown from issue_type column."""
+    conn = _conn()
+    cur = conn.cursor()
+    cur.execute(
+        """
+        SELECT
+          CASE
+            WHEN issue_type IS NULL OR TRIM(issue_type) = '' THEN 'Unknown'
+            WHEN LOWER(issue_type) LIKE '%project%' THEN 'Project'
+            WHEN LOWER(issue_type) LIKE '%fm%'
+              OR LOWER(issue_type) LIKE '%facility%' THEN 'FM'
+            ELSE 'Other'
+          END AS bucket,
+          COUNT(*)::int
+        FROM complaints
+        GROUP BY 1
+        """
+    )
+    rows = dict(cur.fetchall())
+    cur.close()
+    conn.close()
+    return {"fm": rows.get("FM", 0), "project": rows.get("Project", 0), "unknown": rows.get("Unknown", 0), "other": rows.get("Other", 0), "counts": rows}
+
+
+def get_multitrade_patterns(limit: int = 25) -> Dict[str, Any]:
+    """Flats with 3+ distinct categories — proxy for multi-trade / Tier-3-style complexity."""
+    conn = _conn()
+    cur = conn.cursor()
+    cur.execute(
+        """
+        SELECT site_name, tower, flat,
+               COUNT(DISTINCT NULLIF(TRIM(category), ''))::int AS distinct_categories,
+               COUNT(*)::int AS complaint_count
+        FROM complaints
+        WHERE site_name IS NOT NULL
+        GROUP BY site_name, tower, flat
+        HAVING COUNT(DISTINCT NULLIF(TRIM(category), '')) >= 3
+        ORDER BY distinct_categories DESC, complaint_count DESC
+        LIMIT %s
+        """,
+        (limit,),
+    )
+    rows = [
+        {
+            "site_name": r[0],
+            "tower": r[1] or "",
+            "flat": r[2] or "",
+            "distinct_categories": r[3],
+            "complaint_count": r[4],
+        }
+        for r in cur.fetchall()
+    ]
+    cur.close()
+    conn.close()
+    return {"patterns": rows}
+
+
 def get_taxonomy_chaos(sample_limit: int = 8000) -> Dict[str, Any]:
     conn = _conn()
     cur = conn.cursor()

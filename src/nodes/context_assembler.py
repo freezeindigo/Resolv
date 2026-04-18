@@ -11,7 +11,7 @@ Returns a ContextPackage with:
 
 Usage (async):
     from src.nodes.context_assembler import assemble_context
-    ctx = await assemble_context(site_name, tower, flat)
+    ctx = await assemble_context(site_name, tower, flat, complaint_title="...", domain="water_plumbing")
 """
 
 import asyncio
@@ -20,6 +20,8 @@ from datetime import datetime, timedelta
 from typing import List, Optional
 
 import asyncpg
+
+from src.nodes.rag_retriever import retrieve_for_complaint
 
 DB_DSN = "postgresql://localhost/resolv"
 FLAT_HISTORY_DAYS = 365
@@ -88,6 +90,15 @@ class ContextPackage:
     retrieval_ms: int = 0
     # Rough estimate for trigger logic (years); None if unknown
     building_age_years: Optional[float] = None
+    # RAG (operational docs) — see scripts/ingest_rag_documents.py
+    rag_sources_used: List[dict] = field(default_factory=list)
+    audit_context: List[str] = field(default_factory=list)
+    mom_context: List[str] = field(default_factory=list)
+    rag_retrieval_ms: int = 0
+
+    @property
+    def rag_enhanced(self) -> bool:
+        return bool(self.rag_sources_used)
 
     def to_prompt_context(self) -> str:
         """Serialise context into a compact string suitable for LLM prompt inclusion."""
@@ -138,6 +149,15 @@ class ContextPackage:
                 lines.append(f"  Floor {fp.floor:<4} | {fp.category:<20} | {fp.count} complaints")
         else:
             lines.append("BUILDING PATTERN: no data")
+
+        if self.rag_sources_used:
+            lines.append("")
+            lines.append("OPERATIONAL INTELLIGENCE (retrieved document excerpts):")
+            for s in self.rag_sources_used[:8]:
+                coll = s.get("collection", "")
+                title = s.get("title", "")
+                snip = (s.get("snippet") or "")[:240]
+                lines.append(f"  [{coll}] {title}: {snip}")
 
         return "\n".join(lines)
 
@@ -231,7 +251,13 @@ async def _get_building_pattern(
     return [FloorPattern(floor=r["floor"] or "?", category=r["category"], count=r["count"]) for r in rows]
 
 
-async def assemble_context(site_name: str, tower: str, flat: str) -> ContextPackage:
+async def assemble_context(
+    site_name: str,
+    tower: str,
+    flat: str,
+    complaint_title: str = "",
+    domain: str = "other",
+) -> ContextPackage:
     """
     Assemble full complaint context for a given flat.
     Runs three DB queries in parallel using a connection pool.
@@ -252,6 +278,13 @@ async def assemble_context(site_name: str, tower: str, flat: str) -> ContextPack
 
     elapsed_ms = int((asyncio.get_event_loop().time() - t_start) * 1000)
 
+    rag_sources, audit_ctx, mom_ctx, rag_ms = await asyncio.to_thread(
+        retrieve_for_complaint,
+        complaint_title,
+        site_name,
+        domain,
+    )
+
     return ContextPackage(
         site_name=site_name,
         tower=tower,
@@ -262,4 +295,8 @@ async def assemble_context(site_name: str, tower: str, flat: str) -> ContextPack
         adjacency_info=adj_info,
         retrieval_ms=elapsed_ms,
         building_age_years=_estimate_building_age_years(site_name),
+        rag_sources_used=rag_sources,
+        audit_context=audit_ctx,
+        mom_context=mom_ctx,
+        rag_retrieval_ms=rag_ms,
     )

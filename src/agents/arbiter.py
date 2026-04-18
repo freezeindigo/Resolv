@@ -13,6 +13,7 @@ import anthropic
 
 from src.agents.hypothesis_agent import HypothesisResult
 from src.memory.pattern_state import PatternSignal
+from src.nodes.ownership import infer_ownership
 
 ARBITER_MODEL = "claude-opus-4-6"
 MAX_TOKENS = 1500
@@ -33,6 +34,7 @@ class RoutingDecision:
     confidence: str
     reasoning: str
     escalation_trigger: str
+    ownership: str = "FM"  # FM | Project
     tokens_used: int = 0
     latency_ms: int = 0
 
@@ -143,6 +145,7 @@ async def run_arbiter(
         confidence=parsed.get("confidence", "low"),
         reasoning=parsed.get("reasoning", ""),
         escalation_trigger=parsed.get("escalation_trigger", ""),
+        ownership=infer_ownership(complaint_title),
         tokens_used=tokens,
         latency_ms=latency_ms,
     )

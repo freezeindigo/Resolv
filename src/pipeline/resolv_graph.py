@@ -19,6 +19,8 @@ from src.nodes.context_assembler import assemble_context, ContextPackage
 from src.memory.pattern_state import get_active_clusters, ingest_complaint, PatternSignal
 from src.agents.hypothesis_agent import spawn_hypothesis_agents, HypothesisResult
 from src.agents.arbiter import run_arbiter, RoutingDecision
+from src.agents.judge import run_judge
+from src.nodes.ownership import infer_ownership
 
 ANTHROPIC_CLIENT = None  # initialised on first use
 
@@ -96,10 +98,19 @@ def node_assess_complexity(state: ResolvState) -> ResolvState:
 
 
 async def node_assemble_context(state: ResolvState) -> ResolvState:
-    ctx = await assemble_context(state["site_name"], state["tower"], state["flat"])
+    ctx = await assemble_context(
+        state["site_name"],
+        state["tower"],
+        state["flat"],
+        complaint_title=state["complaint_title"],
+        domain=state["domain"],
+    )
     state["context"] = ctx
-    state["total_latency_ms"] += ctx.retrieval_ms
+    state["total_latency_ms"] += ctx.retrieval_ms + ctx.rag_retrieval_ms
     state["audit_log"]["context_retrieval_ms"] = ctx.retrieval_ms
+    state["audit_log"]["rag_retrieval_ms"] = ctx.rag_retrieval_ms
+    if ctx.rag_sources_used:
+        state["audit_log"]["rag_sources_used"] = ctx.rag_sources_used
     return state
 
 
@@ -148,6 +159,7 @@ def node_rule_route(state: ResolvState) -> ResolvState:
         confidence="high",
         reasoning=f"Unambiguous {state['domain']} complaint — rule routed without LLM.",
         escalation_trigger="If vendor cannot resolve, escalate to senior.",
+        ownership=infer_ownership(state["complaint_title"]),
     )
     state["audit_log"]["routing"] = {"method": "rule", "action": action}
     return state
@@ -206,6 +218,7 @@ async def node_tier2_reasoning(state: ResolvState) -> ResolvState:
             confidence=parsed.get("confidence", "medium"),
             reasoning=parsed.get("reasoning", ""),
             escalation_trigger="If unresolved in SLA window, escalate to senior.",
+            ownership=infer_ownership(state["complaint_title"]),
             tokens_used=tokens,
             latency_ms=latency_ms,
         )
@@ -327,6 +340,39 @@ async def node_arbitrate(state: ResolvState) -> ResolvState:
     return state
 
 
+async def node_judge(state: ResolvState) -> ResolvState:
+    """Haiku validation for Tier 2 and Tier 3 only; Tier 1 never reaches this node."""
+    tier = state["tier"]
+    decision = state.get("routing_decision")
+    if tier not in (2, 3) or not decision:
+        return state
+
+    client = _get_client()
+    try:
+        audit, new_decision = await run_judge(
+            complaint_title=state["complaint_title"],
+            domain=state["domain"],
+            tier=tier,
+            decision=decision,
+            client=client,
+        )
+        state["audit_log"]["judge_verdict"] = audit
+        state["total_tokens"] += audit.get("tokens_used", 0)
+        state["total_latency_ms"] += audit.get("latency_ms", 0)
+        if new_decision is not None:
+            state["routing_decision"] = new_decision
+    except Exception as e:
+        state["audit_log"]["judge_verdict"] = {
+            "verdict": "approve",
+            "reason": f"judge error — leaving routing unchanged: {e}",
+            "error": str(e),
+            "tokens_used": 0,
+            "latency_ms": 0,
+        }
+
+    return state
+
+
 def node_execute(state: ResolvState) -> ResolvState:
     """Execution layer — stub for MVP. Real dispatch goes here."""
     decision = state["routing_decision"]
@@ -374,6 +420,7 @@ def build_graph():
     g.add_node("spawn_hypotheses",   node_spawn_hypotheses)
     g.add_node("interpret_patterns", node_interpret_patterns)
     g.add_node("arbitrate",          node_arbitrate)
+    g.add_node("judge",              node_judge)
     g.add_node("execute",           node_execute)
     g.add_node("audit",             node_audit)
 
@@ -386,10 +433,11 @@ def build_graph():
     g.add_conditional_edges("query_patterns", route_after_patterns,
                             {"tier2_reasoning": "tier2_reasoning", "spawn_hypotheses": "spawn_hypotheses"})
     g.add_edge("rule_route",        "execute")
-    g.add_edge("tier2_reasoning",   "execute")
+    g.add_edge("tier2_reasoning",   "judge")
     g.add_edge("spawn_hypotheses",   "interpret_patterns")
     g.add_edge("interpret_patterns", "arbitrate")
-    g.add_edge("arbitrate",         "execute")
+    g.add_edge("arbitrate",         "judge")
+    g.add_edge("judge",             "execute")
     g.add_edge("execute",           "audit")
     g.add_edge("audit",             END)
 
