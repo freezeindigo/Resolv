@@ -8,6 +8,7 @@ No LLM. Pure deterministic clustering.
 """
 
 import json
+import os
 import time
 from dataclasses import dataclass, asdict
 from typing import List, Optional
@@ -16,7 +17,7 @@ import numpy as np
 import redis
 from sklearn.cluster import DBSCAN
 
-REDIS_URL = "redis://localhost:6379"
+REDIS_URL = os.environ.get("REDIS_URL", "redis://localhost:6379")
 WINDOW_SECONDS = 90 * 24 * 3600   # 90-day sliding window
 CLUSTER_KEY = "resolv:cluster:{site}:{tower}"
 COMPLAINT_KEY = "resolv:complaints:{site}:{tower}"

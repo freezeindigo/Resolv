@@ -4,6 +4,7 @@ Resolv FastAPI — complaint intake and reasoning trace endpoints.
 
 import csv
 import io
+import os
 from datetime import datetime
 from typing import Any, Dict, List, Optional, Union
 
@@ -18,6 +19,13 @@ from src.memory.pattern_state import get_active_clusters, ingest_complaint
 from src.nodes.domain_classifier import classify_domain
 from src.nodes.complexity_assessor import assess_complexity
 from src import insights_queries
+
+
+def _db_conn():
+    dsn = os.environ.get("DATABASE_URL")
+    if dsn:
+        return psycopg2.connect(dsn)
+    return psycopg2.connect(dbname=os.environ.get("DB_NAME", "resolv"))
 
 app = FastAPI(title="Resolv.AI", version="0.1.0")
 app.mount("/static", StaticFiles(directory="src/api/static"), name="static")
@@ -88,15 +96,19 @@ async def submit_complaint(req: ComplaintRequest):
 
     # Ingest into pattern state for future cluster detection
     from src.memory.pattern_state import _floor_from_flat
-    floor = _floor_from_flat(req.flat) or 0
-    ingest_complaint(
-        site_name=req.site_name,
-        tower=req.tower,
-        flat=req.flat,
-        floor=floor,
-        category=result.get("domain", "other"),
-        ticket_id=ticket_id,
-    )
+
+    try:
+        floor = _floor_from_flat(req.flat) or 0
+        ingest_complaint(
+            site_name=req.site_name,
+            tower=req.tower,
+            flat=req.flat,
+            floor=floor,
+            category=result.get("domain", "other"),
+            ticket_id=ticket_id,
+        )
+    except Exception as e:
+        result.setdefault("audit_log", {})["pattern_ingest_error"] = str(e)
 
     conf = result["routing_decision"].confidence
     if isinstance(conf, (int, float)):
@@ -160,7 +172,7 @@ async def get_complaint(ticket_id: str):
 @app.get("/complaints/stats")
 async def get_stats():
     """Processing stats and tier distribution."""
-    conn = psycopg2.connect(dbname="resolv")
+    conn = _db_conn()
     cur = conn.cursor()
     cur.execute("SELECT COUNT(*) FROM complaints")
     total = cur.fetchone()[0]

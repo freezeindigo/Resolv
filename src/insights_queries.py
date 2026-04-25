@@ -6,15 +6,19 @@ Uses human-assigned `category` as a stand-in for "domain" where ML domain is not
 from __future__ import annotations
 
 import re
+import os
 from collections import Counter, defaultdict
 from typing import Any, Dict, List, Optional, Tuple
 
 import psycopg2
 
-DB = "resolv"
+DB_DSN = os.environ.get("DATABASE_URL", "")
+DB = os.environ.get("DB_NAME", "resolv")
 
 
 def _conn():
+    if DB_DSN:
+        return psycopg2.connect(DB_DSN)
     return psycopg2.connect(dbname=DB)
 
 

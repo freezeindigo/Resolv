@@ -125,7 +125,11 @@ async def node_assemble_context(state: ResolvState) -> ResolvState:
 
 
 def node_query_patterns(state: ResolvState) -> ResolvState:
-    signal = get_active_clusters(state["site_name"], state["tower"], state["domain"])
+    try:
+        signal = get_active_clusters(state["site_name"], state["tower"], state["domain"])
+    except Exception as e:
+        state["audit_log"]["pattern_signal_error"] = str(e)
+        signal = PatternSignal(active_clusters=[], has_stack_pattern=False, building_complaint_count=0)
     state["pattern_signal"] = signal
     state["audit_log"]["pattern_signal"] = {
         "cluster_count": len(signal.active_clusters),

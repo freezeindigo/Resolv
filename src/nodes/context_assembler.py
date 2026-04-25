@@ -15,6 +15,7 @@ Usage (async):
 """
 
 import asyncio
+import os
 from dataclasses import dataclass, field
 from datetime import datetime, timedelta
 from typing import List, Optional
@@ -23,7 +24,7 @@ import asyncpg
 
 from src.nodes.rag_retriever import retrieve_for_complaint
 
-DB_DSN = "postgresql://localhost/resolv"
+DB_DSN = os.environ.get("DATABASE_URL", "postgresql://localhost/resolv")
 FLAT_HISTORY_DAYS = 365
 ADJACENT_HISTORY_DAYS = 90
 BUILDING_PATTERN_DAYS = 90
