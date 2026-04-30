@@ -5,17 +5,17 @@ import os
 MODEL_CONFIG = {
     "tier2_reasoning": {
         "provider": "groq",
-        "model": "llama-3.1-70b-versatile",
+        "model": "llama-3.3-70b-versatile",
         "max_tokens": 800,
     },
     "hypothesis_agents": {
         "provider": "groq",
-        "model": "llama-3.1-70b-versatile",
+        "model": "llama-3.3-70b-versatile",
         "max_tokens": 1024,
     },
     "pattern_interpreter": {
         "provider": "groq",
-        "model": "llama-3.1-70b-versatile",
+        "model": "llama-3.3-70b-versatile",
         "max_tokens": 600,
     },
     "arbiter": {
