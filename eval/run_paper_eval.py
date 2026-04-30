@@ -25,6 +25,7 @@ import psycopg2
 sys.path.insert(0, str(Path(__file__).parent.parent))
 
 from src.pipeline.resolv_graph import process_complaint
+from src.config.model_config import MODEL_CONFIG
 
 
 AMBIGUOUS_CATEGORIES = [
@@ -222,6 +223,16 @@ def main():
     parser.add_argument("--sample", type=int, default=300)
     parser.add_argument("--concurrency", type=int, default=3)
     parser.add_argument("--run", action="store_true", help="Actually run ARIA + GPT-4o after showing estimate.")
+    parser.add_argument(
+        "--gpt-only",
+        action="store_true",
+        help="Run only GPT-4o baseline on sampled complaints (skip ARIA entirely).",
+    )
+    parser.add_argument(
+        "--paper-mode",
+        action="store_true",
+        help="Evaluation-only model override: keep Groq for Tier2/hypothesis/judge and use Haiku arbiter.",
+    )
     args = parser.parse_args()
 
     rows = fetch_ambiguous_rows(args.db)
@@ -235,36 +246,78 @@ def main():
     # Budget estimate heuristic requested by user.
     low_est, high_est = 8, 12
     print(f"Estimated cost for {len(sampled)} complaints: ~${low_est}-${high_est} (depends on tier mix and token length).")
-    if not args.run:
+    if args.gpt_only:
+        print("Mode: --gpt-only (ARIA skipped; OpenAI baseline only).")
+    if not args.run and not args.gpt_only:
         print("Dry run only. Re-run with --run to execute full batch.")
         return
 
-    print("Proceed? [y/N] ", end="")
-    if input().strip().lower() != "y":
-        print("Aborted.")
-        return
+    if not args.gpt_only:
+        print("Proceed? [y/N] ", end="")
+        if input().strip().lower() != "y":
+            print("Aborted.")
+            return
 
-    aria_rows = asyncio.run(run_aria(sampled, concurrency=args.concurrency))
+    original_cfg = None
+    if args.paper_mode:
+        original_cfg = {
+            k: v.copy() if isinstance(v, dict) else v
+            for k, v in MODEL_CONFIG.items()
+        }
+        # Evaluation-only override; production config file is unchanged.
+        MODEL_CONFIG["tier2_reasoning"]["provider"] = "groq"
+        MODEL_CONFIG["tier2_reasoning"]["model"] = "llama-3.3-70b-versatile"
+        MODEL_CONFIG["hypothesis_agents"]["provider"] = "groq"
+        MODEL_CONFIG["hypothesis_agents"]["model"] = "llama-3.3-70b-versatile"
+        MODEL_CONFIG["arbiter"]["provider"] = "anthropic"
+        MODEL_CONFIG["arbiter"]["model"] = "claude-3-5-haiku-20241022"
+        MODEL_CONFIG["judge"]["provider"] = "groq"
+        MODEL_CONFIG["judge"]["model"] = "llama-3.1-8b-instant"
+        print(
+            "Paper mode model override active: "
+            "Tier2=Groq llama-3.3-70b-versatile, "
+            "Hypothesis=Groq llama-3.3-70b-versatile, "
+            "Arbiter=Anthropic claude-3-5-haiku-20241022, "
+            "Judge=Groq llama-3.1-8b-instant"
+        )
+        print("Paper mode estimated cost target: ~80% lower than Sonnet/Opus-heavy routing.")
+
+    aria_rows = []
+    baseline_rows = []
+    if not args.gpt_only:
+        aria_rows = asyncio.run(run_aria(sampled, concurrency=args.concurrency))
     baseline_rows = run_gpt4o_baseline(sampled)
 
     out_dir = Path("eval/results")
     aria_csv = out_dir / f"paper_eval_ambiguous_{len(sampled)}.csv"
     base_csv = out_dir / f"paper_eval_baseline_{len(sampled)}.csv"
-    write_csv(aria_csv, aria_rows)
+    if not args.gpt_only:
+        write_csv(aria_csv, aria_rows)
     write_csv(base_csv, baseline_rows)
 
-    aria_agree = sum(1 for r in aria_rows if r["agreed"])
+    aria_agree = sum(1 for r in aria_rows if r["agreed"]) if aria_rows else 0
     base_agree = sum(1 for r in baseline_rows if r["agreed"])
-    tier_dist = Counter(r["tier_used"] for r in aria_rows)
-    total_tokens = sum(int(r.get("total_tokens", 0) or 0) for r in aria_rows)
+    tier_dist = Counter(r["tier_used"] for r in aria_rows) if aria_rows else Counter()
+    total_tokens = sum(int(r.get("total_tokens", 0) or 0) for r in aria_rows) if aria_rows else 0
 
     print("\nSUMMARY")
-    print(f"ARIA vs CRM agreement rate: {aria_agree}/{len(aria_rows)} = {aria_agree/len(aria_rows)*100:.2f}%")
+    if aria_rows:
+        print(f"ARIA vs CRM agreement rate: {aria_agree}/{len(aria_rows)} = {aria_agree/len(aria_rows)*100:.2f}%")
+    else:
+        print("ARIA vs CRM agreement rate: skipped (--gpt-only)")
     print(f"GPT-4o vs CRM agreement rate: {base_agree}/{len(baseline_rows)} = {base_agree/len(baseline_rows)*100:.2f}%")
-    print(f"Tier distribution: {dict(tier_dist)}")
-    print(f"ARIA total tokens: {total_tokens:,}")
-    print(f"Saved ARIA CSV: {aria_csv}")
+    if aria_rows:
+        print(f"Tier distribution: {dict(tier_dist)}")
+        print(f"ARIA total tokens: {total_tokens:,}")
+        print(f"Saved ARIA CSV: {aria_csv}")
+    else:
+        print("Tier distribution: skipped (--gpt-only)")
+        print("ARIA total tokens: skipped (--gpt-only)")
     print(f"Saved baseline CSV: {base_csv}")
+
+    if original_cfg is not None:
+        for k, v in original_cfg.items():
+            MODEL_CONFIG[k] = v
 
 
 if __name__ == "__main__":
