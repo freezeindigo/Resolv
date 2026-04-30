@@ -1,3 +1,8 @@
+import os
+from dotenv import load_dotenv
+
+load_dotenv("/Users/kartheek/resolv/.env")
+
 """
 Paper evaluation harness for ambiguous complaints.
 
@@ -17,6 +22,7 @@ import csv
 import os
 import sys
 from collections import Counter
+from contextlib import contextmanager
 from pathlib import Path
 from typing import Dict, List
 
@@ -26,6 +32,8 @@ sys.path.insert(0, str(Path(__file__).parent.parent))
 
 from src.pipeline.resolv_graph import process_complaint
 from src.config.model_config import MODEL_CONFIG
+import src.nodes.context_assembler as context_assembler
+import src.pipeline.resolv_graph as resolv_graph
 
 
 AMBIGUOUS_CATEGORIES = [
@@ -148,6 +156,7 @@ async def run_aria(rows: List[dict], concurrency: int) -> List[dict]:
             return {
                 "ticket_id": row["ticket_id"],
                 "complaint_text": row["complaint_title"],
+                "category": row["category"],
                 "crm_label": normalize_label(row["issue_type"]),
                 "aria_label": aria_label,
                 "aria_confidence": (decision.confidence if decision else "low"),
@@ -161,6 +170,49 @@ async def run_aria(rows: List[dict], concurrency: int) -> List[dict]:
     for coro in asyncio.as_completed(tasks):
         out.append(await coro)
     return out
+
+
+@contextmanager
+def aria_eval_overrides(no_context: bool, no_docs: bool):
+    """
+    Eval-only overrides:
+    - no_context: bypass all context retrieval (DB + docs)
+    - no_docs: keep DB context but disable doc retrieval
+    """
+    orig_graph_assemble = resolv_graph.assemble_context
+    orig_ctx_assemble = context_assembler.assemble_context
+    orig_retrieve = context_assembler.retrieve_for_complaint
+
+    async def _empty_context(site_name: str, tower: str, flat: str, complaint_title: str = "", domain: str = "other"):
+        return context_assembler.ContextPackage(
+            site_name=site_name,
+            tower=tower,
+            flat=flat,
+            flat_history=[],
+            adjacent_history=[],
+            building_pattern=[],
+            adjacency_info={},
+            retrieval_ms=0,
+            rag_sources_used=[],
+            audit_context=[],
+            mom_context=[],
+            rag_retrieval_ms=0,
+        )
+
+    def _no_docs_retrieve(*args, **kwargs):
+        return [], [], [], 0
+
+    try:
+        if no_context:
+            resolv_graph.assemble_context = _empty_context
+            context_assembler.assemble_context = _empty_context
+        elif no_docs:
+            context_assembler.retrieve_for_complaint = _no_docs_retrieve
+        yield
+    finally:
+        resolv_graph.assemble_context = orig_graph_assemble
+        context_assembler.assemble_context = orig_ctx_assemble
+        context_assembler.retrieve_for_complaint = orig_retrieve
 
 
 def run_gpt4o_baseline(rows: List[dict]) -> List[dict]:
@@ -233,7 +285,19 @@ def main():
         action="store_true",
         help="Evaluation-only model override: keep Groq for Tier2/hypothesis/judge and use Haiku arbiter.",
     )
+    parser.add_argument(
+        "--no-context",
+        action="store_true",
+        help="Eval mode: disable all context retrieval (no flat history, no adjacency, no docs).",
+    )
+    parser.add_argument(
+        "--no-docs",
+        action="store_true",
+        help="Eval mode: keep complaint history context but disable operational document retrieval.",
+    )
     args = parser.parse_args()
+    if args.no_context and args.no_docs:
+        raise RuntimeError("Use only one of --no-context or --no-docs.")
 
     rows = fetch_ambiguous_rows(args.db)
     sampled = stratified_sample(rows, args.sample)
@@ -270,22 +334,27 @@ def main():
         MODEL_CONFIG["hypothesis_agents"]["provider"] = "groq"
         MODEL_CONFIG["hypothesis_agents"]["model"] = "llama-3.3-70b-versatile"
         MODEL_CONFIG["arbiter"]["provider"] = "anthropic"
-        MODEL_CONFIG["arbiter"]["model"] = "claude-3-5-haiku-20241022"
+        MODEL_CONFIG["arbiter"]["model"] = "claude-haiku-4-5-20251001"
         MODEL_CONFIG["judge"]["provider"] = "groq"
         MODEL_CONFIG["judge"]["model"] = "llama-3.1-8b-instant"
         print(
             "Paper mode model override active: "
             "Tier2=Groq llama-3.3-70b-versatile, "
             "Hypothesis=Groq llama-3.3-70b-versatile, "
-            "Arbiter=Anthropic claude-3-5-haiku-20241022, "
+            "Arbiter=Anthropic claude-haiku-4-5-20251001, "
             "Judge=Groq llama-3.1-8b-instant"
         )
         print("Paper mode estimated cost target: ~80% lower than Sonnet/Opus-heavy routing.")
+    if args.no_context:
+        print("Context mode override active: --no-context (DB context + docs disabled).")
+    if args.no_docs:
+        print("Context mode override active: --no-docs (DB history on, docs off).")
 
     aria_rows = []
     baseline_rows = []
     if not args.gpt_only:
-        aria_rows = asyncio.run(run_aria(sampled, concurrency=args.concurrency))
+        with aria_eval_overrides(args.no_context, args.no_docs):
+            aria_rows = asyncio.run(run_aria(sampled, concurrency=args.concurrency))
     baseline_rows = run_gpt4o_baseline(sampled)
 
     out_dir = Path("eval/results")
@@ -303,6 +372,12 @@ def main():
     print("\nSUMMARY")
     if aria_rows:
         print(f"ARIA vs CRM agreement rate: {aria_agree}/{len(aria_rows)} = {aria_agree/len(aria_rows)*100:.2f}%")
+        project_rows = [r for r in aria_rows if r["crm_label"] == "Project"]
+        project_right = sum(1 for r in project_rows if r["aria_label"] == "Project")
+        high_cost_errors = sum(1 for r in project_rows if r["aria_label"] == "FM")
+        project_acc = (project_right / len(project_rows) * 100) if project_rows else 0.0
+        print(f"ARIA Project accuracy: {project_right}/{len(project_rows)} = {project_acc:.2f}%")
+        print(f"ARIA high-cost errors (CRM=Project, ARIA=FM): {high_cost_errors}")
     else:
         print("ARIA vs CRM agreement rate: skipped (--gpt-only)")
     print(f"GPT-4o vs CRM agreement rate: {base_agree}/{len(baseline_rows)} = {base_agree/len(baseline_rows)*100:.2f}%")
