@@ -1,0 +1,13 @@
+{
+  "metrics": {
+    "overall_acc": 44.3,
+    "proj_acc": 81.1,
+    "fm_acc": 19.1,
+    "hc_300": 23.0,
+    "lc_300": 144.0,
+    "wtd_300": 374.0,
+    "cost_reduction_pct": 65.5,
+    "n": 300
+  },
+  "sample_size": 300
+}

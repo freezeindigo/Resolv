@@ -1,0 +1,24 @@
+cff-version: 1.2.0
+message: "If you use this system or methodology, please cite the paper below."
+title: "Resolv / ARIA — Cost-Sensitive Complaint Routing under Asymmetric Risk"
+authors:
+  - family-names: Kolanupaka
+    given-names: Kartheek
+repository-code: "https://github.com/freezeindigo/Resolv"
+license: MIT
+version: "1.0.0"
+date-released: "2026-05-09"
+preferred-citation:
+  type: conference-paper
+  title: >
+    Cost-Sensitive Decision Making with LLMs under Asymmetric Risk:
+    A Multi-Agent Approach to Complaint Routing
+  authors:
+    - family-names: Kolanupaka
+      given-names: Kartheek
+  collection-title: "Proceedings of the 35th ACM International Conference on Information and Knowledge Management"
+  collection-type: proceedings
+  conference:
+    name: "CIKM 2026"
+  year: 2026
+  notes: "Applied Research Track. DOI TBD on acceptance."

@@ -1,0 +1,300 @@
+{"ticket_id": "SYN-09270", "complaint_title": "Gas meter reading seems incorrect", "category": "Gas", "issue_type": "FM", "site_name": "SITE_C003", "tower": "T05", "flat": "T05-1201"}
+{"ticket_id": "SYN-09241", "complaint_title": "Roof slab waterproofing layer cracked and leaking", "category": "Waterproofing", "issue_type": "FM", "site_name": "SITE_C003", "tower": "T04", "flat": "T04-1002"}
+{"ticket_id": "SYN-09041", "complaint_title": "Water leaking from parapet into hall", "category": "Leakage", "issue_type": "Project", "site_name": "SITE_E005", "tower": "T05", "flat": "T05-0805"}
+{"ticket_id": "SYN-09035", "complaint_title": "Ceiling leak in study room after heavy rain", "category": "Leakage", "issue_type": "FM", "site_name": "SITE_D004", "tower": "T05", "flat": "T05-0603"}
+{"ticket_id": "SYN-09054", "complaint_title": "Seepage through balcony parapet wall", "category": "Seepage", "issue_type": "Project", "site_name": "SITE_A001", "tower": "T02", "flat": "T02-1301"}
+{"ticket_id": "SYN-09163", "complaint_title": "AC indoor unit display blank", "category": "AC Repair", "issue_type": "FM", "site_name": "SITE_A001", "tower": "T01", "flat": "T01-1002"}
+{"ticket_id": "SYN-09001", "complaint_title": "Bathroom tap continuously dripping", "category": "Plumbing", "issue_type": "FM", "site_name": "SITE_E005", "tower": "T03", "flat": "T03-0102"}
+{"ticket_id": "SYN-09234", "complaint_title": "Vehicle access gate motor broken", "category": "Security", "issue_type": "FM", "site_name": "SITE_A001", "tower": "T03", "flat": "T03-1203"}
+{"ticket_id": "SYN-09277", "complaint_title": "Common terrace tiles cracked trip hazard", "category": "Common Area", "issue_type": "Project", "site_name": "SITE_A001", "tower": "T02", "flat": "T02-0103"}
+{"ticket_id": "SYN-09157", "complaint_title": "Bedroom AC not starting", "category": "AC Repair", "issue_type": "FM", "site_name": "SITE_D004", "tower": "T02", "flat": "T02-1203"}
+{"ticket_id": "SYN-09224", "complaint_title": "External wall crack expanding every monsoon", "category": "Structural", "issue_type": "FM", "site_name": "SITE_E005", "tower": "T05", "flat": "T05-1101"}
+{"ticket_id": "SYN-09069", "complaint_title": "Bedroom window latch broken cannot lock", "category": "Carpentary", "issue_type": "FM", "site_name": "SITE_B002", "tower": "T04", "flat": "T04-1806"}
+{"ticket_id": "SYN-09139", "complaint_title": "Light switch not working in kitchen", "category": "Electrical", "issue_type": "FM", "site_name": "SITE_A001", "tower": "T01", "flat": "T01-0802"}
+{"ticket_id": "SYN-09146", "complaint_title": "Electrical meter box door broken", "category": "Electrical", "issue_type": "FM", "site_name": "SITE_D004", "tower": "T04", "flat": "T04-0701"}
+{"ticket_id": "SYN-09094", "complaint_title": "Bathroom tiles loose and moving when stepped on", "category": "Civil Work", "issue_type": "Project", "site_name": "SITE_C003", "tower": "T06", "flat": "T06-1104"}
+{"ticket_id": "SYN-09281", "complaint_title": "Swimming pool water green algae not treated", "category": "Swimming Pool", "issue_type": "FM", "site_name": "SITE_D004", "tower": "T05", "flat": "T05-0805"}
+{"ticket_id": "SYN-09130", "complaint_title": "Rooftop water tank plinth cracking", "category": "Civil", "issue_type": "FM", "site_name": "SITE_C003", "tower": "T04", "flat": "T04-1405"}
+{"ticket_id": "SYN-09082", "complaint_title": "Bathroom door bottom seal dragging on floor", "category": "Carpentary", "issue_type": "FM", "site_name": "SITE_B002", "tower": "T04", "flat": "T04-0501"}
+{"ticket_id": "SYN-09269", "complaint_title": "Kitchen gas hose needs replacement", "category": "Gas", "issue_type": "Project", "site_name": "SITE_B002", "tower": "T03", "flat": "T03-0406"}
+{"ticket_id": "SYN-09158", "complaint_title": "AC making rattling noise continuously", "category": "AC Repair", "issue_type": "FM", "site_name": "SITE_C003", "tower": "T03", "flat": "T03-2006"}
+{"ticket_id": "SYN-09017", "complaint_title": "Utility balcony tap leaking from wall", "category": "Plumbing", "issue_type": "FM", "site_name": "SITE_B002", "tower": "T01", "flat": "T01-1104"}
+{"ticket_id": "SYN-09280", "complaint_title": "Clubhouse washroom flush not working", "category": "Common Area", "issue_type": "FM", "site_name": "SITE_D004", "tower": "T05", "flat": "T05-0406"}
+{"ticket_id": "SYN-09179", "complaint_title": "Balcony wall paint bubbling near parapet", "category": "Painting", "issue_type": "Project", "site_name": "SITE_B002", "tower": "T01", "flat": "T01-1804"}
+{"ticket_id": "SYN-09003", "complaint_title": "WC flush not working properly", "category": "Plumbing", "issue_type": "FM", "site_name": "SITE_B002", "tower": "T03", "flat": "T03-0401"}
+{"ticket_id": "SYN-09117", "complaint_title": "Hairline cracks in exterior plaster need sealing", "category": "Mason", "issue_type": "Project", "site_name": "SITE_D004", "tower": "T02", "flat": "T02-1506"}
+{"ticket_id": "SYN-09236", "complaint_title": "Security camera offline near back gate", "category": "Security", "issue_type": "FM", "site_name": "SITE_D004", "tower": "T05", "flat": "T05-0602"}
+{"ticket_id": "SYN-09122", "complaint_title": "Concrete spalling visible on parking slab", "category": "Civil", "issue_type": "FM", "site_name": "SITE_B002", "tower": "T03", "flat": "T03-1103"}
+{"ticket_id": "SYN-09240", "complaint_title": "External wall waterproofing coat peeling", "category": "Waterproofing", "issue_type": "Project", "site_name": "SITE_C003", "tower": "T06", "flat": "T06-1406"}
+{"ticket_id": "SYN-09274", "complaint_title": "Podium garden sprinkler system broken", "category": "Common Area", "issue_type": "FM", "site_name": "SITE_C003", "tower": "T02", "flat": "T02-2001"}
+{"ticket_id": "SYN-09243", "complaint_title": "Wet area bathroom waterproofing breach", "category": "Waterproofing", "issue_type": "Project", "site_name": "SITE_D004", "tower": "T05", "flat": "T05-1205"}
+{"ticket_id": "SYN-09217", "complaint_title": "Loose electrical wire exposed in parking ceiling", "category": "Safety", "issue_type": "FM", "site_name": "SITE_C003", "tower": "T04", "flat": "T04-1105"}
+{"ticket_id": "SYN-09254", "complaint_title": "Water supply dirty and has particles", "category": "Water Supply", "issue_type": "FM", "site_name": "SITE_D004", "tower": "T01", "flat": "T01-0502"}
+{"ticket_id": "SYN-09178", "complaint_title": "Exterior wall paint discoloured and peeling", "category": "Painting", "issue_type": "FM", "site_name": "SITE_B002", "tower": "T05", "flat": "T05-1001"}
+{"ticket_id": "SYN-09292", "complaint_title": "Corridor tile edge trim loose and sharp", "category": "Miscellaneous", "issue_type": "FM", "site_name": "SITE_C003", "tower": "T03", "flat": "T03-0506"}
+{"ticket_id": "SYN-09099", "complaint_title": "Kitchen floor tile chip and crack", "category": "Civil Work", "issue_type": "FM", "site_name": "SITE_C003", "tower": "T05", "flat": "T05-1106"}
+{"ticket_id": "SYN-09062", "complaint_title": "Seepage through expansion joint on external wall", "category": "Seepage", "issue_type": "Project", "site_name": "SITE_A001", "tower": "T02", "flat": "T02-0305"}
+{"ticket_id": "SYN-09216", "complaint_title": "Emergency exit door not opening from inside", "category": "Safety", "issue_type": "FM", "site_name": "SITE_E005", "tower": "T05", "flat": "T05-0501"}
+{"ticket_id": "SYN-09024", "complaint_title": "Bathroom mixer tap temperature not controllable", "category": "Plumbing", "issue_type": "FM", "site_name": "SITE_B002", "tower": "T05", "flat": "T05-1601"}
+{"ticket_id": "SYN-09149", "complaint_title": "Emergency light not charging", "category": "Electrical", "issue_type": "FM", "site_name": "SITE_E005", "tower": "T01", "flat": "T01-1205"}
+{"ticket_id": "SYN-09238", "complaint_title": "Bathroom waterproofing failed seepage to lower floor", "category": "Waterproofing", "issue_type": "FM", "site_name": "SITE_C003", "tower": "T06", "flat": "T06-1802"}
+{"ticket_id": "SYN-09049", "complaint_title": "Moisture seeping through bathroom wall tiles", "category": "Seepage", "issue_type": "FM", "site_name": "SITE_B002", "tower": "T03", "flat": "T03-1502"}
+{"ticket_id": "SYN-09211", "complaint_title": "Fire alarm triggered without any smoke detected", "category": "Safety", "issue_type": "FM", "site_name": "SITE_A001", "tower": "T02", "flat": "T02-0404"}
+{"ticket_id": "SYN-09052", "complaint_title": "Dark stain spreading on bedroom wall from outside", "category": "Seepage", "issue_type": "Project", "site_name": "SITE_A001", "tower": "T02", "flat": "T02-0604"}
+{"ticket_id": "SYN-09022", "complaint_title": "Flush valve seal worn out continuous running", "category": "Plumbing", "issue_type": "Project", "site_name": "SITE_C003", "tower": "T06", "flat": "T06-1904"}
+{"ticket_id": "SYN-09300", "complaint_title": "Pigeon netting on balcony damaged", "category": "Miscellaneous", "issue_type": "Project", "site_name": "SITE_E005", "tower": "T05", "flat": "T05-0702"}
+{"ticket_id": "SYN-09101", "complaint_title": "Living room floor tile lifting at corner", "category": "Civil Work", "issue_type": "FM", "site_name": "SITE_C003", "tower": "T06", "flat": "T06-1403"}
+{"ticket_id": "SYN-09222", "complaint_title": "Structural column crack observed in car park", "category": "Structural", "issue_type": "FM", "site_name": "SITE_D004", "tower": "T06", "flat": "T06-1304"}
+{"ticket_id": "SYN-09108", "complaint_title": "Utility area floor tile broken step hazard", "category": "Civil Work", "issue_type": "FM", "site_name": "SITE_C003", "tower": "T04", "flat": "T04-1504"}
+{"ticket_id": "SYN-09173", "complaint_title": "Lift door opening before reaching floor", "category": "Lift", "issue_type": "FM", "site_name": "SITE_C003", "tower": "T01", "flat": "T01-1802"}
+{"ticket_id": "SYN-09205", "complaint_title": "Staircase dirty with debris and leaves", "category": "Housekeeping", "issue_type": "FM", "site_name": "SITE_E005", "tower": "T01", "flat": "T01-1804"}
+{"ticket_id": "SYN-09138", "complaint_title": "Doorbell not ringing", "category": "Electrical", "issue_type": "FM", "site_name": "SITE_C003", "tower": "T02", "flat": "T02-0306"}
+{"ticket_id": "SYN-09253", "complaint_title": "Overhead tank not filling properly", "category": "Water Supply", "issue_type": "FM", "site_name": "SITE_C003", "tower": "T06", "flat": "T06-1101"}
+{"ticket_id": "SYN-09258", "complaint_title": "Water pressure drops significantly after 8pm", "category": "Water Supply", "issue_type": "FM", "site_name": "SITE_C003", "tower": "T05", "flat": "T05-1306"}
+{"ticket_id": "SYN-09210", "complaint_title": "Garbage chute blocked and overflowing", "category": "Housekeeping", "issue_type": "FM", "site_name": "SITE_D004", "tower": "T01", "flat": "T01-0106"}
+{"ticket_id": "SYN-09191", "complaint_title": "Cockroach infestation in kitchen cabinets", "category": "Pest Control", "issue_type": "FM", "site_name": "SITE_A001", "tower": "T02", "flat": "T02-1005"}
+{"ticket_id": "SYN-09100", "complaint_title": "Bathroom wall tile grout cracking", "category": "Civil Work", "issue_type": "FM", "site_name": "SITE_A001", "tower": "T06", "flat": "T06-1005"}
+{"ticket_id": "SYN-09229", "complaint_title": "Boom barrier not functioning at entry gate", "category": "Security", "issue_type": "Project", "site_name": "SITE_E005", "tower": "T01", "flat": "T01-2001"}
+{"ticket_id": "SYN-09088", "complaint_title": "Window handle broken cannot open", "category": "Carpentary", "issue_type": "FM", "site_name": "SITE_B002", "tower": "T06", "flat": "T06-1104"}
+{"ticket_id": "SYN-09207", "complaint_title": "Lobby carpet stained and not cleaned", "category": "Housekeeping", "issue_type": "FM", "site_name": "SITE_C003", "tower": "T05", "flat": "T05-1606"}
+{"ticket_id": "SYN-09120", "complaint_title": "Kitchen backsplash tile joint cracking", "category": "Mason", "issue_type": "Project", "site_name": "SITE_E005", "tower": "T04", "flat": "T04-0606"}
+{"ticket_id": "SYN-09064", "complaint_title": "Study room wall seepage from terrace above", "category": "Seepage", "issue_type": "FM", "site_name": "SITE_A001", "tower": "T05", "flat": "T05-0805"}
+{"ticket_id": "SYN-09150", "complaint_title": "Utility area wiring joint exposed needs repair", "category": "Electrical", "issue_type": "FM", "site_name": "SITE_D004", "tower": "T06", "flat": "T06-1201"}
+{"ticket_id": "SYN-09165", "complaint_title": "Split AC outdoor unit making abnormal noise", "category": "AC Repair", "issue_type": "FM", "site_name": "SITE_E005", "tower": "T03", "flat": "T03-1605"}
+{"ticket_id": "SYN-09248", "complaint_title": "Sunken slab waterproofing failed bathroom seepage", "category": "Waterproofing", "issue_type": "Project", "site_name": "SITE_B002", "tower": "T05", "flat": "T05-0906"}
+{"ticket_id": "SYN-09096", "complaint_title": "Hairline crack in bedroom wall widening", "category": "Civil Work", "issue_type": "Project", "site_name": "SITE_E005", "tower": "T02", "flat": "T02-0901"}
+{"ticket_id": "SYN-09033", "complaint_title": "Kitchen ceiling wet spot growing larger each day", "category": "Leakage", "issue_type": "Project", "site_name": "SITE_A001", "tower": "T01", "flat": "T01-1601"}
+{"ticket_id": "SYN-09134", "complaint_title": "Socket sparking when plugging in appliance", "category": "Electrical", "issue_type": "FM", "site_name": "SITE_D004", "tower": "T03", "flat": "T03-0704"}
+{"ticket_id": "SYN-09076", "complaint_title": "Study room door swelling not closing", "category": "Carpentary", "issue_type": "FM", "site_name": "SITE_A001", "tower": "T01", "flat": "T01-1403"}
+{"ticket_id": "SYN-09013", "complaint_title": "Geyser thermostat not cutting off", "category": "Plumbing", "issue_type": "FM", "site_name": "SITE_C003", "tower": "T06", "flat": "T06-0305"}
+{"ticket_id": "SYN-09072", "complaint_title": "Balcony door handle broken", "category": "Carpentary", "issue_type": "Project", "site_name": "SITE_C003", "tower": "T01", "flat": "T01-0406"}
+{"ticket_id": "SYN-09009", "complaint_title": "Master bathroom shower head blocked", "category": "Plumbing", "issue_type": "FM", "site_name": "SITE_A001", "tower": "T01", "flat": "T01-0803"}
+{"ticket_id": "SYN-09043", "complaint_title": "Kitchen corner ceiling consistently wet", "category": "Leakage", "issue_type": "Project", "site_name": "SITE_A001", "tower": "T02", "flat": "T02-0301"}
+{"ticket_id": "SYN-09007", "complaint_title": "Overhead tank overflow valve leaking", "category": "Plumbing", "issue_type": "FM", "site_name": "SITE_A001", "tower": "T05", "flat": "T05-1006"}
+{"ticket_id": "SYN-09092", "complaint_title": "Tile gap growing between kitchen floor and wall", "category": "Civil Work", "issue_type": "FM", "site_name": "SITE_C003", "tower": "T02", "flat": "T02-1903"}
+{"ticket_id": "SYN-09226", "complaint_title": "Slab crack in podium parking spreading", "category": "Structural", "issue_type": "Project", "site_name": "SITE_A001", "tower": "T06", "flat": "T06-0504"}
+{"ticket_id": "SYN-09204", "complaint_title": "Dustbin outside flat not emptied", "category": "Housekeeping", "issue_type": "FM", "site_name": "SITE_C003", "tower": "T03", "flat": "T03-0404"}
+{"ticket_id": "SYN-09169", "complaint_title": "Lift stuck between floors", "category": "Lift", "issue_type": "FM", "site_name": "SITE_B002", "tower": "T02", "flat": "T02-0706"}
+{"ticket_id": "SYN-09123", "complaint_title": "Settlement crack along column in parking area", "category": "Civil", "issue_type": "FM", "site_name": "SITE_E005", "tower": "T01", "flat": "T01-0502"}
+{"ticket_id": "SYN-09273", "complaint_title": "Common area landscape lights all off", "category": "Common Area", "issue_type": "FM", "site_name": "SITE_B002", "tower": "T05", "flat": "T05-0702"}
+{"ticket_id": "SYN-09168", "complaint_title": "Lift making jerking movements during ride", "category": "Lift", "issue_type": "Project", "site_name": "SITE_A001", "tower": "T06", "flat": "T06-1806"}
+{"ticket_id": "SYN-09141", "complaint_title": "Geyser not turning on electrical connection issue", "category": "Electrical", "issue_type": "FM", "site_name": "SITE_B002", "tower": "T04", "flat": "T04-0405"}
+{"ticket_id": "SYN-09067", "complaint_title": "Utility room external wall seeping in rains", "category": "Seepage", "issue_type": "FM", "site_name": "SITE_E005", "tower": "T03", "flat": "T03-0902"}
+{"ticket_id": "SYN-09068", "complaint_title": "Main door not closing properly needs adjustment", "category": "Carpentary", "issue_type": "Project", "site_name": "SITE_A001", "tower": "T02", "flat": "T02-1203"}
+{"ticket_id": "SYN-09085", "complaint_title": "Utility balcony door not closing flush", "category": "Carpentary", "issue_type": "FM", "site_name": "SITE_A001", "tower": "T03", "flat": "T03-1804"}
+{"ticket_id": "SYN-09188", "complaint_title": "External wall paint blistering", "category": "Painting", "issue_type": "FM", "site_name": "SITE_C003", "tower": "T01", "flat": "T01-0803"}
+{"ticket_id": "SYN-09032", "complaint_title": "Leakage from upstairs flat affecting bedroom ceiling", "category": "Leakage", "issue_type": "FM", "site_name": "SITE_B002", "tower": "T01", "flat": "T01-0805"}
+{"ticket_id": "SYN-09106", "complaint_title": "Bathroom ceiling plaster flaking", "category": "Civil Work", "issue_type": "Project", "site_name": "SITE_A001", "tower": "T03", "flat": "T03-1002"}
+{"ticket_id": "SYN-09176", "complaint_title": "Lift overload sensor not working", "category": "Lift", "issue_type": "FM", "site_name": "SITE_D004", "tower": "T01", "flat": "T01-0105"}
+{"ticket_id": "SYN-09142", "complaint_title": "Bedroom light point dead no power", "category": "Electrical", "issue_type": "FM", "site_name": "SITE_B002", "tower": "T04", "flat": "T04-0903"}
+{"ticket_id": "SYN-09097", "complaint_title": "Floor tiles near main door cracked and uneven", "category": "Civil Work", "issue_type": "FM", "site_name": "SITE_D004", "tower": "T01", "flat": "T01-1705"}
+{"ticket_id": "SYN-09199", "complaint_title": "Bedbugs suspected in master bedroom", "category": "Pest Control", "issue_type": "FM", "site_name": "SITE_C003", "tower": "T05", "flat": "T05-0202"}
+{"ticket_id": "SYN-09162", "complaint_title": "AC gas needs recharging not cooling", "category": "AC Repair", "issue_type": "FM", "site_name": "SITE_D004", "tower": "T06", "flat": "T06-1604"}
+{"ticket_id": "SYN-09290", "complaint_title": "Parking space marking faded needs repaint", "category": "Miscellaneous", "issue_type": "FM", "site_name": "SITE_D004", "tower": "T04", "flat": "T04-1406"}
+{"ticket_id": "SYN-09105", "complaint_title": "Entrance hall tile debonded hollow sound", "category": "Civil Work", "issue_type": "Project", "site_name": "SITE_E005", "tower": "T03", "flat": "T03-1305"}
+{"ticket_id": "SYN-09124", "complaint_title": "Railing post concrete base cracked", "category": "Civil", "issue_type": "Project", "site_name": "SITE_B002", "tower": "T04", "flat": "T04-0506"}
+{"ticket_id": "SYN-09145", "complaint_title": "Fan regulator not working full speed only", "category": "Electrical", "issue_type": "FM", "site_name": "SITE_E005", "tower": "T01", "flat": "T01-1005"}
+{"ticket_id": "SYN-09209", "complaint_title": "Elevator floor not mopped for days", "category": "Housekeeping", "issue_type": "FM", "site_name": "SITE_E005", "tower": "T02", "flat": "T02-1004"}
+{"ticket_id": "SYN-09237", "complaint_title": "Terrace waterproofing failed water seeping to flat below", "category": "Waterproofing", "issue_type": "Project", "site_name": "SITE_D004", "tower": "T03", "flat": "T03-0104"}
+{"ticket_id": "SYN-09133", "complaint_title": "No power in two rooms after thunderstorm", "category": "Electrical", "issue_type": "FM", "site_name": "SITE_D004", "tower": "T02", "flat": "T02-0203"}
+{"ticket_id": "SYN-09257", "complaint_title": "Water pump making noise and not supplying", "category": "Water Supply", "issue_type": "FM", "site_name": "SITE_A001", "tower": "T04", "flat": "T04-1206"}
+{"ticket_id": "SYN-09025", "complaint_title": "Water leaking from kitchen ceiling near window", "category": "Leakage", "issue_type": "FM", "site_name": "SITE_D004", "tower": "T02", "flat": "T02-1501"}
+{"ticket_id": "SYN-09295", "complaint_title": "Floor drain cover missing in utility area", "category": "Miscellaneous", "issue_type": "FM", "site_name": "SITE_C003", "tower": "T02", "flat": "T02-1801"}
+{"ticket_id": "SYN-09278", "complaint_title": "Visitor parking area pothole formed", "category": "Common Area", "issue_type": "FM", "site_name": "SITE_B002", "tower": "T05", "flat": "T05-1101"}
+{"ticket_id": "SYN-09184", "complaint_title": "Staircase wall paint flaking off", "category": "Painting", "issue_type": "Project", "site_name": "SITE_A001", "tower": "T02", "flat": "T02-0703"}
+{"ticket_id": "SYN-09126", "complaint_title": "Balcony slab showing efflorescence", "category": "Civil", "issue_type": "Project", "site_name": "SITE_C003", "tower": "T05", "flat": "T05-1504"}
+{"ticket_id": "SYN-09183", "complaint_title": "Lobby wall repaint required after waterproofing work", "category": "Painting", "issue_type": "FM", "site_name": "SITE_E005", "tower": "T05", "flat": "T05-0205"}
+{"ticket_id": "SYN-09095", "complaint_title": "Plaster peeling off external facing wall", "category": "Civil Work", "issue_type": "FM", "site_name": "SITE_E005", "tower": "T05", "flat": "T05-0404"}
+{"ticket_id": "SYN-09263", "complaint_title": "Gas supply low pressure cooking difficult", "category": "Gas", "issue_type": "FM", "site_name": "SITE_A001", "tower": "T01", "flat": "T01-0805"}
+{"ticket_id": "SYN-09245", "complaint_title": "Service shaft waterproofing damaged", "category": "Waterproofing", "issue_type": "Project", "site_name": "SITE_D004", "tower": "T03", "flat": "T03-0105"}
+{"ticket_id": "SYN-09186", "complaint_title": "Master bedroom wall repaint needed after seepage repair", "category": "Painting", "issue_type": "Project", "site_name": "SITE_E005", "tower": "T01", "flat": "T01-0601"}
+{"ticket_id": "SYN-09293", "complaint_title": "Balcony drainage hole blocked water stagnating", "category": "Miscellaneous", "issue_type": "Project", "site_name": "SITE_D004", "tower": "T01", "flat": "T01-0301"}
+{"ticket_id": "SYN-09251", "complaint_title": "Hot water supply not coming in morning", "category": "Water Supply", "issue_type": "FM", "site_name": "SITE_E005", "tower": "T03", "flat": "T03-1705"}
+{"ticket_id": "SYN-09065", "complaint_title": "Bathroom wall tiles getting damp from behind", "category": "Seepage", "issue_type": "FM", "site_name": "SITE_E005", "tower": "T01", "flat": "T01-2001"}
+{"ticket_id": "SYN-09077", "complaint_title": "Bedroom door hinge screws pulled out from frame", "category": "Carpentary", "issue_type": "FM", "site_name": "SITE_A001", "tower": "T01", "flat": "T01-1102"}
+{"ticket_id": "SYN-09268", "complaint_title": "Gas supply cuts off intermittently", "category": "Gas", "issue_type": "FM", "site_name": "SITE_C003", "tower": "T02", "flat": "T02-1504"}
+{"ticket_id": "SYN-09232", "complaint_title": "Intercom panel at main entrance broken", "category": "Security", "issue_type": "FM", "site_name": "SITE_A001", "tower": "T04", "flat": "T04-0606"}
+{"ticket_id": "SYN-09214", "complaint_title": "Broken railing near staircase safety hazard", "category": "Safety", "issue_type": "Project", "site_name": "SITE_D004", "tower": "T04", "flat": "T04-0804"}
+{"ticket_id": "SYN-09213", "complaint_title": "Electrical panel cover missing in parking area", "category": "Safety", "issue_type": "FM", "site_name": "SITE_C003", "tower": "T05", "flat": "T05-0904"}
+{"ticket_id": "SYN-09256", "complaint_title": "No water on this floor during peak hours", "category": "Water Supply", "issue_type": "Project", "site_name": "SITE_D004", "tower": "T01", "flat": "T01-0905"}
+{"ticket_id": "SYN-09010", "complaint_title": "Toilet flush cistern not filling", "category": "Plumbing", "issue_type": "FM", "site_name": "SITE_A001", "tower": "T02", "flat": "T02-0404"}
+{"ticket_id": "SYN-09037", "complaint_title": "Water dripping onto dining table from ceiling", "category": "Leakage", "issue_type": "Project", "site_name": "SITE_E005", "tower": "T06", "flat": "T06-0706"}
+{"ticket_id": "SYN-09187", "complaint_title": "Paint bubbling on bathroom ceiling", "category": "Painting", "issue_type": "FM", "site_name": "SITE_D004", "tower": "T04", "flat": "T04-2004"}
+{"ticket_id": "SYN-09048", "complaint_title": "Dampness on external wall in living room", "category": "Seepage", "issue_type": "Project", "site_name": "SITE_E005", "tower": "T04", "flat": "T04-0504"}
+{"ticket_id": "SYN-09008", "complaint_title": "Balcony drain pipe choked with debris", "category": "Plumbing", "issue_type": "FM", "site_name": "SITE_E005", "tower": "T03", "flat": "T03-1902"}
+{"ticket_id": "SYN-09223", "complaint_title": "Terrace waterproofing failing water in roof slab", "category": "Structural", "issue_type": "Project", "site_name": "SITE_B002", "tower": "T04", "flat": "T04-0202"}
+{"ticket_id": "SYN-09058", "complaint_title": "Efflorescence on external wall of flat", "category": "Seepage", "issue_type": "Project", "site_name": "SITE_B002", "tower": "T01", "flat": "T01-1906"}
+{"ticket_id": "SYN-09060", "complaint_title": "Damp patch on internal bathroom wall growing", "category": "Seepage", "issue_type": "FM", "site_name": "SITE_A001", "tower": "T05", "flat": "T05-1605"}
+{"ticket_id": "SYN-09166", "complaint_title": "AC not dehumidifying properly", "category": "AC Repair", "issue_type": "FM", "site_name": "SITE_E005", "tower": "T03", "flat": "T03-1406"}
+{"ticket_id": "SYN-09202", "complaint_title": "Garbage not collected from floor for two days", "category": "Housekeeping", "issue_type": "FM", "site_name": "SITE_D004", "tower": "T03", "flat": "T03-1305"}
+{"ticket_id": "SYN-09203", "complaint_title": "Wet floor in lobby after mopping not dried properly", "category": "Housekeeping", "issue_type": "FM", "site_name": "SITE_A001", "tower": "T04", "flat": "T04-0303"}
+{"ticket_id": "SYN-09228", "complaint_title": "Staircase slab deflection visible", "category": "Structural", "issue_type": "Project", "site_name": "SITE_C003", "tower": "T05", "flat": "T05-1306"}
+{"ticket_id": "SYN-09071", "complaint_title": "Wardrobe sliding door track damaged", "category": "Carpentary", "issue_type": "Project", "site_name": "SITE_E005", "tower": "T03", "flat": "T03-0402"}
+{"ticket_id": "SYN-09225", "complaint_title": "Water ingress through foundation wall in basement", "category": "Structural", "issue_type": "Project", "site_name": "SITE_D004", "tower": "T01", "flat": "T01-1704"}
+{"ticket_id": "SYN-09250", "complaint_title": "Low water pressure in entire flat", "category": "Water Supply", "issue_type": "FM", "site_name": "SITE_D004", "tower": "T02", "flat": "T02-0702"}
+{"ticket_id": "SYN-09121", "complaint_title": "Bedroom wall patch repair needed from seepage repair", "category": "Mason", "issue_type": "FM", "site_name": "SITE_D004", "tower": "T04", "flat": "T04-0902"}
+{"ticket_id": "SYN-09018", "complaint_title": "Toilet seat loose and wobbling", "category": "Plumbing", "issue_type": "Project", "site_name": "SITE_C003", "tower": "T01", "flat": "T01-0705"}
+{"ticket_id": "SYN-09113", "complaint_title": "Brick mortar joint cracked in boundary wall", "category": "Mason", "issue_type": "Project", "site_name": "SITE_D004", "tower": "T02", "flat": "T02-0506"}
+{"ticket_id": "SYN-09039", "complaint_title": "Terrace water leaking into top floor bedroom", "category": "Leakage", "issue_type": "Project", "site_name": "SITE_E005", "tower": "T04", "flat": "T04-0402"}
+{"ticket_id": "SYN-09246", "complaint_title": "Kitchen platform waterproofing failed seepage downward", "category": "Waterproofing", "issue_type": "FM", "site_name": "SITE_A001", "tower": "T05", "flat": "T05-1603"}
+{"ticket_id": "SYN-09083", "complaint_title": "Window latch broken on second bedroom", "category": "Carpentary", "issue_type": "FM", "site_name": "SITE_C003", "tower": "T03", "flat": "T03-0203"}
+{"ticket_id": "SYN-09299", "complaint_title": "Bicycle parking stand broken", "category": "Miscellaneous", "issue_type": "Project", "site_name": "SITE_E005", "tower": "T03", "flat": "T03-1201"}
+{"ticket_id": "SYN-09119", "complaint_title": "Bathroom wall plaster repair after pipe work", "category": "Mason", "issue_type": "FM", "site_name": "SITE_D004", "tower": "T05", "flat": "T05-1704"}
+{"ticket_id": "SYN-09127", "complaint_title": "Staircase railing anchor loose from concrete", "category": "Civil", "issue_type": "Project", "site_name": "SITE_A001", "tower": "T02", "flat": "T02-1404"}
+{"ticket_id": "SYN-09046", "complaint_title": "Ceiling near AC drain pipe wet", "category": "Leakage", "issue_type": "Project", "site_name": "SITE_E005", "tower": "T02", "flat": "T02-1905"}
+{"ticket_id": "SYN-09161", "complaint_title": "AC smell when switched on", "category": "AC Repair", "issue_type": "FM", "site_name": "SITE_D004", "tower": "T04", "flat": "T04-1802"}
+{"ticket_id": "SYN-09040", "complaint_title": "Balcony ceiling dripping during rain", "category": "Leakage", "issue_type": "FM", "site_name": "SITE_B002", "tower": "T01", "flat": "T01-1101"}
+{"ticket_id": "SYN-09212", "complaint_title": "Gas smell near kitchen meter room", "category": "Safety", "issue_type": "FM", "site_name": "SITE_A001", "tower": "T06", "flat": "T06-0504"}
+{"ticket_id": "SYN-09051", "complaint_title": "Wall near kitchen window constantly damp", "category": "Seepage", "issue_type": "Project", "site_name": "SITE_A001", "tower": "T06", "flat": "T06-1801"}
+{"ticket_id": "SYN-09291", "complaint_title": "Flat door number plate rusted", "category": "Miscellaneous", "issue_type": "FM", "site_name": "SITE_A001", "tower": "T03", "flat": "T03-1403"}
+{"ticket_id": "SYN-09153", "complaint_title": "AC unit making loud noise when running", "category": "AC Repair", "issue_type": "FM", "site_name": "SITE_C003", "tower": "T02", "flat": "T02-0303"}
+{"ticket_id": "SYN-09261", "complaint_title": "Water meter showing high reading suspected leak", "category": "Water Supply", "issue_type": "FM", "site_name": "SITE_E005", "tower": "T02", "flat": "T02-0306"}
+{"ticket_id": "SYN-09061", "complaint_title": "Bedroom wall moisture leading to paint bubbling", "category": "Seepage", "issue_type": "Project", "site_name": "SITE_E005", "tower": "T02", "flat": "T02-0205"}
+{"ticket_id": "SYN-09038", "complaint_title": "Bedroom ceiling damp patch spreading over days", "category": "Leakage", "issue_type": "Project", "site_name": "SITE_C003", "tower": "T04", "flat": "T04-1204"}
+{"ticket_id": "SYN-09155", "complaint_title": "AC compressor turns off after 10 minutes", "category": "AC Repair", "issue_type": "FM", "site_name": "SITE_E005", "tower": "T06", "flat": "T06-1303"}
+{"ticket_id": "SYN-09090", "complaint_title": "Floor tile cracked in master bathroom", "category": "Civil Work", "issue_type": "FM", "site_name": "SITE_C003", "tower": "T03", "flat": "T03-1704"}
+{"ticket_id": "SYN-09050", "complaint_title": "Seepage from external wall causing paint peeling", "category": "Seepage", "issue_type": "Project", "site_name": "SITE_A001", "tower": "T04", "flat": "T04-1801"}
+{"ticket_id": "SYN-09264", "complaint_title": "PNG gas meter making ticking sound", "category": "Gas", "issue_type": "FM", "site_name": "SITE_B002", "tower": "T04", "flat": "T04-1503"}
+{"ticket_id": "SYN-09136", "complaint_title": "Bedroom fan making noise and running slow", "category": "Electrical", "issue_type": "FM", "site_name": "SITE_D004", "tower": "T03", "flat": "T03-0304"}
+{"ticket_id": "SYN-09185", "complaint_title": "Terrace parapet paint deteriorating with rust stains", "category": "Painting", "issue_type": "Project", "site_name": "SITE_A001", "tower": "T02", "flat": "T02-0802"}
+{"ticket_id": "SYN-09131", "complaint_title": "Drainage channel concrete broken in common area", "category": "Civil", "issue_type": "Project", "site_name": "SITE_E005", "tower": "T05", "flat": "T05-0804"}
+{"ticket_id": "SYN-09195", "complaint_title": "Ants coming from bathroom wall", "category": "Pest Control", "issue_type": "FM", "site_name": "SITE_D004", "tower": "T04", "flat": "T04-0305"}
+{"ticket_id": "SYN-09208", "complaint_title": "Common area washroom dirty and foul smell", "category": "Housekeeping", "issue_type": "FM", "site_name": "SITE_D004", "tower": "T01", "flat": "T01-0703"}
+{"ticket_id": "SYN-09086", "complaint_title": "Cabinet drawer runner broken", "category": "Carpentary", "issue_type": "FM", "site_name": "SITE_E005", "tower": "T06", "flat": "T06-0502"}
+{"ticket_id": "SYN-09231", "complaint_title": "Access card reader not working at main gate", "category": "Security", "issue_type": "FM", "site_name": "SITE_A001", "tower": "T04", "flat": "T04-0406"}
+{"ticket_id": "SYN-09087", "complaint_title": "French door latch not catching", "category": "Carpentary", "issue_type": "FM", "site_name": "SITE_B002", "tower": "T02", "flat": "T02-1401"}
+{"ticket_id": "SYN-09260", "complaint_title": "Cold water supply only no hot water", "category": "Water Supply", "issue_type": "FM", "site_name": "SITE_A001", "tower": "T05", "flat": "T05-1803"}
+{"ticket_id": "SYN-09201", "complaint_title": "Common corridor not being cleaned regularly", "category": "Housekeeping", "issue_type": "FM", "site_name": "SITE_A001", "tower": "T02", "flat": "T02-1104"}
+{"ticket_id": "SYN-09021", "complaint_title": "Water hammer noise in pipes", "category": "Plumbing", "issue_type": "FM", "site_name": "SITE_B002", "tower": "T06", "flat": "T06-1805"}
+{"ticket_id": "SYN-09235", "complaint_title": "Visitor management system not working", "category": "Security", "issue_type": "FM", "site_name": "SITE_D004", "tower": "T02", "flat": "T02-0805"}
+{"ticket_id": "SYN-09103", "complaint_title": "Plaster crack near water heater point", "category": "Civil Work", "issue_type": "FM", "site_name": "SITE_B002", "tower": "T02", "flat": "T02-1406"}
+{"ticket_id": "SYN-09151", "complaint_title": "Hallway light fitting loose", "category": "Electrical", "issue_type": "FM", "site_name": "SITE_E005", "tower": "T06", "flat": "T06-1101"}
+{"ticket_id": "SYN-09267", "complaint_title": "Gas regulator needs replacement", "category": "Gas", "issue_type": "FM", "site_name": "SITE_E005", "tower": "T04", "flat": "T04-0901"}
+{"ticket_id": "SYN-09063", "complaint_title": "Kitchen wall behind sink constantly damp", "category": "Seepage", "issue_type": "Project", "site_name": "SITE_A001", "tower": "T06", "flat": "T06-0804"}
+{"ticket_id": "SYN-09028", "complaint_title": "Wet patch on living room ceiling after rain", "category": "Leakage", "issue_type": "FM", "site_name": "SITE_E005", "tower": "T05", "flat": "T05-0702"}
+{"ticket_id": "SYN-09198", "complaint_title": "Cockroaches in bathroom tiles", "category": "Pest Control", "issue_type": "FM", "site_name": "SITE_E005", "tower": "T05", "flat": "T05-0106"}
+{"ticket_id": "SYN-09023", "complaint_title": "Geyser pressure relief valve dripping", "category": "Plumbing", "issue_type": "Project", "site_name": "SITE_E005", "tower": "T04", "flat": "T04-1202"}
+{"ticket_id": "SYN-09279", "complaint_title": "Society notice board damaged", "category": "Common Area", "issue_type": "FM", "site_name": "SITE_B002", "tower": "T03", "flat": "T03-0202"}
+{"ticket_id": "SYN-09177", "complaint_title": "Paint peeling from living room ceiling", "category": "Painting", "issue_type": "FM", "site_name": "SITE_A001", "tower": "T05", "flat": "T05-0202"}
+{"ticket_id": "SYN-09221", "complaint_title": "Building settlement causing door frames to shift", "category": "Structural", "issue_type": "Project", "site_name": "SITE_D004", "tower": "T01", "flat": "T01-1106"}
+{"ticket_id": "SYN-09283", "complaint_title": "Pool ladder handle loose unsafe", "category": "Swimming Pool", "issue_type": "Project", "site_name": "SITE_D004", "tower": "T06", "flat": "T06-0101"}
+{"ticket_id": "SYN-09262", "complaint_title": "Common water tank level always low", "category": "Water Supply", "issue_type": "FM", "site_name": "SITE_D004", "tower": "T06", "flat": "T06-1006"}
+{"ticket_id": "SYN-09218", "complaint_title": "Gas pipeline suspected minor leak near meter", "category": "Safety", "issue_type": "FM", "site_name": "SITE_C003", "tower": "T01", "flat": "T01-1006"}
+{"ticket_id": "SYN-09006", "complaint_title": "Wash basin tap has low water pressure", "category": "Plumbing", "issue_type": "FM", "site_name": "SITE_D004", "tower": "T05", "flat": "T05-0404"}
+{"ticket_id": "SYN-09200", "complaint_title": "Insect nests in balcony ceiling corner", "category": "Pest Control", "issue_type": "FM", "site_name": "SITE_D004", "tower": "T05", "flat": "T05-1503"}
+{"ticket_id": "SYN-09244", "complaint_title": "Compound wall waterproofing failed", "category": "Waterproofing", "issue_type": "Project", "site_name": "SITE_C003", "tower": "T06", "flat": "T06-1001"}
+{"ticket_id": "SYN-09219", "complaint_title": "Large crack running through external wall of flat", "category": "Structural", "issue_type": "Project", "site_name": "SITE_D004", "tower": "T03", "flat": "T03-0706"}
+{"ticket_id": "SYN-09249", "complaint_title": "No water supply in morning for two days", "category": "Water Supply", "issue_type": "FM", "site_name": "SITE_A001", "tower": "T03", "flat": "T03-1106"}
+{"ticket_id": "SYN-09164", "complaint_title": "AC drain pipe choked water dripping", "category": "AC Repair", "issue_type": "FM", "site_name": "SITE_D004", "tower": "T06", "flat": "T06-0803"}
+{"ticket_id": "SYN-09182", "complaint_title": "Internal wall paint discolouration from dampness", "category": "Painting", "issue_type": "Project", "site_name": "SITE_C003", "tower": "T05", "flat": "T05-1403"}
+{"ticket_id": "SYN-09104", "complaint_title": "Bedroom wall crack appeared after monsoon", "category": "Civil Work", "issue_type": "FM", "site_name": "SITE_D004", "tower": "T06", "flat": "T06-0605"}
+{"ticket_id": "SYN-09147", "complaint_title": "Circuit breaker keeps tripping on AC circuit", "category": "Electrical", "issue_type": "Project", "site_name": "SITE_E005", "tower": "T06", "flat": "T06-0801"}
+{"ticket_id": "SYN-09110", "complaint_title": "Grouting between bathroom tiles broken", "category": "Mason", "issue_type": "FM", "site_name": "SITE_A001", "tower": "T01", "flat": "T01-0804"}
+{"ticket_id": "SYN-09148", "complaint_title": "Outdoor socket on balcony dead", "category": "Electrical", "issue_type": "FM", "site_name": "SITE_C003", "tower": "T06", "flat": "T06-2001"}
+{"ticket_id": "SYN-09259", "complaint_title": "Water supply intermittent throughout the day", "category": "Water Supply", "issue_type": "FM", "site_name": "SITE_C003", "tower": "T01", "flat": "T01-0804"}
+{"ticket_id": "SYN-09020", "complaint_title": "Kitchen sink waste pipe disconnected", "category": "Plumbing", "issue_type": "FM", "site_name": "SITE_D004", "tower": "T02", "flat": "T02-0902"}
+{"ticket_id": "SYN-09118", "complaint_title": "Terrace parapet plaster deteriorating", "category": "Mason", "issue_type": "FM", "site_name": "SITE_E005", "tower": "T05", "flat": "T05-2003"}
+{"ticket_id": "SYN-09005", "complaint_title": "Bathroom tap leaking from base", "category": "Plumbing", "issue_type": "FM", "site_name": "SITE_E005", "tower": "T03", "flat": "T03-0206"}
+{"ticket_id": "SYN-09112", "complaint_title": "Tiles re-grouting required in master bathroom", "category": "Mason", "issue_type": "FM", "site_name": "SITE_E005", "tower": "T02", "flat": "T02-1304"}
+{"ticket_id": "SYN-09011", "complaint_title": "Kitchen tap making noise when opened", "category": "Plumbing", "issue_type": "Project", "site_name": "SITE_C003", "tower": "T04", "flat": "T04-1202"}
+{"ticket_id": "SYN-09265", "complaint_title": "Gas connection valve stiff not turning", "category": "Gas", "issue_type": "FM", "site_name": "SITE_E005", "tower": "T04", "flat": "T04-1906"}
+{"ticket_id": "SYN-09230", "complaint_title": "CCTV not recording in parking area", "category": "Security", "issue_type": "FM", "site_name": "SITE_B002", "tower": "T06", "flat": "T06-1002"}
+{"ticket_id": "SYN-09019", "complaint_title": "Shower area drain choked hair blockage", "category": "Plumbing", "issue_type": "FM", "site_name": "SITE_C003", "tower": "T02", "flat": "T02-1604"}
+{"ticket_id": "SYN-09091", "complaint_title": "Plaster falling from bedroom ceiling corner", "category": "Civil Work", "issue_type": "Project", "site_name": "SITE_E005", "tower": "T03", "flat": "T03-0101"}
+{"ticket_id": "SYN-09172", "complaint_title": "Lift making grinding noise while operating", "category": "Lift", "issue_type": "FM", "site_name": "SITE_C003", "tower": "T02", "flat": "T02-1202"}
+{"ticket_id": "SYN-09144", "complaint_title": "VDP video door phone blank screen", "category": "Electrical", "issue_type": "FM", "site_name": "SITE_A001", "tower": "T02", "flat": "T02-1001"}
+{"ticket_id": "SYN-09129", "complaint_title": "Parking pillar paint peeling showing concrete damage", "category": "Civil", "issue_type": "FM", "site_name": "SITE_D004", "tower": "T04", "flat": "T04-0103"}
+{"ticket_id": "SYN-09294", "complaint_title": "Building entrance sliding door slow", "category": "Miscellaneous", "issue_type": "FM", "site_name": "SITE_A001", "tower": "T04", "flat": "T04-0406"}
+{"ticket_id": "SYN-09181", "complaint_title": "Corridor paint deteriorating", "category": "Painting", "issue_type": "FM", "site_name": "SITE_E005", "tower": "T04", "flat": "T04-1504"}
+{"ticket_id": "SYN-09287", "complaint_title": "Flat number plate outside door fallen off", "category": "Miscellaneous", "issue_type": "Project", "site_name": "SITE_A001", "tower": "T06", "flat": "T06-0406"}
+{"ticket_id": "SYN-09098", "complaint_title": "Wall corner near staircase crumbling", "category": "Civil Work", "issue_type": "FM", "site_name": "SITE_B002", "tower": "T03", "flat": "T03-1401"}
+{"ticket_id": "SYN-09034", "complaint_title": "Water marks on ceiling near bathroom wall", "category": "Leakage", "issue_type": "FM", "site_name": "SITE_E005", "tower": "T02", "flat": "T02-0506"}
+{"ticket_id": "SYN-09045", "complaint_title": "Water dripping near electrical switchboard ceiling", "category": "Leakage", "issue_type": "Project", "site_name": "SITE_C003", "tower": "T06", "flat": "T06-1602"}
+{"ticket_id": "SYN-09242", "complaint_title": "Podium waterproofing failure causing basement leakage", "category": "Waterproofing", "issue_type": "Project", "site_name": "SITE_D004", "tower": "T04", "flat": "T04-0402"}
+{"ticket_id": "SYN-09192", "complaint_title": "Rodent droppings found in kitchen area", "category": "Pest Control", "issue_type": "FM", "site_name": "SITE_E005", "tower": "T03", "flat": "T03-1501"}
+{"ticket_id": "SYN-09128", "complaint_title": "Water pooling on terrace due to drain slope issue", "category": "Civil", "issue_type": "FM", "site_name": "SITE_E005", "tower": "T06", "flat": "T06-0105"}
+{"ticket_id": "SYN-09227", "complaint_title": "Retaining wall crack near lift pit", "category": "Structural", "issue_type": "Project", "site_name": "SITE_B002", "tower": "T01", "flat": "T01-1603"}
+{"ticket_id": "SYN-09031", "complaint_title": "Water stains appearing on dining room ceiling", "category": "Leakage", "issue_type": "FM", "site_name": "SITE_A001", "tower": "T01", "flat": "T01-1203"}
+{"ticket_id": "SYN-09084", "complaint_title": "Sliding door stopper missing", "category": "Carpentary", "issue_type": "Project", "site_name": "SITE_B002", "tower": "T06", "flat": "T06-0806"}
+{"ticket_id": "SYN-09075", "complaint_title": "Main entrance door frame gap visible", "category": "Carpentary", "issue_type": "FM", "site_name": "SITE_C003", "tower": "T05", "flat": "T05-1603"}
+{"ticket_id": "SYN-09066", "complaint_title": "Staircase wall seepage from external face", "category": "Seepage", "issue_type": "Project", "site_name": "SITE_D004", "tower": "T06", "flat": "T06-1905"}
+{"ticket_id": "SYN-09196", "complaint_title": "Lizard infestation in flat", "category": "Pest Control", "issue_type": "FM", "site_name": "SITE_A001", "tower": "T04", "flat": "T04-1105"}
+{"ticket_id": "SYN-09276", "complaint_title": "Mail room lock broken cannot retrieve letters", "category": "Common Area", "issue_type": "FM", "site_name": "SITE_C003", "tower": "T02", "flat": "T02-0406"}
+{"ticket_id": "SYN-09197", "complaint_title": "Rats seen in parking area", "category": "Pest Control", "issue_type": "FM", "site_name": "SITE_C003", "tower": "T01", "flat": "T01-0302"}
+{"ticket_id": "SYN-09055", "complaint_title": "External wall near bathroom consistently wet", "category": "Seepage", "issue_type": "FM", "site_name": "SITE_D004", "tower": "T03", "flat": "T03-1503"}
+{"ticket_id": "SYN-09078", "complaint_title": "Balcony window handle loose", "category": "Carpentary", "issue_type": "Project", "site_name": "SITE_C003", "tower": "T02", "flat": "T02-1505"}
+{"ticket_id": "SYN-09053", "complaint_title": "Water seeping from wall behind kitchen cabinets", "category": "Seepage", "issue_type": "FM", "site_name": "SITE_D004", "tower": "T04", "flat": "T04-0704"}
+{"ticket_id": "SYN-09002", "complaint_title": "Kitchen sink drain choked and not draining", "category": "Plumbing", "issue_type": "Project", "site_name": "SITE_D004", "tower": "T03", "flat": "T03-0902"}
+{"ticket_id": "SYN-09289", "complaint_title": "Utility meter reading access door jammed", "category": "Miscellaneous", "issue_type": "FM", "site_name": "SITE_D004", "tower": "T02", "flat": "T02-1403"}
+{"ticket_id": "SYN-09154", "complaint_title": "AC remote control not responding", "category": "AC Repair", "issue_type": "FM", "site_name": "SITE_D004", "tower": "T02", "flat": "T02-1505"}
+{"ticket_id": "SYN-09102", "complaint_title": "Corridor tile outside flat cracked", "category": "Civil Work", "issue_type": "Project", "site_name": "SITE_D004", "tower": "T06", "flat": "T06-1005"}
+{"ticket_id": "SYN-09057", "complaint_title": "Bedroom external wall damp in monsoon season", "category": "Seepage", "issue_type": "FM", "site_name": "SITE_D004", "tower": "T02", "flat": "T02-0703"}
+{"ticket_id": "SYN-09012", "complaint_title": "Bathroom pipe under sink dripping slowly", "category": "Plumbing", "issue_type": "FM", "site_name": "SITE_C003", "tower": "T03", "flat": "T03-0706"}
+{"ticket_id": "SYN-09079", "complaint_title": "Kitchen cabinet door cannot close", "category": "Carpentary", "issue_type": "Project", "site_name": "SITE_D004", "tower": "T05", "flat": "T05-0101"}
+{"ticket_id": "SYN-09171", "complaint_title": "Lift travel extremely slow", "category": "Lift", "issue_type": "FM", "site_name": "SITE_E005", "tower": "T03", "flat": "T03-0402"}
+{"ticket_id": "SYN-09135", "complaint_title": "Exhaust fan in bathroom not working", "category": "Electrical", "issue_type": "FM", "site_name": "SITE_C003", "tower": "T03", "flat": "T03-1303"}
+{"ticket_id": "SYN-09252", "complaint_title": "Water supply cuts off every afternoon", "category": "Water Supply", "issue_type": "FM", "site_name": "SITE_C003", "tower": "T02", "flat": "T02-0904"}
+{"ticket_id": "SYN-09152", "complaint_title": "AC not cooling bedroom adequately", "category": "AC Repair", "issue_type": "Project", "site_name": "SITE_D004", "tower": "T04", "flat": "T04-1903"}
+{"ticket_id": "SYN-09239", "complaint_title": "Balcony waterproofing deteriorated water ingress", "category": "Waterproofing", "issue_type": "Project", "site_name": "SITE_A001", "tower": "T04", "flat": "T04-1205"}
+{"ticket_id": "SYN-09282", "complaint_title": "Pool pump not working water not circulating", "category": "Swimming Pool", "issue_type": "FM", "site_name": "SITE_A001", "tower": "T06", "flat": "T06-1703"}
+{"ticket_id": "SYN-09275", "complaint_title": "Entrance lobby seating needs repair", "category": "Common Area", "issue_type": "FM", "site_name": "SITE_C003", "tower": "T02", "flat": "T02-0505"}
+{"ticket_id": "SYN-09029", "complaint_title": "Water dripping from bedroom ceiling near AC unit", "category": "Leakage", "issue_type": "FM", "site_name": "SITE_C003", "tower": "T02", "flat": "T02-1805"}
+{"ticket_id": "SYN-09271", "complaint_title": "Clubhouse AC not working during weekend", "category": "Common Area", "issue_type": "FM", "site_name": "SITE_A001", "tower": "T03", "flat": "T03-0802"}
+{"ticket_id": "SYN-09089", "complaint_title": "Crack in living room wall near AC outlet", "category": "Civil Work", "issue_type": "FM", "site_name": "SITE_D004", "tower": "T03", "flat": "T03-0901"}
+{"ticket_id": "SYN-09030", "complaint_title": "Damp ceiling in children room getting worse", "category": "Leakage", "issue_type": "FM", "site_name": "SITE_A001", "tower": "T05", "flat": "T05-1104"}
+{"ticket_id": "SYN-09132", "complaint_title": "MCB tripping repeatedly in flat", "category": "Electrical", "issue_type": "FM", "site_name": "SITE_A001", "tower": "T06", "flat": "T06-1402"}
+{"ticket_id": "SYN-09194", "complaint_title": "Termite infestation in bedroom wardrobe", "category": "Pest Control", "issue_type": "FM", "site_name": "SITE_D004", "tower": "T03", "flat": "T03-1705"}
+{"ticket_id": "SYN-09298", "complaint_title": "Parking bay number faded", "category": "Miscellaneous", "issue_type": "FM", "site_name": "SITE_D004", "tower": "T06", "flat": "T06-0203"}
+{"ticket_id": "SYN-09070", "complaint_title": "Kitchen cabinet door hinge broken", "category": "Carpentary", "issue_type": "FM", "site_name": "SITE_C003", "tower": "T05", "flat": "T05-1701"}
+{"ticket_id": "SYN-09107", "complaint_title": "Balcony tile surface spalling", "category": "Civil Work", "issue_type": "FM", "site_name": "SITE_D004", "tower": "T05", "flat": "T05-2006"}
+{"ticket_id": "SYN-09255", "complaint_title": "Water supply smells bad in mornings", "category": "Water Supply", "issue_type": "FM", "site_name": "SITE_D004", "tower": "T05", "flat": "T05-1201"}
+{"ticket_id": "SYN-09156", "complaint_title": "AC leaking water onto floor", "category": "AC Repair", "issue_type": "FM", "site_name": "SITE_A001", "tower": "T04", "flat": "T04-1102"}
+{"ticket_id": "SYN-09125", "complaint_title": "Exposed rebar visible on staircase soffit", "category": "Civil", "issue_type": "Project", "site_name": "SITE_B002", "tower": "T01", "flat": "T01-1404"}
+{"ticket_id": "SYN-09109", "complaint_title": "Plaster patch repair needed in bathroom", "category": "Mason", "issue_type": "FM", "site_name": "SITE_C003", "tower": "T02", "flat": "T02-0702"}
+{"ticket_id": "SYN-09170", "complaint_title": "Lift button panel not responding", "category": "Lift", "issue_type": "FM", "site_name": "SITE_D004", "tower": "T03", "flat": "T03-1905"}
+{"ticket_id": "SYN-09114", "complaint_title": "Floor tile re-bonding required in living room", "category": "Mason", "issue_type": "Project", "site_name": "SITE_A001", "tower": "T01", "flat": "T01-1402"}
+{"ticket_id": "SYN-09284", "complaint_title": "Pool area tiles cracked near edge", "category": "Swimming Pool", "issue_type": "FM", "site_name": "SITE_D004", "tower": "T04", "flat": "T04-1406"}
+{"ticket_id": "SYN-09042", "complaint_title": "Overhead slab leaking in utility area", "category": "Leakage", "issue_type": "FM", "site_name": "SITE_B002", "tower": "T01", "flat": "T01-0306"}
+{"ticket_id": "SYN-09026", "complaint_title": "Ceiling dripping water in master bedroom", "category": "Leakage", "issue_type": "FM", "site_name": "SITE_C003", "tower": "T05", "flat": "T05-0605"}
+{"ticket_id": "SYN-09266", "complaint_title": "Slight gas odour near kitchen pipeline", "category": "Gas", "issue_type": "FM", "site_name": "SITE_B002", "tower": "T04", "flat": "T04-0404"}
+{"ticket_id": "SYN-09080", "complaint_title": "Bedroom wardrobe door hinge worn out", "category": "Carpentary", "issue_type": "FM", "site_name": "SITE_A001", "tower": "T06", "flat": "T06-0505"}
+{"ticket_id": "SYN-09027", "complaint_title": "Water seeping through roof onto balcony", "category": "Leakage", "issue_type": "FM", "site_name": "SITE_A001", "tower": "T06", "flat": "T06-1006"}
+{"ticket_id": "SYN-09044", "complaint_title": "Lobby area ceiling leaking in monsoon", "category": "Leakage", "issue_type": "Project", "site_name": "SITE_C003", "tower": "T01", "flat": "T01-1702"}
+{"ticket_id": "SYN-09167", "complaint_title": "Lift door not closing properly", "category": "Lift", "issue_type": "FM", "site_name": "SITE_A001", "tower": "T06", "flat": "T06-0703"}
+{"ticket_id": "SYN-09160", "complaint_title": "Living room AC not reaching set temperature", "category": "AC Repair", "issue_type": "FM", "site_name": "SITE_B002", "tower": "T01", "flat": "T01-0806"}
+{"ticket_id": "SYN-09190", "complaint_title": "Bedroom wall water stain marks after repair", "category": "Painting", "issue_type": "Project", "site_name": "SITE_B002", "tower": "T03", "flat": "T03-1906"}
+{"ticket_id": "SYN-09081", "complaint_title": "Main door peephole missing", "category": "Carpentary", "issue_type": "Project", "site_name": "SITE_A001", "tower": "T03", "flat": "T03-1905"}
+{"ticket_id": "SYN-09175", "complaint_title": "Lift cabin light flickering", "category": "Lift", "issue_type": "FM", "site_name": "SITE_C003", "tower": "T06", "flat": "T06-0506"}
+{"ticket_id": "SYN-09233", "complaint_title": "Security camera showing blank screen", "category": "Security", "issue_type": "FM", "site_name": "SITE_C003", "tower": "T01", "flat": "T01-0203"}
+{"ticket_id": "SYN-09215", "complaint_title": "Fire extinguisher seal broken needs replacement", "category": "Safety", "issue_type": "FM", "site_name": "SITE_E005", "tower": "T02", "flat": "T02-1302"}
+{"ticket_id": "SYN-09193", "complaint_title": "Mosquito breeding in common area drain", "category": "Pest Control", "issue_type": "FM", "site_name": "SITE_D004", "tower": "T06", "flat": "T06-1006"}
+{"ticket_id": "SYN-09111", "complaint_title": "Damaged plaster near entrance door needs repair", "category": "Mason", "issue_type": "Project", "site_name": "SITE_E005", "tower": "T01", "flat": "T01-1504"}
+{"ticket_id": "SYN-09272", "complaint_title": "Gym equipment treadmill motor broken", "category": "Common Area", "issue_type": "FM", "site_name": "SITE_E005", "tower": "T02", "flat": "T02-0305"}
+{"ticket_id": "SYN-09047", "complaint_title": "Wall seepage in master bedroom behind wardrobe", "category": "Seepage", "issue_type": "FM", "site_name": "SITE_A001", "tower": "T02", "flat": "T02-0702"}
+{"ticket_id": "SYN-09016", "complaint_title": "Bathroom faucet handle broken", "category": "Plumbing", "issue_type": "Project", "site_name": "SITE_E005", "tower": "T02", "flat": "T02-1101"}
+{"ticket_id": "SYN-09073", "complaint_title": "Bathroom door not latching from inside", "category": "Carpentary", "issue_type": "FM", "site_name": "SITE_E005", "tower": "T02", "flat": "T02-0903"}
+{"ticket_id": "SYN-09036", "complaint_title": "Living room false ceiling wet and sagging", "category": "Leakage", "issue_type": "Project", "site_name": "SITE_E005", "tower": "T05", "flat": "T05-1402"}
+{"ticket_id": "SYN-09206", "complaint_title": "Common terrace area garbage accumulation", "category": "Housekeeping", "issue_type": "FM", "site_name": "SITE_D004", "tower": "T01", "flat": "T01-0705"}
+{"ticket_id": "SYN-09074", "complaint_title": "Window grille loose rattling in wind", "category": "Carpentary", "issue_type": "FM", "site_name": "SITE_E005", "tower": "T02", "flat": "T02-1102"}
+{"ticket_id": "SYN-09296", "complaint_title": "Common area bench broken unsafe to sit", "category": "Miscellaneous", "issue_type": "FM", "site_name": "SITE_E005", "tower": "T05", "flat": "T05-1803"}
+{"ticket_id": "SYN-09004", "complaint_title": "Hot water geyser not heating water", "category": "Plumbing", "issue_type": "FM", "site_name": "SITE_D004", "tower": "T01", "flat": "T01-1203"}
+{"ticket_id": "SYN-09297", "complaint_title": "Door number plate missing", "category": "Miscellaneous", "issue_type": "FM", "site_name": "SITE_A001", "tower": "T04", "flat": "T04-1206"}
+{"ticket_id": "SYN-09174", "complaint_title": "Lift indicator lights not working", "category": "Lift", "issue_type": "FM", "site_name": "SITE_C003", "tower": "T01", "flat": "T01-0205"}
+{"ticket_id": "SYN-09159", "complaint_title": "AC showing error code on display", "category": "AC Repair", "issue_type": "FM", "site_name": "SITE_C003", "tower": "T05", "flat": "T05-0105"}
+{"ticket_id": "SYN-09140", "complaint_title": "Power fluctuations causing lights to flicker", "category": "Electrical", "issue_type": "FM", "site_name": "SITE_A001", "tower": "T05", "flat": "T05-0502"}
+{"ticket_id": "SYN-09093", "complaint_title": "Crack running along balcony ceiling", "category": "Civil Work", "issue_type": "FM", "site_name": "SITE_A001", "tower": "T01", "flat": "T01-2004"}
+{"ticket_id": "SYN-09015", "complaint_title": "Wash basin drainage very slow", "category": "Plumbing", "issue_type": "FM", "site_name": "SITE_D004", "tower": "T04", "flat": "T04-0906"}
+{"ticket_id": "SYN-09137", "complaint_title": "Intercom not working", "category": "Electrical", "issue_type": "FM", "site_name": "SITE_A001", "tower": "T06", "flat": "T06-1801"}
+{"ticket_id": "SYN-09014", "complaint_title": "WC jet spray connector leaking", "category": "Plumbing", "issue_type": "FM", "site_name": "SITE_B002", "tower": "T05", "flat": "T05-0802"}
+{"ticket_id": "SYN-09286", "complaint_title": "Pool overflow channel blocked standing water", "category": "Swimming Pool", "issue_type": "Project", "site_name": "SITE_A001", "tower": "T03", "flat": "T03-2002"}
+{"ticket_id": "SYN-09288", "complaint_title": "Post box lock broken key lost", "category": "Miscellaneous", "issue_type": "FM", "site_name": "SITE_E005", "tower": "T06", "flat": "T06-0704"}
+{"ticket_id": "SYN-09220", "complaint_title": "Basement waterproofing failed water ingress", "category": "Structural", "issue_type": "Project", "site_name": "SITE_B002", "tower": "T05", "flat": "T05-1302"}
+{"ticket_id": "SYN-09116", "complaint_title": "Tile debonding in kitchen floor at multiple places", "category": "Mason", "issue_type": "Project", "site_name": "SITE_A001", "tower": "T05", "flat": "T05-0801"}
+{"ticket_id": "SYN-09143", "complaint_title": "Kitchen counter socket not working", "category": "Electrical", "issue_type": "FM", "site_name": "SITE_B002", "tower": "T05", "flat": "T05-2006"}
+{"ticket_id": "SYN-09059", "complaint_title": "Living room wall seepage during heavy rain", "category": "Seepage", "issue_type": "FM", "site_name": "SITE_E005", "tower": "T01", "flat": "T01-1101"}
+{"ticket_id": "SYN-09189", "complaint_title": "Kitchen wall paint discolouring near sink", "category": "Painting", "issue_type": "FM", "site_name": "SITE_C003", "tower": "T06", "flat": "T06-1501"}
+{"ticket_id": "SYN-09285", "complaint_title": "Pool filtration system making loud noise", "category": "Swimming Pool", "issue_type": "FM", "site_name": "SITE_A001", "tower": "T04", "flat": "T04-1501"}
+{"ticket_id": "SYN-09180", "complaint_title": "Bedroom wall paint chipping near window", "category": "Painting", "issue_type": "FM", "site_name": "SITE_E005", "tower": "T05", "flat": "T05-2002"}
+{"ticket_id": "SYN-09056", "complaint_title": "Mushroom growth on wall due to persistent dampness", "category": "Seepage", "issue_type": "FM", "site_name": "SITE_D004", "tower": "T06", "flat": "T06-1806"}
+{"ticket_id": "SYN-09115", "complaint_title": "Plaster crack near window sill needs filling", "category": "Mason", "issue_type": "FM", "site_name": "SITE_B002", "tower": "T06", "flat": "T06-1704"}
+{"ticket_id": "SYN-09247", "complaint_title": "Expansion joint waterproofing failed between blocks", "category": "Waterproofing", "issue_type": "Project", "site_name": "SITE_B002", "tower": "T05", "flat": "T05-1202"}

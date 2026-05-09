@@ -1,0 +1,17 @@
+# ARIA evaluation configuration
+# Used by: scripts/run_eval.py
+# Mirrors the --paper-mode settings from eval/run_paper_eval.py
+
+model:
+  tier2: groq/llama-3.3-70b-versatile
+  hypotheses: groq/llama-3.3-70b-versatile
+  pattern_interpreter: groq/llama-3.3-70b-versatile
+  arbiter: anthropic/claude-haiku-4-5-20251001
+  judge: groq/llama-3.1-8b-instant
+
+cost_matrix:
+  project_misrouted_as_fm: 10   # High-cost error weight (paper §2)
+  fm_misrouted_as_project: 1    # Low-cost error weight
+
+bootstrap_samples: 1000
+random_seed: 42

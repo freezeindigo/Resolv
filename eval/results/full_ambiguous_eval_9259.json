@@ -1,0 +1,36 @@
+{
+  "sample_size": 9259,
+  "aria": {
+    "overall_accuracy": 60.0,
+    "project_accuracy": 35.76,
+    "fm_accuracy": 75.45,
+    "high_cost_errors": 2316,
+    "low_cost_errors": 1388,
+    "raw_expected_cost": 24548,
+    "tier_distribution": {
+      "2": 309,
+      "3": 159,
+      "1": 32,
+      "2": 5294,
+      "1": 601,
+      "3": 2864
+    },
+    "total_tokens": 25923451
+  },
+  "gpt4o": {
+    "overall_accuracy": 61.08,
+    "project_accuracy": 13.2,
+    "fm_accuracy": 91.6,
+    "raw_expected_cost": 31765
+  },
+  "cost_reduction": {
+    "point_estimate_pct": 22.72,
+    "bootstrap_ci": {
+      "point_estimate": 22.72,
+      "ci_95_lo": 20.61,
+      "ci_95_hi": 24.71,
+      "n_boot": 1000,
+      "n_paired": 9259
+    }
+  }
+}

@@ -1,0 +1,44 @@
+# Asymmetric cost model used in ARIA paper (CIKM '26)
+#
+# Binary routing task: FM (Facility Management) vs Project (developer / DLP)
+#
+# Asymmetry rationale:
+#   - Missing a Project complaint (routing to FM) delays developer-warranty work,
+#     potentially voids DLP coverage, and causes structural damage to compound.
+#     Real-world cost: ₹5,000–50,000 per incident + tenant escalation risk.
+#   - False Project alarm (routing FM complaint to Project) causes minor delay;
+#     complaint is re-routed on next review. Real-world cost: ~1 working day.
+#
+# 4.3× outcome asymmetry observed empirically:
+#   - Project complaints: median resolution 71 days
+#   - FM complaints: median resolution 10 days
+#   (See eval/resolution_time_validation.py and paper §6)
+
+routing_cost_matrix:
+  project_misrouted_as_fm:
+    cost: 10
+    label: "High-cost error"
+    description: >
+      CRM label = Project, ARIA prediction = FM.
+      Developer-warranty or DLP defect routed to FM team — FM cannot resolve,
+      complaint bounces back with delay and potential warranty void.
+  fm_misrouted_as_project:
+    cost: 1
+    label: "Low-cost error"
+    description: >
+      CRM label = FM, ARIA prediction = Project.
+      Routine maintenance routed to Project team — minor delay, re-routed on review.
+
+# Stress-test ratios used in cost sensitivity analysis (paper §5, Figure)
+# Each ratio replaces the 10:1 baseline with ratio:1
+cost_sensitivity_ratios: [1, 2, 3, 5, 7, 10, 15, 20, 30, 50]
+
+# Within-domain hypothesis weights (used by arbiter in Tier 3)
+# These are separate from the binary routing cost above.
+# See src/config/hypothesis_library.yaml for per-hypothesis cost_of_error_weight values.
+# Examples: structural_seepage=10, safety_hazard=20, fire_system=50
+hypothesis_cost_note: >
+  Hypothesis-level cost weights encode the cost of missing a specific failure mode
+  within a domain (e.g., sending a plumber for structural seepage = 10× worse than
+  the reverse). These are used by the arbiter to rank hypotheses, not to compute
+  the binary FM/Project routing cost reported in the paper.

@@ -1,0 +1,59 @@
+{
+  "verdict": "PARTIAL: ARIA's dismissed Project calls age shorter than uncontested Project (26.0d vs 31.0d).",
+  "groups": {
+    "aria_proj_crm_fm": {
+      "n": 1388,
+      "mean": 9.2,
+      "median": 0.0,
+      "p75": 3.0,
+      "p90": 24.0,
+      "pct_over_7d": 17.8,
+      "pct_over_30d": 7.3,
+      "pct_over_60d": 3.5
+    },
+    "aria_fm_crm_proj": {
+      "n": 2316,
+      "mean": 64.6,
+      "median": 26.0,
+      "p75": 94.2,
+      "p90": 195.0,
+      "pct_over_7d": 67.1,
+      "pct_over_30d": 46.6,
+      "pct_over_60d": 33.9
+    },
+    "both_fm": {
+      "n": 4266,
+      "mean": 7.5,
+      "median": 0.0,
+      "p75": 1.0,
+      "p90": 12.0,
+      "pct_over_7d": 12.0,
+      "pct_over_30d": 5.5,
+      "pct_over_60d": 3.0
+    },
+    "both_proj": {
+      "n": 1289,
+      "mean": 79.5,
+      "median": 31.0,
+      "p75": 114.0,
+      "p90": 230.6,
+      "pct_over_7d": 70.1,
+      "pct_over_30d": 50.7,
+      "pct_over_60d": 36.6
+    }
+  },
+  "within_fm_pool": {
+    "uncontested_fm_median_days": 0.0,
+    "aria_contested_median_days": 0.0,
+    "aria_contested_pct_over_30d": 7.3,
+    "uncontested_pct_over_30d": 5.5,
+    "aria_flags_age_longer": false
+  },
+  "within_project_pool": {
+    "uncontested_proj_median_days": 31.0,
+    "aria_dismissed_median_days": 26.0,
+    "aria_dismissed_pct_over_30d": 46.6,
+    "uncontested_pct_over_30d": 50.7,
+    "aria_dismissals_age_shorter": true
+  }
+}

@@ -1,0 +1,22 @@
+{
+  "dataset": "NYC 311 Service Requests (2022-2024)",
+  "routing_analog": {
+    "FM": "HPD (routine maintenance)",
+    "Project": "DOB (structural/construction defects)"
+  },
+  "sample_size": 300,
+  "accuracy_trap": {
+    "system": "GPT-4o (text-only)",
+    "hpd_acc": 47.3,
+    "dob_acc": 97.3,
+    "asymmetry_ratio": 0.5,
+    "hc_300": 4.0
+  },
+  "cost_trap": {
+    "system": "GPT-4o (cost-prompt)",
+    "hpd_acc": 18.0,
+    "dob_acc": 97.3,
+    "lc_300": 123.0
+  },
+  "outcome_proxy_n": 140
+}

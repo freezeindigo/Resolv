@@ -1,0 +1,35 @@
+{
+  "domain": "CFPB",
+  "n_per_class": 500,
+  "high_cost_class": "Mortgage",
+  "low_cost_class": "General",
+  "text_only": {
+    "n": 1000,
+    "overall_acc": 98.5,
+    "mortgage_acc": 97.2,
+    "general_acc": 99.8,
+    "hc_errors": 14,
+    "lc_errors": 1,
+    "hc_300": 4.2,
+    "lc_300": 0.3,
+    "wtd_300": 42.3,
+    "cost_reduction_pct": null,
+    "parse_failures": 0
+  },
+  "cost_prompt": {
+    "n": 1000,
+    "overall_acc": 98.6,
+    "mortgage_acc": 97.6,
+    "general_acc": 99.6,
+    "hc_errors": 12,
+    "lc_errors": 2,
+    "hc_300": 3.6,
+    "lc_300": 0.6,
+    "wtd_300": 36.6,
+    "cost_reduction_pct": 13.5,
+    "parse_failures": 0
+  },
+  "accuracy_trap_reproduced": false,
+  "cost_trap_reproduced": false,
+  "both_traps_reproduced": false
+}

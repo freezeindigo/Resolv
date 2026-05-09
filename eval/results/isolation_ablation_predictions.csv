@@ -1,0 +1,901 @@
+ticket_id,condition,tier_used,label,confidence,tokens
+3732-11125,aria_full,2,FM,high,1715
+3903-11303,aria_full,2,FM,high,1310
+3786-10181,aria_full,3,FM,high,1816
+3903-10915,aria_full,2,FM,high,1269
+3858-11434,aria_full,3,Project,medium,4722
+3858-13081,aria_full,3,Project,medium,3979
+3853-11001,aria_full,2,FM,high,2387
+GN- 2086,aria_full,2,FM,high,2217
+3732-10854,aria_full,2,FM,high,1747
+3858-14035,aria_full,2,FM,high,1916
+3869-10415,aria_full,2,FM,high,2051
+3853-10693,aria_full,3,Project,high,8928
+3869-10378,aria_full,2,FM,high,1604
+3858-11798,aria_full,3,Project,medium,5566
+3869-10878,aria_full,3,Project,medium,5075
+3907-10256,aria_full,3,Project,medium,5245
+GN- 285,aria_full,2,FM,high,2020
+3903-10328,aria_full,2,FM,high,1412
+3907-10118,aria_full,2,FM,high,1721
+3907-10266,aria_full,2,FM,high,1734
+GN- 2291,aria_full,2,FM,high,2106
+3858-12698,aria_full,3,Project,high,6300
+GN- 2399,aria_full,3,Project,medium,5592
+GN- 567,aria_full,1,FM,high,0
+3853-10826,aria_full,2,FM,high,2304
+3869-10269,aria_full,2,FM,high,1482
+3853-10501,aria_full,2,FM,high,1815
+3822-10922,aria_full,2,FM,high,1264
+3858-13226,aria_full,2,FM,high,1791
+GN- 2308,aria_full,2,FM,high,2021
+3869-10759,aria_full,2,FM,high,1622
+3853-10765,aria_full,3,Project,high,4709
+GN- 137,aria_full,2,FM,high,2328
+GPM278,aria_full,3,Project,medium,4753
+GN- 2396,aria_full,3,Project,medium,5581
+3903-11113,aria_full,2,FM,high,1198
+3903-10139,aria_full,2,FM,high,1137
+3907-10134,aria_full,1,FM,high,0
+3853-10723,aria_full,3,Project,high,6303
+GN- 235,aria_full,1,FM,high,0
+3822-12045,aria_full,2,FM,high,2035
+GPM74,aria_full,3,Project,medium,4601
+GN- 2034,aria_full,2,FM,high,2128
+3907-10385,aria_full,2,FM,high,1768
+3907-10238,aria_full,3,Project,medium,5172
+3907-10219,aria_full,3,Project,medium,5267
+3858-11377,aria_full,2,FM,high,1685
+3869-11185,aria_full,3,Project,medium,5404
+3858-14575,aria_full,2,FM,high,2185
+GN- 1937,aria_full,2,FM,high,1830
+GN- 470,aria_full,3,Project,medium,5600
+GN- 2029,aria_full,2,FM,high,2054
+3858-11944,aria_full,3,Project,medium,6742
+3858-14459,aria_full,2,FM,high,1877
+3903-10910,aria_full,2,FM,high,1281
+3858-11004,aria_full,3,Project,medium,4464
+GN- 1680,aria_full,1,FM,high,0
+GN- 380,aria_full,3,Project,medium,5556
+GN- 849,aria_full,1,FM,high,0
+3858-10914,aria_full,3,Project,high,5437
+3853-10626,aria_full,2,FM,high,2043
+3869-11028,aria_full,2,FM,high,1907
+3858-13037,aria_full,3,Project,medium,5285
+3903-10090,aria_full,2,FM,high,1303
+3858-13095,aria_full,3,Project,medium,6142
+3858-13230,aria_full,2,FM,high,2414
+GPM293,aria_full,1,FM,high,0
+GN- 2416,aria_full,2,FM,medium,1974
+3907-10190,aria_full,3,Project,medium,5133
+GN-3270,aria_full,2,FM,high,2338
+3853-10427,aria_full,2,FM,high,2201
+3858-10331,aria_full,1,FM,high,0
+3822-12454,aria_full,2,FM,high,1636
+3822-12226,aria_full,3,Project,medium,4416
+3866-10964,aria_full,3,Project,medium,4713
+GGV0784,aria_full,3,FM,medium,3846
+3853-10033,aria_full,3,Project,high,6204
+3903-10652,aria_full,2,FM,high,1189
+3858-10595,aria_full,3,Project,medium,4516
+GN- 1022,aria_full,2,FM,high,2161
+3858-13251,aria_full,2,FM,high,1829
+GN- 340,aria_full,3,Project,medium,5751
+3858-14685,aria_full,2,FM,high,2066
+3858-12646,aria_full,2,FM,high,1379
+3907-10192,aria_full,2,FM,high,1588
+3853-11102,aria_full,2,FM,high,2468
+3903-10966,aria_full,3,Project,high,3883
+3732-10782,aria_full,3,Project,medium,5212
+3907-10125,aria_full,2,FM,high,1716
+3732-10596,aria_full,2,FM,high,1683
+GN- 1074,aria_full,1,FM,high,0
+GGV1586,aria_full,2,FM,high,1333
+GN- 737,aria_full,2,FM,high,2088
+GN- 491,aria_full,2,FM,high,2090
+GPM264,aria_full,2,FM,high,1644
+3786-10666,aria_full,2,FM,high,930
+3866-10994,aria_full,2,FM,high,1750
+3869-10400,aria_full,3,Project,medium,5307
+3732-11048,aria_full,3,FM,high,6944
+3853-10978,aria_full,2,FM,high,1524
+GPG163,aria_full,2,FM,high,1650
+GPM415,aria_full,3,Project,high,4573
+3907-10564,aria_full,3,Project,medium,4817
+7628,aria_full,2,FM,high,1252
+GN- 477,aria_full,2,FM,high,1707
+GN- 246,aria_full,1,FM,high,0
+3907-10094,aria_full,2,FM,high,1726
+3866-11290,aria_full,3,Project,medium,7411
+3869-11322,aria_full,2,FM,high,1843
+3786-10799,aria_full,2,FM,high,1236
+3869-10307,aria_full,2,FM,high,1363
+GPM52,aria_full,2,FM,high,1639
+3869-10780,aria_full,2,FM,high,1660
+3903-10246,aria_full,2,FM,high,1133
+3869-10365,aria_full,2,FM,high,1395
+3858-11763,aria_full,2,FM,high,2198
+3866-11285,aria_full,2,FM,high,1689
+3869-10060,aria_full,3,Project,medium,5675
+3907-10044,aria_full,2,FM,medium,1531
+3858-14565,aria_full,3,Project,medium,5491
+3869-10778,aria_full,2,FM,high,1694
+3866-10520,aria_full,2,FM,high,1596
+GPM02,aria_full,2,FM,high,1586
+3732-10336,aria_full,3,Project,medium,5180
+3719-11315,aria_full,3,Project,medium,4599
+3632-49944,aria_full,3,Project,high,4914
+3869-10958,aria_full,3,FM,high,1927
+3858-13297,aria_full,3,Project,high,5575
+GN- 1317,aria_full,2,FM,high,2068
+3853-10384,aria_full,2,FM,high,1941
+3858-14229,aria_full,3,FM,high,6051
+3858-11863,aria_full,2,FM,high,2054
+3907-10378,aria_full,2,FM,high,1709
+GN-3337,aria_full,2,FM,high,1566
+GN- 1419,aria_full,2,FM,high,2103
+3853-10006,aria_full,2,FM,high,2070
+GN- 1732,aria_full,3,Project,medium,5078
+3858-13408,aria_full,3,FM,medium,5487
+3853-11244,aria_full,2,FM,high,2321
+3866-10692,aria_full,3,Project,medium,5125
+GGV0018,aria_full,3,Project,medium,4142
+3858-11930,aria_full,2,FM,high,1941
+GN- 618,aria_full,2,FM,high,1994
+3866-11216,aria_full,2,FM,high,1555
+GN- 383,aria_full,3,Project,medium,5582
+3858-11032,aria_full,2,FM,high,2370
+GPM05,aria_full,2,FM,high,1411
+3866-10869,aria_full,3,Project,medium,4856
+3858-11760,aria_full,2,Project,high,2178
+GN- 143,aria_full,2,FM,high,2192
+3866-11265,aria_full,3,FM,high,4335
+3732-10316,aria_full,3,Project,medium,5188
+GPM66,aria_full,3,Project,medium,4677
+3866-10744,aria_full,3,Project,high,4638
+3869-11346,aria_full,2,FM,high,1467
+3858-10940,aria_full,2,FM,high,2121
+GN- 892,aria_full,2,FM,high,2030
+3853-11021,aria_full,2,FM,high,2305
+GN- 371,aria_full,2,FM,high,1947
+3853-10757,aria_full,2,FM,high,2384
+3858-11919,aria_full,2,FM,high,2110
+3858-13870,aria_full,2,FM,high,2105
+3869-10611,aria_full,2,FM,high,1496
+3732-11258,aria_full,2,FM,medium,957
+3853-10581,aria_full,2,FM,high,2284
+3907-10403,aria_full,3,Project,medium,5287
+3866-10861,aria_full,1,FM,high,0
+3907-10368,aria_full,2,FM,high,1806
+3858-12469,aria_full,3,Project,medium,5332
+3853-11467,aria_full,3,Project,medium,4509
+GN- 200,aria_full,1,FM,high,0
+3866-10968,aria_full,3,Project,medium,5182
+3858-11092,aria_full,3,Project,medium,6083
+3853-10737,aria_full,2,FM,high,1834
+3858-14466,aria_full,2,FM,high,1953
+GN- 2270,aria_full,3,Project,medium,5575
+3858-13360,aria_full,3,Project,medium,5577
+3858-13734,aria_full,3,FM,medium,5293
+GN- 816,aria_full,1,FM,high,0
+3858-11999,aria_full,2,FM,high,2028
+3858-14174,aria_full,3,Project,low,4571
+3858-11101,aria_full,2,FM,high,1774
+3853-10805,aria_full,2,FM,high,2154
+3907-10021,aria_full,2,FM,high,1764
+3858-14254,aria_full,2,FM,high,1833
+12322,aria_full,2,FM,high,1341
+3858-12498,aria_full,3,Project,medium,5052
+3853-10504,aria_full,3,Project,medium,5279
+3786-10887,aria_full,3,Project,medium,3959
+3907-10352,aria_full,2,FM,high,1234
+GPG26,aria_full,2,FM,high,1612
+3858-10395,aria_full,2,FM,high,1143
+3869-10639,aria_full,3,Project,high,4788
+3858-13787,aria_full,2,FM,high,2116
+GN- 929,aria_full,2,FM,high,1989
+3853-11359,aria_full,2,FM,high,2131
+3858-12829,aria_full,3,FM,medium,1577
+3858-12984,aria_full,2,FM,high,2205
+3869-11298,aria_full,2,Project,high,1643
+3869-10142,aria_full,3,FM,high,6867
+3903-10680,aria_full,2,FM,high,1313
+GN- 1799,aria_full,3,Project,medium,4608
+3822-11863,aria_full,3,Project,medium,4490
+3858-13558,aria_full,2,FM,high,1853
+3732-11116,aria_full,3,Project,medium,5203
+10905,aria_full,2,FM,high,1128
+GN- 656,aria_full,2,FM,medium,908
+3822-10077,aria_full,3,Project,high,7527
+3866-10701,aria_full,3,Project,medium,5125
+3869-10345,aria_full,3,FM,medium,8076
+GPG227,aria_full,2,FM,high,1533
+GN-3308,aria_full,2,FM,high,1955
+GN- 593,aria_full,2,FM,high,2021
+3858-10056,aria_full,2,FM,high,1844
+3858-10648,aria_full,2,FM,high,1498
+3903-10562,aria_full,2,FM,high,1292
+3822-10031,aria_full,2,FM,high,1210
+3853-11275,aria_full,3,Project,medium,5784
+GN- 460,aria_full,1,FM,high,0
+3786-10769,aria_full,2,FM,high,1150
+GN- 1830,aria_full,2,FM,high,1970
+3732-10520,aria_full,3,Project,medium,5155
+3858-12044,aria_full,2,FM,high,1360
+GN- 1514,aria_full,2,FM,high,2096
+3732-10690,aria_full,3,Project,medium,5223
+3732-10254,aria_full,3,Project,medium,5204
+3858-12631,aria_full,3,FM,high,1521
+GN- 443,aria_full,3,Project,high,5448
+3866-10258,aria_full,2,FM,high,1679
+3869-10623,aria_full,1,FM,high,0
+3858-13239,aria_full,2,FM,high,1329
+3719-11588,aria_full,3,Project,high,4761
+3858-10470,aria_full,3,Project,medium,4380
+GN- 580,aria_full,2,FM,high,1849
+GN- 1940,aria_full,2,FM,high,2010
+3869-11248,aria_full,2,FM,high,1211
+3732-10024,aria_full,3,Project,medium,5249
+3869-10817,aria_full,2,FM,high,1961
+GN- 795,aria_full,1,FM,high,0
+3866-10543,aria_full,2,FM,high,1666
+238,aria_full,2,FM,high,1242
+3858-14040,aria_full,2,FM,high,1847
+3866-10947,aria_full,2,FM,high,1693
+GN- 877,aria_full,2,FM,medium,1699
+3858-12209,aria_full,3,Project,medium,5575
+3853-10567,aria_full,2,FM,high,2105
+3858-13552,aria_full,2,FM,high,1965
+GN- 192,aria_full,2,FM,high,2325
+GPG100,aria_full,3,Project,high,4371
+3858-11269,aria_full,2,FM,high,1915
+3632-41001,aria_full,3,FM,high,4362
+GN-3307,aria_full,2,FM,high,2352
+3858-13673,aria_full,3,FM,medium,4083
+3858-11814,aria_full,3,Project,medium,5933
+3822-10697,aria_full,3,FM,high,1614
+3822-12189,aria_full,3,Project,medium,4632
+3822-12694,aria_full,1,FM,high,0
+3732-10328,aria_full,2,FM,medium,1512
+3858-10383,aria_full,2,FM,high,1808
+3866-10501,aria_full,3,Project,medium,5086
+12490,aria_full,2,Project,high,1228
+3858-12781,aria_full,3,Project,medium,7257
+GN- 521,aria_full,2,FM,high,1880
+3869-10061,aria_full,2,FM,high,1862
+3858-11184,aria_full,2,FM,high,2124
+GN- 398,aria_full,2,FM,high,1896
+GN- 269,aria_full,2,FM,high,2267
+GPM125,aria_full,2,FM,high,1682
+3732-10899,aria_full,3,Project,medium,5215
+3858-11906,aria_full,3,Project,medium,4510
+GN- 1422,aria_full,2,FM,high,2085
+GN- 772,aria_full,2,Project,high,2065
+GPM413,aria_full,2,FM,high,1850
+3853-10798,aria_full,2,FM,high,2503
+3869-10928,aria_full,3,FM,high,5611
+3858-11239,aria_full,3,FM,high,4618
+GGV1128,aria_full,1,FM,high,0
+3632-52516,aria_full,2,Project,high,1456
+3866-10834,aria_full,1,FM,high,0
+3866-10282,aria_full,2,FM,high,1683
+3858-13383,aria_full,2,FM,high,2073
+3866-10181,aria_full,2,FM,high,1661
+3858-10748,aria_full,2,FM,high,1510
+3858-11098,aria_full,3,Project,medium,5416
+3822-10773,aria_full,2,FM,high,1866
+3858-10480,aria_full,2,FM,high,1721
+3853-11186,aria_full,3,Project,medium,5763
+3822-11888,aria_full,3,Project,medium,4876
+GPM331,aria_full,3,Project,medium,4370
+3903-11301,aria_full,1,FM,high,0
+3858-14587,aria_full,2,FM,high,2027
+GPM396,aria_full,2,FM,high,1567
+3822-11648,aria_full,2,FM,high,1589
+3869-11069,aria_full,2,FM,high,1247
+3853-11422,aria_full,2,FM,high,1670
+GN- 2051,aria_full,3,Project,medium,5745
+3858-13635,aria_full,3,Project,high,5612
+3853-11311,aria_full,3,Project,medium,5785
+3869-10275,aria_full,3,Project,medium,5209
+3869-10728,aria_full,3,Project,high,4756
+3903-11303,aria_pooled,2,FM,high,1312
+3732-11125,aria_pooled,2,FM,high,1715
+3786-10181,aria_pooled,,FM,error,0
+3903-10915,aria_pooled,2,FM,high,1240
+3853-11001,aria_pooled,2,FM,high,2389
+3858-13081,aria_pooled,3,Project,high,4036
+GN- 2086,aria_pooled,2,FM,high,2132
+3858-11434,aria_pooled,3,Project,high,4670
+3858-14035,aria_pooled,2,FM,high,1916
+3732-10854,aria_pooled,2,FM,high,1743
+3869-10415,aria_pooled,2,FM,high,2006
+3858-11798,aria_pooled,3,Project,medium,6014
+3869-10378,aria_pooled,2,FM,high,1604
+3853-10693,aria_pooled,3,Project,high,9574
+3907-10256,aria_pooled,3,Project,medium,5245
+GN- 285,aria_pooled,2,FM,high,2020
+3858-12698,aria_pooled,3,Project,high,6443
+3903-10328,aria_pooled,2,FM,high,1412
+3869-10878,aria_pooled,3,Project,high,5551
+3907-10118,aria_pooled,2,FM,high,1721
+3907-10266,aria_pooled,2,FM,medium,1700
+GN- 2291,aria_pooled,2,FM,high,2106
+3853-10826,aria_pooled,2,FM,high,2322
+GN- 567,aria_pooled,1,FM,high,0
+3869-10269,aria_pooled,2,FM,high,1482
+GN- 2399,aria_pooled,3,Project,high,6181
+3853-10501,aria_pooled,2,FM,high,1770
+3858-13226,aria_pooled,2,FM,high,1791
+3822-10922,aria_pooled,2,FM,high,1252
+GN- 2308,aria_pooled,2,FM,high,2067
+3869-10759,aria_pooled,2,FM,high,1623
+GN- 137,aria_pooled,2,FM,high,2328
+3853-10765,aria_pooled,3,Project,high,4815
+GPM278,aria_pooled,3,Project,medium,5062
+GN- 2396,aria_pooled,3,Project,medium,6051
+3903-11113,aria_pooled,2,FM,high,1198
+3903-10139,aria_pooled,2,FM,high,1131
+3907-10134,aria_pooled,1,FM,high,0
+GPM74,aria_pooled,3,Project,medium,4790
+GN- 235,aria_pooled,1,FM,high,0
+3822-12045,aria_pooled,2,FM,medium,2022
+3853-10723,aria_pooled,3,Project,high,7103
+3907-10238,aria_pooled,3,Project,high,5337
+GN- 2034,aria_pooled,2,FM,high,2128
+3907-10385,aria_pooled,2,FM,high,1768
+3907-10219,aria_pooled,3,Project,medium,5237
+GN- 470,aria_pooled,3,Project,medium,5878
+3869-11185,aria_pooled,3,Project,medium,5483
+3858-11377,aria_pooled,2,FM,high,1685
+GN- 1937,aria_pooled,2,FM,high,1795
+3858-14575,aria_pooled,2,FM,high,2185
+3858-11944,aria_pooled,3,Project,medium,7056
+GN- 2029,aria_pooled,2,FM,high,2029
+3858-14459,aria_pooled,2,FM,high,1907
+3903-10910,aria_pooled,2,FM,high,1281
+3858-11004,aria_pooled,3,Project,medium,4950
+GN- 1680,aria_pooled,1,FM,high,0
+GN- 380,aria_pooled,3,Project,medium,5889
+GN- 849,aria_pooled,1,FM,high,0
+3858-10914,aria_pooled,3,Project,high,5626
+3853-10626,aria_pooled,2,FM,high,2046
+3869-11028,aria_pooled,2,FM,high,1955
+3858-13037,aria_pooled,3,Project,medium,5889
+3903-10090,aria_pooled,2,FM,high,1292
+3907-10190,aria_pooled,3,Project,medium,5170
+3858-13230,aria_pooled,2,FM,high,2414
+GPM293,aria_pooled,1,FM,high,0
+3858-13095,aria_pooled,3,Project,medium,6756
+GN- 2416,aria_pooled,2,FM,medium,1932
+GN-3270,aria_pooled,2,FM,high,2338
+3853-10427,aria_pooled,2,FM,high,2202
+3858-10331,aria_pooled,1,FM,high,0
+3822-12226,aria_pooled,3,Project,high,4676
+3822-12454,aria_pooled,2,FM,high,1610
+3866-10964,aria_pooled,3,Project,high,4931
+GGV0784,aria_pooled,3,FM,high,3891
+3853-10033,aria_pooled,3,Project,high,6597
+3903-10652,aria_pooled,2,FM,high,1163
+GN- 340,aria_pooled,3,Project,medium,6092
+3858-10595,aria_pooled,3,Project,high,5121
+GN- 1022,aria_pooled,2,FM,high,2157
+3858-14685,aria_pooled,2,FM,high,2066
+3858-13251,aria_pooled,2,FM,high,1828
+3858-12646,aria_pooled,2,FM,high,1407
+3907-10192,aria_pooled,2,FM,high,1586
+3853-11102,aria_pooled,2,FM,high,2470
+3732-10782,aria_pooled,3,Project,medium,5161
+3903-10966,aria_pooled,3,Project,high,3877
+3907-10125,aria_pooled,2,FM,high,1729
+GN- 1074,aria_pooled,1,FM,high,0
+3732-10596,aria_pooled,2,FM,high,1683
+GN- 737,aria_pooled,2,FM,high,2088
+GGV1586,aria_pooled,2,FM,high,1333
+GN- 491,aria_pooled,2,FM,high,2090
+GPM264,aria_pooled,2,FM,high,1688
+3786-10666,aria_pooled,2,FM,high,930
+3866-10994,aria_pooled,2,FM,high,1746
+3732-11048,aria_pooled,3,FM,high,7262
+3869-10400,aria_pooled,3,Project,medium,5397
+3853-10978,aria_pooled,2,FM,high,1522
+GPG163,aria_pooled,2,FM,high,1633
+3907-10564,aria_pooled,3,Project,medium,5004
+7628,aria_pooled,2,FM,high,1252
+GPM415,aria_pooled,3,Project,high,4653
+GN- 477,aria_pooled,2,FM,high,1707
+GN- 246,aria_pooled,1,FM,high,0
+3907-10094,aria_pooled,2,FM,high,1746
+3866-11290,aria_pooled,3,Project,medium,7533
+3786-10799,aria_pooled,2,FM,high,1196
+3869-11322,aria_pooled,2,FM,high,1843
+3869-10060,aria_pooled,3,Project,medium,5741
+3869-10307,aria_pooled,2,FM,high,1363
+GPM52,aria_pooled,2,FM,high,1555
+3903-10246,aria_pooled,2,FM,high,1133
+3869-10780,aria_pooled,2,FM,high,1661
+3869-10365,aria_pooled,2,FM,high,1393
+3858-11763,aria_pooled,2,FM,high,2194
+3866-11285,aria_pooled,2,FM,high,1682
+3907-10044,aria_pooled,2,FM,medium,1551
+3858-14565,aria_pooled,3,Project,medium,5799
+3869-10778,aria_pooled,2,FM,high,1698
+3866-10520,aria_pooled,2,FM,high,1650
+3719-11315,aria_pooled,3,Project,medium,4620
+3732-10336,aria_pooled,3,Project,medium,5199
+GPM02,aria_pooled,2,FM,high,1586
+3632-49944,aria_pooled,3,Project,medium,4854
+3869-10958,aria_pooled,3,FM,high,1949
+3858-13297,aria_pooled,3,Project,high,5709
+GN- 1317,aria_pooled,2,FM,high,2070
+3858-14229,aria_pooled,3,FM,medium,10191
+3853-10384,aria_pooled,2,FM,high,1933
+3858-11863,aria_pooled,2,FM,high,2054
+3907-10378,aria_pooled,2,FM,high,1709
+GN-3337,aria_pooled,2,FM,high,1566
+GN- 1732,aria_pooled,3,Project,medium,5504
+GN- 1419,aria_pooled,2,FM,high,2101
+3853-10006,aria_pooled,2,FM,high,2062
+3858-13408,aria_pooled,3,FM,medium,6240
+3853-11244,aria_pooled,2,FM,high,2328
+GGV0018,aria_pooled,3,Project,medium,4053
+3858-11930,aria_pooled,2,FM,high,1901
+3866-10692,aria_pooled,3,Project,medium,5159
+3866-11216,aria_pooled,2,FM,high,1555
+GN- 383,aria_pooled,3,Project,medium,5972
+GN- 618,aria_pooled,2,FM,high,1994
+3858-11032,aria_pooled,2,FM,high,2391
+3866-10869,aria_pooled,3,Project,medium,5461
+GPM05,aria_pooled,2,FM,high,1413
+3858-11760,aria_pooled,2,FM,medium,2194
+GN- 143,aria_pooled,2,FM,high,2167
+3866-11265,aria_pooled,3,FM,high,5007
+3732-10316,aria_pooled,3,Project,medium,5231
+3858-10940,aria_pooled,2,FM,high,2121
+3869-11346,aria_pooled,2,FM,high,1473
+GN- 892,aria_pooled,2,FM,high,2030
+3853-11021,aria_pooled,2,FM,high,2308
+GPM66,aria_pooled,3,Project,medium,4967
+GN- 371,aria_pooled,2,FM,high,1947
+3853-10757,aria_pooled,2,FM,high,2381
+3866-10744,aria_pooled,3,Project,high,4652
+3858-13870,aria_pooled,2,FM,high,2107
+3858-11919,aria_pooled,2,FM,high,2110
+3869-10611,aria_pooled,2,FM,high,1496
+3907-10403,aria_pooled,3,Project,medium,5334
+3732-11258,aria_pooled,2,FM,medium,957
+3853-10581,aria_pooled,2,FM,high,2284
+3866-10861,aria_pooled,1,FM,high,0
+3907-10368,aria_pooled,2,FM,high,1806
+3858-11092,aria_pooled,3,Project,high,6513
+3853-10737,aria_pooled,2,FM,high,1834
+GN- 200,aria_pooled,1,FM,high,0
+3858-12469,aria_pooled,3,Project,medium,5766
+3853-11467,aria_pooled,3,Project,medium,4780
+3858-14466,aria_pooled,2,FM,high,1953
+3866-10968,aria_pooled,3,Project,medium,5246
+3858-13734,aria_pooled,3,FM,medium,5547
+GN- 2270,aria_pooled,3,Project,medium,5873
+3858-11999,aria_pooled,2,FM,high,2057
+GN- 816,aria_pooled,1,FM,high,0
+3858-14174,aria_pooled,3,Project,medium,4574
+3858-11101,aria_pooled,2,FM,high,1807
+3853-10805,aria_pooled,2,FM,high,2154
+3907-10021,aria_pooled,2,FM,high,1764
+3858-13360,aria_pooled,3,Project,high,6292
+3858-14254,aria_pooled,2,FM,high,1807
+12322,aria_pooled,2,FM,high,1384
+3786-10887,aria_pooled,3,Project,medium,3904
+3907-10352,aria_pooled,2,FM,high,1240
+3853-10504,aria_pooled,3,Project,medium,5767
+GPG26,aria_pooled,2,FM,high,1614
+3869-10639,aria_pooled,3,Project,high,4722
+3858-12498,aria_pooled,3,Project,medium,6004
+GN- 929,aria_pooled,2,FM,high,1989
+3858-10395,aria_pooled,2,FM,high,1143
+3858-13787,aria_pooled,2,FM,high,2144
+3853-11359,aria_pooled,2,FM,high,2155
+3858-12829,aria_pooled,3,FM,medium,1596
+3858-12984,aria_pooled,2,FM,high,2211
+3869-11298,aria_pooled,2,Project,high,1660
+3869-10142,aria_pooled,3,FM,medium,8045
+3903-10680,aria_pooled,2,FM,high,1319
+GN- 1799,aria_pooled,3,Project,medium,5130
+3822-11863,aria_pooled,3,Project,medium,4629
+3858-13558,aria_pooled,2,FM,high,1847
+3866-10701,aria_pooled,3,Project,medium,4961
+3822-10077,aria_pooled,3,Project,high,7856
+3732-11116,aria_pooled,3,Project,medium,5238
+GN- 656,aria_pooled,2,FM,medium,908
+3869-10345,aria_pooled,3,FM,medium,9069
+10905,aria_pooled,2,FM,high,1122
+GPG227,aria_pooled,2,FM,high,1533
+GN-3308,aria_pooled,2,FM,high,1955
+GN- 593,aria_pooled,2,FM,high,2021
+3858-10056,aria_pooled,2,FM,high,1915
+3858-10648,aria_pooled,2,FM,high,1490
+3903-10562,aria_pooled,2,FM,high,1292
+3822-10031,aria_pooled,2,FM,high,1210
+3853-11275,aria_pooled,3,Project,medium,6008
+GN- 460,aria_pooled,1,FM,high,0
+3732-10520,aria_pooled,3,Project,medium,5231
+3786-10769,aria_pooled,2,FM,high,1148
+GN- 1830,aria_pooled,2,FM,high,1970
+3858-12044,aria_pooled,2,FM,high,1313
+GN- 1514,aria_pooled,2,FM,high,2096
+3732-10690,aria_pooled,3,Project,medium,5209
+3732-10254,aria_pooled,3,Project,medium,5231
+3858-12631,aria_pooled,3,FM,high,1544
+GN- 443,aria_pooled,3,Project,high,5873
+3866-10258,aria_pooled,2,FM,high,1663
+3869-10623,aria_pooled,1,FM,high,0
+3858-13239,aria_pooled,2,FM,high,1381
+3858-10470,aria_pooled,3,Project,medium,4543
+3719-11588,aria_pooled,3,Project,high,4755
+GN- 1940,aria_pooled,2,FM,high,2010
+GN- 580,aria_pooled,2,FM,high,1841
+3869-11248,aria_pooled,2,FM,high,1216
+3869-10817,aria_pooled,2,FM,high,1961
+3866-10543,aria_pooled,2,FM,high,1666
+GN- 795,aria_pooled,1,FM,high,0
+238,aria_pooled,2,FM,high,1242
+3858-14040,aria_pooled,2,FM,high,1847
+3866-10947,aria_pooled,2,FM,high,1663
+3732-10024,aria_pooled,3,Project,medium,5255
+3858-12209,aria_pooled,3,Project,medium,5774
+GN- 877,aria_pooled,2,FM,medium,1709
+3853-10567,aria_pooled,2,FM,high,2105
+GPG100,aria_pooled,3,Project,high,4357
+3858-13552,aria_pooled,2,FM,high,2001
+GN- 192,aria_pooled,2,FM,high,2324
+3858-11269,aria_pooled,2,FM,high,1875
+3858-13673,aria_pooled,3,FM,medium,4678
+GN-3307,aria_pooled,2,FM,high,2359
+3632-41001,aria_pooled,3,FM,high,6057
+3858-11814,aria_pooled,3,Project,medium,6527
+3822-10697,aria_pooled,3,FM,high,1623
+3822-12189,aria_pooled,3,Project,medium,4616
+3822-12694,aria_pooled,1,FM,high,0
+3732-10328,aria_pooled,2,FM,medium,1512
+3858-10383,aria_pooled,2,FM,high,1808
+3866-10501,aria_pooled,3,Project,medium,5356
+12490,aria_pooled,2,Project,high,1263
+GN- 521,aria_pooled,2,FM,high,1880
+3869-10061,aria_pooled,2,FM,high,1862
+GN- 398,aria_pooled,2,FM,high,1896
+3858-11184,aria_pooled,2,FM,high,2124
+3858-12781,aria_pooled,3,Project,medium,7882
+GN- 269,aria_pooled,2,FM,high,2292
+3732-10899,aria_pooled,3,Project,medium,5197
+GPM125,aria_pooled,2,FM,high,1682
+3858-11906,aria_pooled,3,Project,medium,4714
+GN- 1422,aria_pooled,2,FM,high,2118
+GN- 772,aria_pooled,2,Project,high,2071
+GPM413,aria_pooled,2,FM,high,1850
+3853-10798,aria_pooled,2,FM,high,2506
+3869-10928,aria_pooled,3,FM,high,5627
+3858-11239,aria_pooled,3,FM,high,4698
+GGV1128,aria_pooled,1,FM,high,0
+3866-10282,aria_pooled,2,FM,high,1677
+3866-10834,aria_pooled,1,FM,high,0
+3632-52516,aria_pooled,2,Project,high,1456
+3858-13383,aria_pooled,2,FM,high,2116
+3866-10181,aria_pooled,2,FM,high,1659
+3858-10748,aria_pooled,2,FM,high,1505
+3853-11186,aria_pooled,3,Project,medium,6001
+3822-10773,aria_pooled,2,FM,high,1866
+3858-10480,aria_pooled,2,FM,high,1721
+3858-11098,aria_pooled,3,Project,medium,6106
+3822-11888,aria_pooled,3,Project,medium,5001
+3903-11301,aria_pooled,1,FM,high,0
+3858-14587,aria_pooled,2,FM,high,2027
+GPM331,aria_pooled,3,Project,medium,4680
+GPM396,aria_pooled,2,FM,high,1563
+3858-13635,aria_pooled,3,Project,high,5982
+3822-11648,aria_pooled,2,FM,high,1589
+GN- 2051,aria_pooled,3,Project,medium,6083
+3869-11069,aria_pooled,2,FM,high,1247
+3853-11422,aria_pooled,2,FM,high,1654
+3853-11311,aria_pooled,3,Project,high,6239
+3869-10728,aria_pooled,3,Project,high,4802
+3869-10275,aria_pooled,3,Project,medium,5265
+3732-11125,aria_single,2,FM,high,1715
+3903-11303,aria_single,2,FM,high,1283
+3786-10181,aria_single,,FM,error,0
+3903-10915,aria_single,2,FM,high,1240
+3853-11001,aria_single,2,FM,high,2375
+3858-13081,aria_single,3,Project,medium,3994
+3858-11434,aria_single,3,Project,high,4664
+GN- 2086,aria_single,2,FM,high,2132
+3732-10854,aria_single,2,FM,high,1707
+3858-14035,aria_single,2,FM,high,1914
+3869-10415,aria_single,2,FM,high,2041
+3858-11798,aria_single,3,Project,medium,6061
+3869-10378,aria_single,2,FM,high,1604
+3853-10693,aria_single,3,Project,high,9545
+3907-10256,aria_single,3,Project,medium,5301
+GN- 285,aria_single,2,FM,high,2020
+3903-10328,aria_single,2,FM,high,1412
+3869-10878,aria_single,3,Project,medium,5464
+3907-10118,aria_single,2,FM,high,1721
+3907-10266,aria_single,2,FM,medium,1708
+3858-12698,aria_single,3,Project,high,6489
+GN- 2291,aria_single,2,FM,high,2109
+GN- 2399,aria_single,3,Project,high,6074
+GN- 567,aria_single,1,FM,high,0
+3869-10269,aria_single,2,FM,high,1465
+3853-10826,aria_single,2,FM,high,2322
+3853-10501,aria_single,2,FM,high,1770
+3858-13226,aria_single,2,FM,high,1791
+3822-10922,aria_single,2,FM,high,1264
+GN- 2308,aria_single,2,FM,high,2018
+3869-10759,aria_single,2,FM,high,1639
+3853-10765,aria_single,3,Project,high,4749
+GN- 137,aria_single,2,FM,high,2328
+GPM278,aria_single,3,Project,medium,5061
+GN- 2396,aria_single,3,Project,medium,5908
+3903-11113,aria_single,2,FM,high,1182
+GPM74,aria_single,3,Project,medium,4813
+3907-10134,aria_single,1,FM,high,0
+3903-10139,aria_single,2,FM,high,1137
+GN- 235,aria_single,1,FM,high,0
+3853-10723,aria_single,3,Project,medium,7109
+3822-12045,aria_single,2,FM,high,2017
+GN- 2034,aria_single,2,FM,high,2135
+3907-10385,aria_single,2,FM,high,1768
+3907-10238,aria_single,3,Project,high,5392
+3907-10219,aria_single,3,Project,medium,5331
+3869-11185,aria_single,3,Project,medium,5430
+3858-11377,aria_single,2,FM,high,1685
+3858-14575,aria_single,2,FM,high,2185
+GN- 1937,aria_single,2,FM,high,1875
+3858-11944,aria_single,3,Project,medium,7167
+GN- 470,aria_single,3,Project,medium,5934
+GN- 2029,aria_single,2,FM,high,2067
+3858-14459,aria_single,2,FM,high,1876
+3903-10910,aria_single,2,FM,high,1281
+3858-11004,aria_single,3,Project,medium,4982
+GN- 1680,aria_single,1,FM,high,0
+3858-10914,aria_single,3,Project,high,5549
+GN- 849,aria_single,1,FM,high,0
+GN- 380,aria_single,3,Project,medium,5913
+3853-10626,aria_single,2,FM,high,2046
+3858-13037,aria_single,3,Project,medium,5816
+3869-11028,aria_single,2,FM,high,1955
+3903-10090,aria_single,2,FM,high,1292
+3858-13095,aria_single,3,Project,medium,6726
+3858-13230,aria_single,2,FM,high,2414
+GPM293,aria_single,1,FM,high,0
+3907-10190,aria_single,3,Project,medium,5185
+GN- 2416,aria_single,2,FM,medium,1974
+GN-3270,aria_single,2,FM,high,2338
+3853-10427,aria_single,2,FM,high,2202
+3858-10331,aria_single,1,FM,high,0
+3822-12454,aria_single,2,FM,high,1610
+3866-10964,aria_single,3,Project,high,4722
+3822-12226,aria_single,3,Project,medium,4732
+3853-10033,aria_single,3,Project,high,6578
+GGV0784,aria_single,3,FM,high,3910
+3903-10652,aria_single,2,FM,high,1148
+GN- 340,aria_single,3,Project,medium,5967
+3858-10595,aria_single,3,Project,medium,5039
+3858-13251,aria_single,2,FM,high,1829
+GN- 1022,aria_single,2,FM,high,2161
+3858-14685,aria_single,2,FM,high,2066
+3858-12646,aria_single,2,FM,high,1401
+3907-10192,aria_single,2,FM,high,1588
+3853-11102,aria_single,2,FM,high,2470
+3903-10966,aria_single,3,Project,high,3860
+3732-10782,aria_single,3,Project,medium,5260
+3907-10125,aria_single,2,FM,high,1716
+GN- 1074,aria_single,1,FM,high,0
+3732-10596,aria_single,2,FM,high,1710
+GN- 737,aria_single,2,FM,high,2088
+GGV1586,aria_single,2,FM,high,1349
+GN- 491,aria_single,2,FM,high,2090
+GPM264,aria_single,2,FM,high,1684
+3786-10666,aria_single,2,FM,high,930
+3866-10994,aria_single,2,FM,high,1746
+3869-10400,aria_single,3,Project,medium,5419
+3732-11048,aria_single,3,FM,high,7397
+3853-10978,aria_single,2,FM,high,1510
+GPM415,aria_single,3,Project,high,4548
+GPG163,aria_single,2,FM,high,1668
+7628,aria_single,2,FM,high,1254
+GN- 477,aria_single,2,FM,high,1707
+3907-10564,aria_single,3,Project,medium,4921
+GN- 246,aria_single,1,FM,high,0
+3907-10094,aria_single,2,FM,high,1726
+3786-10799,aria_single,2,FM,high,1196
+3866-11290,aria_single,3,Project,medium,7456
+3869-10307,aria_single,2,FM,high,1363
+3869-11322,aria_single,2,FM,high,1843
+3903-10246,aria_single,2,FM,high,1133
+GPM52,aria_single,2,FM,high,1555
+3869-10780,aria_single,2,FM,high,1661
+3858-11763,aria_single,2,FM,high,2194
+3869-10060,aria_single,3,Project,medium,5659
+3869-10365,aria_single,2,FM,high,1395
+3866-11285,aria_single,2,FM,high,1664
+3907-10044,aria_single,2,FM,medium,1531
+3858-14565,aria_single,3,Project,medium,5707
+3869-10778,aria_single,2,FM,high,1698
+3866-10520,aria_single,2,FM,high,1648
+GPM02,aria_single,2,FM,high,1586
+3732-10336,aria_single,3,Project,medium,5255
+3719-11315,aria_single,3,Project,medium,4634
+3632-49944,aria_single,3,Project,high,4950
+3869-10958,aria_single,3,FM,high,1933
+3858-13297,aria_single,3,Project,high,5692
+3858-14229,aria_single,3,FM,medium,10179
+GN- 1317,aria_single,2,FM,high,2105
+3853-10384,aria_single,2,FM,high,1933
+3858-11863,aria_single,2,FM,high,2118
+3907-10378,aria_single,2,FM,high,1709
+GN-3337,aria_single,2,FM,high,1566
+GN- 1419,aria_single,2,FM,high,2099
+3853-10006,aria_single,2,FM,high,2072
+GN- 1732,aria_single,3,Project,medium,5382
+3858-13408,aria_single,3,FM,medium,6169
+3853-11244,aria_single,2,FM,high,2328
+GGV0018,aria_single,3,Project,medium,4117
+3866-10692,aria_single,3,Project,medium,5067
+3858-11930,aria_single,2,FM,high,1901
+GN- 618,aria_single,2,FM,high,1994
+GN- 383,aria_single,3,Project,medium,5935
+3866-11216,aria_single,2,FM,high,1555
+3858-11032,aria_single,2,FM,high,2382
+GPM05,aria_single,2,FM,high,1411
+3866-10869,aria_single,3,Project,medium,5382
+3858-11760,aria_single,2,FM,medium,2194
+GN- 143,aria_single,2,FM,high,2179
+3866-11265,aria_single,3,FM,high,4858
+3732-10316,aria_single,3,Project,medium,5232
+3858-10940,aria_single,2,FM,high,2121
+3869-11346,aria_single,2,FM,high,1473
+GPM66,aria_single,3,Project,medium,4945
+GN- 892,aria_single,2,FM,high,2022
+3866-10744,aria_single,3,Project,high,4662
+3853-11021,aria_single,2,FM,high,2305
+GN- 371,aria_single,2,FM,high,1947
+3853-10757,aria_single,2,FM,high,2381
+3858-11919,aria_single,2,FM,high,2110
+3869-10611,aria_single,2,FM,high,1527
+3858-13870,aria_single,2,FM,high,2131
+3732-11258,aria_single,2,FM,medium,957
+3853-10581,aria_single,2,FM,high,2284
+3907-10403,aria_single,3,Project,medium,5443
+3866-10861,aria_single,1,FM,high,0
+3907-10368,aria_single,2,FM,high,1764
+3858-11092,aria_single,3,Project,high,6588
+3858-12469,aria_single,3,Project,medium,5600
+GN- 200,aria_single,1,FM,high,0
+3853-10737,aria_single,2,FM,high,1834
+3853-11467,aria_single,3,Project,medium,4737
+3858-14466,aria_single,2,FM,high,1971
+3866-10968,aria_single,3,Project,medium,5305
+3858-13360,aria_single,3,Project,medium,6106
+3858-13734,aria_single,3,FM,medium,5589
+3858-14174,aria_single,3,Project,medium,4599
+GN- 816,aria_single,1,FM,high,0
+3858-11999,aria_single,2,FM,high,2057
+3907-10021,aria_single,2,FM,high,1702
+3853-10805,aria_single,2,FM,high,2154
+3858-11101,aria_single,2,FM,high,1809
+GN- 2270,aria_single,3,Project,medium,5947
+3858-14254,aria_single,2,FM,high,1821
+12322,aria_single,2,FM,high,1396
+3858-12498,aria_single,3,Project,medium,5967
+3853-10504,aria_single,3,Project,medium,5751
+3786-10887,aria_single,3,Project,medium,3959
+3869-10639,aria_single,3,Project,high,4709
+3907-10352,aria_single,2,FM,high,1245
+GPG26,aria_single,2,FM,high,1614
+3858-10395,aria_single,2,FM,high,1143
+GN- 929,aria_single,2,FM,high,1984
+3858-13787,aria_single,2,FM,high,2178
+3853-11359,aria_single,2,FM,high,2131
+3858-12829,aria_single,3,FM,medium,1621
+3858-12984,aria_single,2,FM,high,2211
+3869-11298,aria_single,2,Project,high,1643
+3869-10142,aria_single,3,FM,medium,7825
+3903-10680,aria_single,2,FM,high,1313
+3822-11863,aria_single,3,Project,medium,4513
+GN- 1799,aria_single,3,Project,medium,5001
+3858-13558,aria_single,2,FM,high,1841
+3732-11116,aria_single,3,Project,medium,5162
+10905,aria_single,2,FM,high,1137
+GN- 656,aria_single,2,FM,medium,916
+3866-10701,aria_single,3,Project,medium,5160
+3869-10345,aria_single,3,FM,medium,9046
+3822-10077,aria_single,3,Project,high,7784
+GPG227,aria_single,2,FM,high,1535
+GN-3308,aria_single,2,FM,high,1954
+3858-10056,aria_single,2,FM,high,1858
+GN- 593,aria_single,2,FM,high,2043
+3858-10648,aria_single,2,FM,high,1514
+3903-10562,aria_single,2,FM,high,1292
+3822-10031,aria_single,2,FM,high,1210
+3853-11275,aria_single,3,Project,medium,5984
+GN- 460,aria_single,1,FM,high,0
+3786-10769,aria_single,2,FM,high,1148
+GN- 1830,aria_single,2,FM,high,1970
+3858-12044,aria_single,2,FM,high,1311
+3732-10520,aria_single,3,Project,medium,5240
+GN- 1514,aria_single,2,FM,high,2096
+3732-10690,aria_single,3,Project,medium,5249
+3732-10254,aria_single,3,Project,medium,5293
+3858-12631,aria_single,3,FM,high,1544
+GN- 443,aria_single,3,Project,high,5861
+3866-10258,aria_single,2,FM,high,1679
+3869-10623,aria_single,1,FM,high,0
+3858-13239,aria_single,2,FM,high,1381
+3719-11588,aria_single,3,Project,high,4682
+3858-10470,aria_single,3,Project,medium,4541
+GN- 580,aria_single,2,FM,high,1843
+GN- 1940,aria_single,2,FM,high,2086
+3869-11248,aria_single,2,FM,high,1217
+3869-10817,aria_single,2,FM,high,1956
+3732-10024,aria_single,3,Project,medium,5251
+GN- 795,aria_single,1,FM,high,0
+3866-10543,aria_single,2,FM,high,1666
+238,aria_single,2,FM,high,1242
+3858-14040,aria_single,2,FM,high,1843
+3866-10947,aria_single,2,FM,high,1687
+GN- 877,aria_single,2,FM,medium,1709
+3853-10567,aria_single,2,FM,high,2105
+3858-12209,aria_single,3,Project,medium,5650
+3858-13552,aria_single,2,FM,high,2001
+GN- 192,aria_single,2,FM,high,2325
+GPG100,aria_single,3,Project,medium,4387
+3858-11269,aria_single,2,FM,high,1957
+3632-41001,aria_single,3,FM,high,6054
+GN-3307,aria_single,2,FM,high,2359
+3858-13673,aria_single,3,FM,high,4959
+3858-11814,aria_single,3,Project,medium,6489
+3822-12189,aria_single,3,Project,medium,4553
+3732-10328,aria_single,2,FM,medium,1496
+3822-12694,aria_single,1,FM,high,0
+3822-10697,aria_single,3,FM,high,1650
+3858-10383,aria_single,2,FM,high,1810
+3866-10501,aria_single,3,Project,medium,5481
+12490,aria_single,2,Project,high,1234
+GN- 521,aria_single,2,FM,high,1905
+3869-10061,aria_single,2,FM,high,1862
+GN- 398,aria_single,2,FM,high,1896
+3858-12781,aria_single,3,Project,medium,8140
+3858-11184,aria_single,2,FM,high,2124
+GN- 269,aria_single,2,FM,high,2270
+GPM125,aria_single,2,FM,high,1682
+3732-10899,aria_single,3,Project,medium,5207
+3858-11906,aria_single,3,Project,medium,4694
+GN- 1422,aria_single,2,FM,high,2120
+GN- 772,aria_single,2,Project,high,2065
+GPM413,aria_single,2,FM,high,1850
+3853-10798,aria_single,2,FM,high,2503
+3858-11239,aria_single,3,Project,medium,4742
+3632-52516,aria_single,2,Project,high,1456
+GGV1128,aria_single,1,FM,high,0
+3869-10928,aria_single,3,FM,high,5877
+3866-10834,aria_single,1,FM,high,0
+3866-10282,aria_single,2,FM,high,1685
+3858-13383,aria_single,2,FM,high,2073
+3866-10181,aria_single,2,FM,high,1671
+3858-11098,aria_single,3,Project,medium,5930
+3858-10748,aria_single,2,FM,high,1510
+3853-11186,aria_single,3,Project,medium,6066
+3822-10773,aria_single,2,FM,high,1866
+3858-10480,aria_single,2,FM,high,1721
+3822-11888,aria_single,3,Project,medium,4944
+3903-11301,aria_single,1,FM,high,0
+3858-14587,aria_single,2,FM,high,2029
+GPM331,aria_single,3,Project,medium,4639
+GPM396,aria_single,2,FM,high,1596
+3858-13635,aria_single,3,Project,high,6015
+3822-11648,aria_single,2,FM,high,1638
+3869-11069,aria_single,2,FM,high,1247
+3853-11422,aria_single,2,FM,high,1694
+GN- 2051,aria_single,3,Project,medium,6201
+3853-11311,aria_single,3,Project,high,6280
+3869-10728,aria_single,3,Project,medium,4770
+3869-10275,aria_single,3,Project,medium,5290

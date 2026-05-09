@@ -1,0 +1,138 @@
+# Tier classification rules
+# Tier 1: deterministic, high-confidence patterns grounded in top sample complaint titles
+# Tier 2: default — single reasoning agent
+# Tier 3: ambiguity / recurrence / safety / high-cost domains
+
+tier1_min_domain_confidence: 0.55
+
+tier1_patterns:
+  water_plumbing:
+    - "flush not working"
+    - "plumber required"
+    - "hot water not coming"
+    - "solar water not coming"
+    - "water wasn't avaikable"
+    - "water wasnot cominng due to tank cleaning"
+    - "no water in kitchen"
+    - "there is no water in washroom"
+    - "water pressure low"
+    - "new water connection"
+    - "wc base leakage"
+    - "wc issue"
+    - "kitchen sink leakeage issue"
+    - "kitchen draineage chockup"
+    - "jet spray leakeage"
+    - "jet spray changing required"
+    - "mbr wr nani trap chockup"
+    - "chokup issue"
+    - "shower not working in common bathroom"
+    - "re:(^|\\b)tap issue(\\b|$)"
+
+  electrical:
+    - "no electricity in flat"
+    - "mseb electricity not available"
+    - "mseb failure"
+    - "no electricity"
+    - "no power"
+    - "no power supply"
+    - "switch not working"
+    - "electrician required"
+    - "mcb tripped"
+    - "triping electricity"
+    - "triping electrcity"
+    - "passage lights werent working on floor"
+    - "fan wasn't working"
+    - "inverter issue"
+    - "inverter wiring issue"
+    - "inverter not working"
+    - "ivertor not working"
+    - "eletricity issue due to shut down (project work)"
+
+  carpentry:
+    - "door lock issue"
+    - "lock issue"
+    - "sliding window not opening"
+    - "door not closing"
+    - "door not opening"
+
+  lift_elevator:
+    - "lift not working"
+    - "lift issue"
+    - "elevator not working"
+    - "lift stuck"
+
+  hvac:
+    - "ac not cooling"
+    - "ac not working"
+    - "ac service"
+    - "ac repair"
+
+  pest_hygiene:
+    - "pest control"
+    - "cockroach issue"
+    - "garbage not collected"
+    - "housekeeping"
+    - "cleaning not done"
+
+# Any of these signals escalates to Tier 3 regardless of domain.
+recurrence_phrases:
+  - "again"
+  - "still not"
+  - "still facing"
+  - "still pending"
+  - "not resolved"
+  - "unresolved"
+  - "repeated"
+  - "repeatedly"
+  - "third time"
+  - "4th time"
+  - "multiple times"
+  - "same issue"
+  - "same problem"
+  - "same complaint"
+  - "previously complained"
+  - "already complained"
+  - "already raised"
+  - "despite"
+  - "no action"
+  - "no response"
+  - "ignored"
+  - "escalat"
+
+ambiguity_keywords:
+  - "seepage"
+  - "seep"
+  - "leak"
+  - "leakage"
+  - "leakeage"
+  - "damp"
+  - "wet wall"
+  - "wet ceiling"
+  - "ceiling leak"
+  - "ceiling water"
+  - "wall crack"
+  - "crack"
+  - "crack and leak"
+  - "smell"
+  - "algae"
+  - "moss"
+  - "multiple"
+
+tier3_domains:
+  - "structural_civil"
+  - "safety_security"
+
+safety_keywords:
+  - "spark"
+  - "sparking"
+  - "shock"
+  - "electric shock"
+  - "smoke"
+  - "fire alarm"
+  - "burning smell"
+  - "gas leak"
+  - "gas smell"
+  - "cooking gas"
+  - "png not"
+  - "hazard"
+  - "danger"

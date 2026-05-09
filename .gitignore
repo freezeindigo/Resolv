@@ -1,0 +1,34 @@
+data/*.xlsx
+.env
+
+# Proprietary eval outputs — contain real resident complaint text or production ticket IDs
+# (NDA-only; see docs/REPRODUCIBILITY.md §Data Availability)
+eval/results/paper_eval_ambiguous_*.csv
+eval/results/paper_eval_baseline_*.csv
+eval/results/gpt4o_expected_cost_cot_results.csv
+eval/results/cost_aware_prompting_results.csv
+eval/audit/disagreements_for_review.*
+eval/ground_truth/suspected_misrouted_to_project.csv
+
+# Paper PDFs and LaTeX source (not part of code artifact)
+*.pdf
+*.aux
+*.log
+*.out
+CIKM26_*.pdf
+ARIA_paper*.tex
+ARIA_paper*.pdf
+ARIA_paper_draft*.md
+_fig1_render.png
+
+# Pip install target dir
+.pip_target/
+
+# Local runtime
+__pycache__/
+*.pyc
+*.pyo
+.venv/
+*.egg-info/
+dist/
+.DS_Store

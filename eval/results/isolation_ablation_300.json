@@ -1,0 +1,47 @@
+{
+  "n_complaints": 300,
+  "tier_3_only": false,
+  "conditions": {
+    "aria_full": {
+      "n": 300,
+      "n_proj": 122,
+      "n_fm": 178,
+      "overall_acc": 60.0,
+      "proj_acc": 40.16,
+      "fm_acc": 73.6,
+      "hc": 73,
+      "lc": 47,
+      "weighted_cost": 777,
+      "elapsed_seconds": 237.4
+    },
+    "aria_pooled": {
+      "n": 300,
+      "n_proj": 122,
+      "n_fm": 178,
+      "overall_acc": 59.67,
+      "proj_acc": 39.34,
+      "fm_acc": 73.6,
+      "hc": 74,
+      "lc": 47,
+      "weighted_cost": 787,
+      "elapsed_seconds": 236.0
+    },
+    "aria_single": {
+      "n": 300,
+      "n_proj": 122,
+      "n_fm": 178,
+      "overall_acc": 59.33,
+      "proj_acc": 39.34,
+      "fm_acc": 73.03,
+      "hc": 74,
+      "lc": 48,
+      "weighted_cost": 788,
+      "elapsed_seconds": 233.6
+    }
+  },
+  "cost_matrix": {
+    "high_cost_misroute": 10,
+    "low_cost_misroute": 1,
+    "note": "Project->FM = 10 (warranty voided); FM->Project = 1 (minor delay)."
+  }
+}
